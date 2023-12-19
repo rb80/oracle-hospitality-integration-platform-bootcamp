@@ -11,7 +11,7 @@
 1. [Configure Streaming in the Developer Portal](#1-configure-streaming-in-the-developer-portal)
 2. [Use GraphiQL to stream events](#2-use-graphiql-to-stream-events)
 3. [Use Postman to stream events](#3-use-postman-to-stream-events)
-4. [Use Use the NodeJS reference implementation to stream events](#4-use-the-nodejs-reference-implementation-to-stream-events)
+4. [Use the NodeJS reference implementation to stream events](#4-use-the-nodejs-reference-implementation-to-stream-events)
 
 ## Polling
 
