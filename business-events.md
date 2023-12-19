@@ -2,9 +2,9 @@
 
 [Polling](#polling)
 
-1 [Creating an External System in OPERA Cloud](#1-creating-an-external-system-in-opera-cloud)
-2 [Configuring an External System for Events](#2-configuring-the-external-system-for-events)
-3 [Calling the getBusinessEvents API](#3-calling-the-getbusinessevents-api)
+1. [Creating an External System in OPERA Cloud](#1-creating-an-external-system-in-opera-cloud)
+2. [Configuring an External System for Events](#2-configuring-the-external-system-for-events)
+3. [Calling the getBusinessEvents API](#3-calling-the-getbusinessevents-api)
 
 [Streaming](#streaming)
 
