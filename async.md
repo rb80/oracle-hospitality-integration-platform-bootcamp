@@ -81,6 +81,6 @@ required for Async APIs
 https://docs.oracle.com/en/industries/hospitality/integration-platform/ohipu/t_polling_api.htm#PollingAPIpull-170089A2
 
 You can also fetch Async APIs using Application id which was created in Developer Portal. 
-For this you will required the application id shown in your browser url when you are inside your application in developer portal. Please prefix “OHIP” in front. 
+For this you will required the application id shown in your browser url when you are inside your application in developer portal. Please prefix “OHIP” in front.
 
 In below screenshot you can see 1147 is the application id. Therefore external system I would be using will be OHIP1147.
