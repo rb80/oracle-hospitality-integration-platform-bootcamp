@@ -4,13 +4,13 @@
 For long-running operations such as adding, updating, or retrieving large amounts of data, there is a series of Oracle Hospitality Property APIs called asynchronous ("Async") APIs.
 
 
-1.  [How to call Async APIs ] (# 1- How to call Async APIs)
-2.	[How frequently should I send HEAD? ] (#2-How frequently should I send HEAD)
-3.	[When will the response be available?] (#3-When will the response be available?)
-4.	[Async APIs call limits] (#4-Async APIs call limits)
-5.	[Async APIs] (#5-Async APIs)
-6.	[Async APIs Size Limits] (#6-Async APIs Size Limits)
-7.	[Creating an External System in OPERA Cloud](#7-Creating-an-external-system-in-opera-cloud)
+1. [How to call Async APIs](#1-how-to-call-async-apis)
+2.	[How frequently should I send HEAD?](#2-how-frequently-should-i-send-head)
+3.	[When will the response be available?](#3-when-will-the-response-be-available?)
+4.	[Async APIs call limits](#4-async-apis-call-limits)
+5.	[Async APIs](#5-async-apis)
+6.	[Async APIs Size Limits](#6-async-apis-size-limits)
+7.	[Creating an External System in OPERA Cloud](#7-creating-an-external-system-in-opera-cloud)
 
 
 
