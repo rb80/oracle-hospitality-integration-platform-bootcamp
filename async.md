@@ -85,4 +85,4 @@ For this you will required the application id shown in your browser url when you
 
 In below screenshot you can see 1147 is the application id. Therefore external system I would be using will be OHIP1147.
 
-![Alt text](image.png)
+![Alt text](image-1.png)
