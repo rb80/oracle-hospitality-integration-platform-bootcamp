@@ -1,9 +1,9 @@
-# Async
+### 1. How to call Async APIs# Async
 
 For long-running operations such as adding, updating, or retrieving large amounts of data, there is a series of Oracle Hospitality Property APIs called asynchronous ("async") APIs.
 
 
-1. [How to call Async APIs] (# 1-How to call Async APIs)
+1.  [How to call Async APIs ] (# 1- How to call Async APIs)
 2.	[How frequently should I send HEAD? ] (#2-How frequently should I send HEAD)
 3.	[When will the response be available?] (#3-When will the response be available?)
 4.	[Async APIs call limits] (#4-Async APIs call limits)
@@ -56,25 +56,17 @@ Since OPERA 23.2 HEAD requests return a header "retry-after" containing the numb
 Since OPERA 23.2. the final GET call to obtain the result of the Async API will include a "retry-after" header containing the number of seconds that will need to be waited before calling the same Async API again.
 
 
-
-
-
-
-
-
-
-
 ### 5. Async APIs
 
--ReservationDailySummary
--BlockAllocationSummary
--RevenueInventoryStatistics
--SellLimits
--RestrictionProcess
--BestAvailableRatePlans
--DailyRatePlanSchedules
--HurdleRates
--RatePlanHeaders
+- ReservationDailySummary
+- BlockAllocationSummary
+- RevenueInventoryStatistics
+- SellLimits
+- RestrictionProcess
+- BestAvailableRatePlans
+- DailyRatePlanSchedules
+- HurdleRates
+- RatePlanHeaders
 
 ### 6. Async APIs Size Limits
 Each API has 2 MB size limit.  
@@ -90,5 +82,4 @@ https://docs.oracle.com/en/industries/hospitality/integration-platform/ohipu/t_p
 You can also fetch Async APIs using Application id which was created in Developer Portal. 
 For this you will required the application id shown in your browser url when you are inside your application in developer portal. Please prefix “OHIP” in front. 
 
-In below screenshot you can see 1147 is the application id. Therefore external system I would be using will be OHIP1147. 
-
+In below screenshot you can see 1147 is the application id. Therefore external system I would be using will be OHIP1147.
