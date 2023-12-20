@@ -74,7 +74,7 @@ Each API has 2 MB size limit.
 For example if you want to update Daily Rates using “DailyRatePlanSchedules“ maximum content in the body should be size of 2MB. 
 
 
-### 7. External System
+### 7. Creating an External System in OPERA Cloud
 
 Please follow below link to see how External System is created in OPERA Cloud which is 
 required for Async APIs
