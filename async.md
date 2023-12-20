@@ -1,10 +1,7 @@
 
 # Async
 
-
-### 1. How to call Async APIs
-
-For long-running operations such as adding, updating, or retrieving large amounts of data, there is a series of Oracle Hospitality Property APIs called asynchronous ("async") APIs.
+For long-running operations such as adding, updating, or retrieving large amounts of data, there is a series of Oracle Hospitality Property APIs called asynchronous ("Async") APIs.
 
 
 1.  [How to call Async APIs ] (# 1- How to call Async APIs)
