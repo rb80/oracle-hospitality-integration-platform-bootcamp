@@ -56,7 +56,7 @@ Streaming means opening a WebSocket connection, then Oracle Hospitality pushing 
 1. On the developer portal Environments tab, add the environment provided by the Oracle team (see the "Basic Setup" workshop)
 2. Verify that the environment shows the `Streaming Enabled` label
 3. Open an application from the Applications tab
-4. Add the events `Create Profile`, `Update Profile`, and `Update Reservation` to the template.  See [Working with Events in the Developer Portal](https://docs.oracle.com/cd/F29336_01/doc.201/f27480/c_streaming_api.htm#OHIPU-WorkingWithEventsInTheDeveloperPort-0BDD2493)
+4. Add the events `Create Profile`, `Update Profile`, and `Update Reservation` to the template.  See [Working with Events in the Developer Portal](https://docs.oracle.com/en/industries/hospitality/integration-platform/ohipu/c_streaming_api.htm#OHIPU-WorkingWithEventsInTheDeveloperPort-0BDD2493)
 5. Go to the Application > Events > Subscribed tab and subscribe to consume events from the environment provided by the Oracle team
 6. Verify that the events listed are the same as those on the template
 7. Notify the Oracle team to approve the subscription.  In production, this would be approved by the hoteliers.
