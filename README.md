@@ -1,4 +1,4 @@
-# oracle-hospitality-integration-platform-bootcamp
+# Oracle Hospitality Integration Platform Bootcamp
 
 Materials for a bootcamp on the Oracle Hospitality Integration Platform:
 
