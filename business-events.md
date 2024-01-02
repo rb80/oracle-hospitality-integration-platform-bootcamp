@@ -22,7 +22,7 @@ Polling means sending repeated requests to ask "are there any events for my exte
 #### 1.1 Creating the user
 
 1. Create a chain-level user in OPERA Cloud
-2. Assign the following tasks to the user.  See [Assigning Tasks to a Role](https://docs.oracle.com/en/industries/hospitality/opera-cloud/23.2/ocsuh/t_manage_property_roles_assigning_tasks_to_roles.htm):
+2. Assign the following tasks to the user.  See [Assigning Tasks to a Role](https://docs.oracle.com/search/?q=Assigning+Tasks+to+a+Role&category=industries&product=en%2Findustries%2Fhospitality):
 
 * Under Interfaces Admin - Property Interfaces - External Systems: _New/Edit External Systems_
 * Under Toolbox: _External Databases_
@@ -30,19 +30,19 @@ Polling means sending repeated requests to ask "are there any events for my exte
 
 #### 1.2 Creating an external system
 
-1. Create an external system in OPERA Cloud following [these steps](https://docs.oracle.com/en/industries/hospitality/opera-cloud/23.2/ocsuh/t_admin_interfaces_configuring_external_systems.htm).  Note down the external system code.
-2. Create an external database in OPERA Cloud for the external system you created following [these steps](https://docs.oracle.com/en/industries/hospitality/opera-cloud/23.2/ocsuh/t_toolbox_system_setup_external_databases.htm)
+1. Create an external system in OPERA Cloud following [these steps](https://docs.oracle.com/search/?q=Configuring%20External%20Systems&pg=1&size=10&product=en%2Findustries%2Fhospitality&category=en%2Findustries&showfirstpage=true&lang=en).  Note down the external system code.
+2. Create an external database in OPERA Cloud for the external system you created following [these steps](https://docs.oracle.com/search/?q=Configuring%20External%20Databases&pg=1&size=10&product=en%2Findustries%2Fhospitality&category=en%2Findustries&showfirstpage=true&lang=en)
 
 ### 2. Configuring the External System for Events
 
 1. Choose which events to receive using [this guide to the list of business events and the Data Elements - fields - on them](https://docs.oracle.com/cd/E98457_01/opera_5_6_core_help/PDFs/Business%20Events%20Data%20Elements_5%200.pdf).  For this workshop choose the events `Create Profile`, `Update Profile`, and `Update Reservation`
-2. Add events to the external system by [configuring business events](https://docs.oracle.com/en/industries/hospitality/opera-cloud/23.1/ocsuh/t_admin_interfaces_configuring_business_events.htm#ConfiguringBusinessEvents-63CBCF70) in OPERA Cloud
+2. Add events to the external system by [configuring business events](https://docs.oracle.com/search/?q=Configuring%20External%20Systems&pg=1&size=10&product=en%2Findustries%2Fhospitality&category=en%2Findustries&showfirstpage=true&lang=en) in OPERA Cloud
 
 ### 3. Calling the getBusinessEvents API
 
 1. Verify the details in the Postman Environment file (see the "Basic Setup" workshop)
 2. Obtain an oAuth token (see the "Basic Setup" workshop)
-3. In the Postman collection find the operation `get Business Events`
+3. In the Postman collection find the operation `get Business Events` ![alt text](business_events_polling_3_3.png "Searching for get business events in the Postman collections")
 4. Click Send and observe that up to 20 events are received
 5. Generate some events by calling the `post Profile` operation
 6. Call the `get Business Events` operation again to observe the event arrive for the new profile created
@@ -56,7 +56,7 @@ Streaming means opening a WebSocket connection, then Oracle Hospitality pushing 
 1. On the developer portal Environments tab, add the environment provided by the Oracle team (see the "Basic Setup" workshop)
 2. Verify that the environment shows the `Streaming Enabled` label
 3. Open an application from the Applications tab
-4. Add the events `Create Profile`, `Update Profile`, and `Update Reservation` to the template.  See [Working with Events in the Developer Portal](https://docs.oracle.com/en/industries/hospitality/integration-platform/ohipu/c_streaming_api.htm#OHIPU-WorkingWithEventsInTheDeveloperPort-0BDD2493)
+4. Add the events `Create Profile`, `Update Profile`, and `Update Reservation` to the template.  See [Working with Events in the Developer Portal](https://docs.oracle.com/en/industries/hospitality/integration-platform/ohipu/c_streaming_api.htm#OHIPU-WorkingWithEventsInTheDeveloperPort-0BDD2493) ![alt text](business_events_streaming_1_4.png "Adding events to the template on an application in the Oracle Hospitality Integration Platform developer portal")
 5. Go to the Application > Events > Subscribed tab and subscribe to consume events from the environment provided by the Oracle team
 6. Verify that the events listed are the same as those on the template
 7. Notify the Oracle team to approve the subscription.  In production, this would be approved by the hoteliers.
@@ -64,13 +64,13 @@ Streaming means opening a WebSocket connection, then Oracle Hospitality pushing 
 ### 2. Use GraphiQL to stream events
 
 1. Download the [GraphiQL page from the Oracle Hospitality Github repository](https://github.com/oracle/hospitality-api-docs/blob/main/graphql/graphiql.html)
-2. Open the GraphiQL HTML page
+2. Open the GraphiQL HTML page ![alt text](business_events_streaming_2_2.png "Screenshot of the GraphiQL page")
 3. Obtain an oAuth token (see the "Basic Setup" workshop) using the clientId, clientSecret, and gateway URL of the environment given by the Oracle team
 4. Paste the value of the `access_token` to the `Auth Token` field
 5. Enter the Gateway URL in the `URL` field, but change the scheme from `https://` to `wss://`  (see the "Basic Setup" workshop for obtaining the Gateway URL)
 6. Enter the application key in the `Application Key` field  (see the "Basic Setup" workshop for obtaining the application key).  Use the application subscribed to consume events from the environment supplied by the Oracle team - see [Configure Streaming in the Developer Portal](#1-configure-streaming-in-the-developer-portal)
 7. Click Start
-8. In the request payload ensure the `chainCode` reflects the tenant code given to you by the Oracle team
+8. In the request payload ensure the `chainCode` reflects the tenant code given to you by the Oracle team ![alt text](business_events_streaming_2_8.png "Screenshot of the GraphiQL page after authentication showing the subscribe message")
 9. _Optional_ Open developer tools in the browser and go to the "Network" tab, filtering this for `WS` (WebSocket traffic) and clicking the "Response" tab
 10. Click Play.  Observe the `subscribe` event being sent, followed by events flowing through
 11. Generate some events by calling the `post Profile` operation and view these events come through
@@ -84,7 +84,7 @@ Streaming means opening a WebSocket connection, then Oracle Hospitality pushing 
 4. Obtain an oAuth token (see the "Basic Setup" workshop)
 5. Edit the `subscribe` message to have the `chainCode` given to you by the Oracle team
 6. Open the "Saved Messages" on the right of the request
-7. Send the `init` message
+7. Send the `init` message ![alt text](business_events_streaming_3_7.png "Screenshot of Postman sample for Streaming Business Events")
 8. Send the `subscribe` message within 5 seconds of sending the `init` message
 9. Observe events flowing through
 10. Generate some events by calling the `post Profile` operation and observe these events come through
