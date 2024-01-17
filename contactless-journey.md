@@ -18,7 +18,7 @@ This collection will provide you a head start on major APIs which are required f
 14. [Checkin- Posting room keys](#14-postroomkey)
 15. [Stay- Posting Service Request](#15-postservicerequest)
 16. [Stay - Set wakeup call](#16-postwakupcall)
-17. [Stay - Posting charges](# 17-postbillingcharges)
+17. [Stay - Posting charges](#17-postbillingcharges)
 18. [Checkout- Fetch Folio](#18-getfolio)
 19. [Checkout - Post Billing Payment](#19-postbillingpayment)
 20. [Checkout- Settle Folio](#20-postfolios)
