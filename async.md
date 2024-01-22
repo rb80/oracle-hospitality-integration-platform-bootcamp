@@ -27,7 +27,7 @@ c. **GET** request is the third step from an external system to OPERA Cloud to e
 
 ## 2. How frequently should I send HEAD?
 
-Since OPERA Cloud 23.2 HEAD requests return a header `retry-after` containing the number of seconds we recommend waiting before calling HEAD again. There is known Bug at present which is addressed with `HOPCS-63293``
+Since OPERA Cloud 23.2 HEAD requests return a header `retry-after` containing the number of seconds we recommend waiting before calling HEAD again. There is known Bug at present which is addressed with `HOPCS-63293`
 
 ## 3. When will the response be available?
 
