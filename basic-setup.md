@@ -23,7 +23,7 @@ Getting started with Oracle Hospitality Integration Platform is easy.  Follow th
 1. Searching for the Customer Relationship Management API.  See [API Search Engine](https://docs.oracle.com/en/industries/hospitality/integration-platform/ohipu/ch_discover_and_subscribe_to_APIs.htm#OHIPU-APISearchEngine-3C569607)
 2. View the API specifications for the V1 Customer Relationship Management API
 3. Search for the operation `getHotelDetails`
-4. Find the example request in Postman for `getHotelDetails`
+4. Find the example request in Postman for `getHotelDetails` ![alt text](images/getting_started_2_4.png "screenshot of Oracle Hospitality Integration Platform developer portal searching for getHotelDetails highlighting the method to get to the Postman sample")
 5. Find the workflow for checking in
 6. Create an application and subscribe it to the Property APIs.  See [Registering an Application](https://docs.oracle.com/en/industries/hospitality/integration-platform/ohipu/c_register_and_manage_applications.htm#OHIPU-CreatingAnApplication-D59E4A5D).  Note down the Application Key.
 
@@ -33,7 +33,7 @@ In this lab, we are using an environment on the Resource Owner grant.
 
 1. Create an integration user via the Shared Security Domain vendor self-registration portal.  Use the `Tenant` code supplied by the Oracle team.  Enter your company name in the `Vendor` field, without spaces and to a maximum of 10 characters.  Fill in the contact details and security questions.  Note down the `Interface ID` and `Interface Key`; these are your username and password.  See [Authenticating to Oracle Hospitality Property APIs](https://docs.oracle.com/en/industries/hospitality/integration-platform/ohipu/c_oracle_hospitality_property_apis.htm#OHIPU-AuthenticatingToOracleHospitalityPr-1BD54F80)
 2. Let the Oracle team know your your `Interface ID` so they can approve access.  In production, this would be approved by the hoteliers.
-3. On the Environments page add an environment, specifying your Integration Username (`Interface ID`), choosing the region and environment type listed by the Oracle team.  See [Adding an Environment](https://docs.oracle.com/en/industries/hospitality/integration-platform/ohipu/t_adding_an_environment.htm)
+3. On the Environments page add an environment, specifying your Integration Username (`Interface ID`), choosing the region and environment type listed by the Oracle team.  See [Adding an Environment](https://docs.oracle.com/en/industries/hospitality/integration-platform/ohipu/t_adding_an_environment.htm) ![alt text](images/getting_started_3_3.png "Add environment dialog on the Environments page of the Oracle Hospitality Integration Platform developer portal")
 4. View and note down the gateway URL, clientId and clientSecret
 
 ## 4. Authentication Flows
@@ -65,16 +65,16 @@ Oracle Hospitality APIs are protected by oAuth2.  There are two "flows" used in 
 
 ## 7. Calling the getHotelDetails API
 
-1. Search for the getHotelDetails saved request in Postman (it's in the "Property REST APIs by Module" collection in the folder "OPERA Property APIs by Module" > "Enterprise Configuration (ENT Config)").  _Note_ for ease of reading, operationIds are separated by spaces, thus `getHotelDetails` appears as `get Hotel Details`
+1. Search for the getHotelDetails saved request in Postman (it's in the "Property REST APIs by Module" collection in the folder "OPERA Property APIs by Module" > "Enterprise Configuration (ENT Config)").  _Note_ for ease of reading, operationIds are separated by spaces, thus `getHotelDetails` appears as `get Hotel Details` ![alt text](images/getting_started_7_1.png "Searching for get Hotel Details in the Postman collections")
 2. Click Send.  This works because it uses the oAuth token in the Postman Environment
 
 ## 8. Finding the OPERA version of the environment
 
-1. Search for the "get OPERA version" saved request in Postman (it's in the "Property REST APIs by Module" collection in the folder "List of Values (LOV)" > "M-R")
+1. Search for the `get OPERA version` saved request in Postman (it's in the "Property REST APIs by Module" collection in the folder "List of Values (LOV)" > "M-R") ![alt text](images/getting_started_8_1.png "Searching for get OPERA version in the Postman collections")
 2. Click Send.  Read the `operaVersion` from the response payload
 
 ## 9. View analytics
 
 1. Go back to the Developer Portal and click on the Analytics tab.  See [Analytics](https://docs.oracle.com/en/industries/hospitality/integration-platform/ohipu/c_analytics.htm#OHIPU-Analytics-EC725F0D)
 2. See the calls made just now in the analytics
-3. Filter down to the Enterprise Configuration API to see just the calls to `getHotelDetails`
+3. Filter down to the Enterprise Configuration API to see just the calls we made to `getHotelDetails`, along with any other operations we called in the Enterprise Configuration API
