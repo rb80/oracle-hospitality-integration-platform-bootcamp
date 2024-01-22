@@ -27,9 +27,7 @@ c. **GET** request is the third step from an external system to OPERA Cloud to e
 
 ## 2. How frequently should I send HEAD?
 
-Since OPERA Cloud 23.2 HEAD requests return a header `retry-after` containing the number of seconds we recommend waiting before calling HEAD again.
-
-Since OPERA Cloud 23.2. the final GET call to obtain the result of the Async API will include a `retry-after` header containing the number of seconds that will need to be waited before calling the same Async API again.
+Since OPERA Cloud 23.2 HEAD requests return a header `retry-after` containing the number of seconds we recommend waiting before calling HEAD again. There is known Bug at present which is addressed with `HOPCS-63293``
 
 ## 3. When will the response be available?
 
@@ -37,10 +35,10 @@ There is no set length of time; different requests require different amounts of 
 
 ## 4. Async APIs call limits
 
-A maximum of 90 requests per minute per gateway can be made to the Async API. Bear this in mind when determining how frequently to poll HEAD.
+A maximum of 120 requests per minute per application can be made to the Async API. Bear this in mind when determining how frequently to poll HEAD.
 ___
 
-In the operation `startReservationsDailySummaryProcess` in the OPERA Cloud Reservation Asynchronous API a request that uses the parameter `lastModifiedDate` (available from OPERA Cloud 22.5) can be called only once every 3 hours.
+In the operation `startReservationsDailySummaryProcess` in the OPERA Cloud Reservation Asynchronous API a request that uses the parameter `lastModifiedDate` (available from OPERA Cloud 23.1) can be called only once every 3 hours.
 A given request body can be called only once every 30 minutes when starting an Asynchronous API request.
 ___
 
@@ -52,8 +50,6 @@ If partner requests data with `startLastModifiedDate` & `endLastModifiedDate`; i
 ___
 
 Since OPERA Cloud 23.2 HEAD requests return a header `retry-after` containing the number of seconds we recommend waiting before calling HEAD again.
-
-Since OPERA Cloud 23.2 the final GET call to obtain the result of the Async API will include a `retry-after` header containing the number of seconds that will need to be waited before calling the same Async API again.
 ___
 
 ## 5. Async APIs
