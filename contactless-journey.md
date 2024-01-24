@@ -4,27 +4,40 @@ This collection will provide you a head start on major APIs which are required f
 
 1. [OAuth Token](#1-gettoken)
 2. [Profile - Create Guest Profile](#2-postguestprofile)
-3. [Profile - Create Company Profile with AR address](#3-postcompany)
-4. [Profile - Create Travel Agent Profile with AR address](#4-postprofile)
-5. [Booking - Fetch Hotel Availability](#5-gethotelavailability)
-6. [Booking - Create Reservation](#6-postreservation)
-7. [Booking - Create Multi Leg Reservation](#7-postreservation)
-8. [Pre Arrival - Add Preference](#8-putreservation)
-9. [Pre Arrival - Add Routing to Company](#9-postrouting)
-10. [Pre Arrival - Add Routing to TA](#10-postrouting)
-11. [Pre Arrival- Get available rooms](#11-gethotelrooms)
-12. [Pre Arrival - Assign Rooms](#12-postroomassignment)
-13. [Pre Arrival- PreCheckin](#13-precheckin)
-14. [Checkin](#14-checkin)
-15. [Checkin- Posting room keys](#15-postroomkey)
-16. [Stay- Posting Service Request](#16-postservicerequest)
-17. [Stay - Set wakeup call](#17-postwakupcall)
-18. [Stay - Posting charges](#18-postbillingcharges)
-19. [Checkout- Fetch Folio](#19-getfolio)
-20. [Checkout - Post Billing Payment](#20-postbillingpayment)
-21. [Checkout- Settle Folio](#21-postfolios)
-22. [Checkout - Posting Checkout](#22-postcheckout)
-23. [Checkout - Send Guest invoice to email address](#23-postemailfolioreport)
+3. [Profile - Create Company Profile with AR address](#3-postCompany)
+4. [Profile - Create Company AR account](#4-postAccount)
+5. [Profile - Create Travel Agent Profile with AR address](#5-postProfile)
+6. [Profile - Create Travel Agent AR account](#6-postAccount)
+7. [Booking - Fetch Hotel Availability](#7-gethotelavailability)
+8. [Booking - Create Reservation](#8-postreservation)
+9. [Booking - Create Multi Leg Reservation](#9-postreservation)
+10. [Pre Arrival - Add Preference](#10-putreservation)
+11. [Pre Arrival - Add Routing to Company](#11-postrouting)
+12. [Pre Arrival - Add Payment Method](#12-putreservation)
+13. [Pre Arrival - Add Routing to TA](#13-postrouting)
+14. [Pre Arrival - Add Payment Method](#14-putreservation)
+15. [Pre Arrival - Convert Pan into token](#15-openPaymentTokenExchange)
+16. [Pre Arrival - Add Payment Method](#16-postPaymentMethod)
+17. [Pre Arrival- Get available rooms](#17-gethotelrooms)
+18. [Pre Arrival - Assign Rooms](#18-postroomassignment)
+19. [Pre Arrival- PreCheckin](#19-precheckin)
+20. [Checkin](#20-checkin)
+21. [Checkin- Posting room keys](#21-postroomkey)
+22. [Stay- Posting Service Request](#22-postservicerequest)
+23. [Stay - Set wakeup call](#23-postwakupcall)
+24. [Stay - Create Cashier](#23-postCashiers)
+25. [Stay - Create Cashier](#23-postBillingCharges)
+26. [Stay - Create Cashier](#23-postBillingCharges)
+27. [Stay - Posting of Advance Folio](#27-postAdvanceRoomCharges)
+28. [Checkout- Fetch Folio](#28-getfolio)
+29. [Checkout - Post Billing Payment](#29-postbillingpayment)
+30. [Checkout - Post Billing Payment](#30-postbillingpayment)
+31. [Checkout - Post Billing Payment](#31-postbillingpayment)
+32. [Checkout - Post Billing Payment](#32-putEarlyDeparture)
+33. [Checkout - Post Billing Payment](#33-postFinalCharges)
+34. [Checkout- Settle Folio](#34-postfolios)
+35. [Checkout - Posting Checkout](#35-postcheckout)
+36. [Checkout - Send Guest invoice to email address](#36-postemailfolioreport)
 
 ## 1. getToken
 
@@ -53,21 +66,26 @@ Note that within the postman collection provided, from the POST response `Profil
 
 Create Company Profile where by adding an AR address in the payload. This is required for successful checkout of the folio to Accounts Receivable.
 
-1. Once Company Profile is created, ensure `getProfile` API is executed so that AR address id is inserted into environment variables `CompanyArAddressId`
-2. Fetch AR types which is required to create Company AR account and set environment variable `ArAccountType`
-3. Create Company AR Account. Make sure the AR number (accountNo) is inserted and also the environment variable is populated `CompanyAccountNo`
-4. Use getProfile API to check all of the above values are responded correctly
+1. Change `companyName`and `address`as required`
+2. Once Company Profile is created, ensure `getProfile` API is executed so that `AR address id` is inserted into environment variables `CompanyArAddressId`
 
-## 4. PostProfile
+## 4. PostAccount
+1. Fetch AR types which is required to create Company AR account and set environment variable `ArAccountType`
+2. Create Company AR Account. Make sure the AR number (accountNo) is inserted and also the environment variable is populated `CompanyAccountNo`
+3. Use getProfile API to check all of the above values are responded correctly
+
+## 5. PostProfile
 
 Create Travel Agent Profile with AR Address. This is required for successful checkout of the folio to Accounts Receivable. The TA profile id is auto populated in Environment variables with Test Scripts inserted into collection
 
 1. Once Travel Agent Profile is created, ensure `getProfile` API is executed so that `TaArAddressId` is inserted into environment variables
 2. Fetch AR types which is required to create Travel Agent AR account and set environment variable `ArAccountType`. If the value doesnt differ from Company, no changes required.
-3. Create Travel Agent AR Account. Make sure the AR number (accountNo) is inserted and also the environment variable `TravelAgentAccountNo` is populated
-4. Use getProfile API to check all of the above values are responded correctly
 
-## 5. getHotelAvailability
+## 6. PostAccount
+1. Create Travel Agent AR Account. Make sure the AR number (accountNo) is inserted and also the environment variable `TravelAgentAccountNo` is populated
+2. Use getProfile API to check all of the above values are responded correctly
+
+## 7. getHotelAvailability
 
 Fetch Hotel Availability which is required for creating Reservation.
 
@@ -78,13 +96,13 @@ After successful fetch, make sure following are inserted into Environment variab
 
 For testing purposes please pick Room type `DEL` and RatePlanCode `BARRO` as they are relevant later for updating reservation. Set environment variables accordingly
 
-The variables `CurrentDate` and `CurrentDateplus1` variable are created from getToken API test scripts.
+The variables `Currentdate` and `Currentdateplus1` variable are created from getToken API test scripts.
 
-## 6. postReservation
+## 8. postReservation
 
 Create Reservation with Company and Travel Agent attached /linked
 Change `id` values within `reservationIdList` and `ExternalReferences`
-Other field changes required maybe is `Company Name` and `Travel Agent Name`
+Other field changes required maybe are `Company Name` and `Travel Agent Name`
 
 
 1. getMarketCode.  This API is required so that the variable `MarketCode` can be inserted into the environment variable
@@ -94,93 +112,132 @@ Other field changes required maybe is `Company Name` and `Travel Agent Name`
 5. getPaymentMethod.  This API is required so that the variable `PaymentMethod` can be inserted into the environment variable
 6. getReservation.  Once postReservation is executed, please check whether all required details are entered correctly with this API. Ensure the value from reservationIdList Confirmation is copied into environment variable `Confirmationid`
 
-## 7. postReservation (multiLeg Reservation)
+## 9. postReservation (multiLeg Reservation)
 Create Reservation which is multi leg reservation
 Change the value within `id` of `ExternalReferences` or `idContext`
 After successful post, make sure the environment Variable `ReservationId2`
-1. Verify the data with `getReservation`
+1. Verify the data with `getReservation` whereby Leg 2 should be visible within External References type=OPERA
 
-## 8. putReservation
+## 10. putReservation
 
 Pre Arrival where a preference will be added.
 
 1. getPreference.  To insert the preference, you will need to fetch all preferences which can be attached on the reservation. For testing purposes, will be using preference group `ROOM FEATURES`. Make sure you use for testing purpose  `FBAL` as environment variable `PreferenceCode`
 2. getReservation.  Once putReservation is executed, check whether your preference has been attached on the reservation
 
-## 9. postRouting
+## 11. postRouting
 
 Posting a routing instruction to existing reservation where `Food` charges goes to the Company which is linked to the reservation. Make sure the routing code `FOOD` is directed to window 2.
 
 1. Fetch the routing Codes with `getRoutingCodes` and set Environment Variable of `CompanyRoutingCode`
-2. putReservation.  Once Routing is done, modification is required to existing Reservation to inform that window 2 will be paid by Direct Billing as Payment Method
-3. To find the Payment Method use `getPaymentMethod` API. For testing purpose use `INV`. No Environment is defined here. Use the value within payload. 
 
-## 10. postRouting
+## 12. putReservation
+1. putReservation.  Once Routing is done, modification is required to existing Reservation to inform that window 2 will be paid by Direct Billing as Payment Method
+2. To find the Payment Method use `getPaymentMethod` API. For testing purpose use `INV`. No Environment is defined here. Use the value within payload. 
+
+## 13. postRouting
 
 Posting a routing instruction to existing reservation where `Room` charges goes to the Travel Agent which is linked to the reservation. Make sure the routing is done to window 3. Make sure the routing code `BB` is directed to window 3.
 
-1. Fetch the routing Codes with `getRoutingCodes` and set Environment Variable of `TravelAgentRoutingCode`
-2. putReservation.  Once Routing is done, modification is required to existing Reservation to inform that window 3 will be paid by Direct Billing as Payment Method
+1. Fetch the routing Codes with `getRoutingCodes` API and set Environment Variable of `TravelAgentRoutingCode`
 
-## 11. getHotelRooms
+## 14. putReservation
+1. putReservation.  Once Routing is done, modification is required to existing Reservation to inform that window 3 will be paid by Direct Billing as Payment Method
+2. To find the Payment Method use `getPaymentMethod` API. For testing purpose use `INV`. No Environment is defined here. Use the value within payload.
+
+## 15. openPaymentTokenExchange
+Converts Primary Account Number (PAN) into Token issued by Payment Service Providers
+This is required to updated Window 1 payment method which belongs to guest
+Take any test Credit Card numbers and insert into the payload within the tag `pan`
+
+## 16. postPaymentMethods
+Update existing Payment Method using this API. Make sure you update the tags 
+1. cardNumber with `token` value  which you received in `openPaymentTokenExchange`
+2. cardNumberMasked with `pan`  which you received in `openPaymentTokenExchange`
+3. Expiration Date
+And any other value which you changed
+
+
+## 17. getHotelRooms
 
 Find vacant and inspected rooms so that you can assign to the reservation.
 Make sure you insert the `RoomNumber` into environment variable.
 
-## 12. postRoomAssignment
+## 18. postRoomAssignment
 
 Assign room which you got from earlier API call.
 
-## 13. preCheckin
+## 19. preCheckin
 
 Pre Register the guest. Ensure the `arrivalTime` is updated in the payload
 
-## 14. checkin
+## 20. checkin
 
 Checkin the reservation with the same roomId which you assigned.
 
-## 15. postRoomKey
+## 21. postRoomKey
 
 Creating a Key. KeyType by default should be `New`
 
-## 16. postServiceRequest
+*Please note this API is only for illustration purpose as the API is not available yet*
+
+## 22. postServiceRequest
 
 Create a Service request to provide towel by Housekeeping department. Ensure you change the dates within the payload
 
 1. getServceRequestCodes.  Fetch the Service Request Codes and Department Code
 
-## 17. postWakupcall
+## 23. postWakupcall
 
 Create a Wakeup call on the reservation. Ensure you change the dates within the payload
 
 1. getWakeUpcall.  Use this API to check whether the postWakeUpcall was inserted successfully into the reservation
 
-## 18. postBillingCharges
+## 24. postCashiers
+This API is required for `postBillingCharges" whereby it is mandatory that API requires a cashier id. 
+1.  getCashier.  Use this API to check whether postCashier API has successfully inserted cashier id. If inserted, please insert the environment variable `CashierId`
 
-Post charges to the room.
 
-1. postCashier.  To Post charges you are required a cashier id. Use this API to create the cashier id
-2. getCashier.  Use this API to check whether postCashier API has successfully inserted cashier id
-3. getTransactionCode.  Use this API to find the relevant transaction code to successfully post charges
+## 25. postBillingCharges 
+1. getTransactionCode
+Use this API to find the required transaction Code. For testing purpose we require transaction Sub Group value `FOD`where by you will need to find transaction Code `2800`. Make sure this inserted into environment Variable `TransactionCode`
+2. Post charges (2800) to the window 2
 
-## 19. getFolio
+## 26. postBillingCharges 
+1. getTransactionCode
+Use this API to find the required transaction Code. For testing purpose we require transaction Sub Group value `COM`where by you will need to find transaction Code `5000`. Make sure this inserted into environment Variable `TransactionCode`
+2. Post charges (5000) to the window 1
 
+## 27. postAdvanceRoomCharges
+As we are testing and no End of Day Routine will be run, use this API to post Room Charges in advance
+
+## 28. getFolio
 Use this API to fetch Folios from each window.
 
-## 20. postBillingPayment
+## 29. postBillingPayment
+Use this API to post payment against the folio on Window 1. There should be no balance left
 
-Use this API to post payment against the folio from a specific window.
+## 30. postBillingPayment
+Use this API to post payment against the folio on Window 2. There should be no balance left
 
-## 21. postFolios
+## 31. postBillingPayment
+Use this API to post payment against the folio on Window 3. There should be no balance left
 
-Use this folio to settle the folio prior checkout.
+## 32. putEarlyDeparture
+As we are testing and no End of Day Routine will be run, use this API to change the Reservation to be able checkout Early.
 
-## 22. postCheckout
+## 33. postFinalCharges
+Ensure that you are applying final charges
+
+## 34. postFolios
+Use this folio to settle the folio prior checkout. *This API needs to be executed to all 3 windows as charges were on all these 3 windows*. Make sure that you change folioWindow value for each API calls. 
+
+## 35. postCheckout
 
 Use this API to post checkout.
 
-## 23. postEmailFolioReport
+## 36. postEmailFolioReport
 
-Send copy of the invoice to email.
+Send copy of the invoice to email. Change the value within `emailAddress`
 
 1. getFolioTypes.  Use this API to fetch the folio type configured for executing postEmailFolioReport API
