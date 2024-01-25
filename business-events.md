@@ -30,8 +30,8 @@ Polling means sending repeated requests to ask "are there any events for my exte
 
 #### 1.2 Creating an external system
 
-1. Create an external system in OPERA Cloud following [these steps](https://docs.oracle.com/search/?q=Configuring%20External%20Systems&pg=1&size=10&product=en%2Findustries%2Fhospitality&category=en%2Findustries&showfirstpage=true&lang=en).  Note down the external system code.
-2. Create an external database in OPERA Cloud for the external system you created following [these steps](https://docs.oracle.com/search/?q=Configuring%20External%20Databases&pg=1&size=10&product=en%2Findustries%2Fhospitality&category=en%2Findustries&showfirstpage=true&lang=en)
+1. Create an external system in OPERA Cloud following [these steps](https://docs.oracle.com/search/?q=Configuring%20External%20Systems&pg=1&size=10&product=en%2Findustries%2Fhospitality&category=en%2Findustries&showfirstpage=true&lang=en). For environments on 23.4.x+ tick the `Auto Configure External Databases` checkbox. Note down the external system code.
+2. _For environments below OPERA Cloud 23.4.x:_ Create an external database in OPERA Cloud for the external system you created following [these steps](https://docs.oracle.com/search/?q=Configuring%20External%20Databases&pg=1&size=10&product=en%2Findustries%2Fhospitality&category=en%2Findustries&showfirstpage=true&lang=en)
 
 ### 2. Configuring the External System for Events
 
