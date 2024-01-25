@@ -2,18 +2,19 @@
 
 ## Day 1
 
-|Time       |Activity                      |
-|-----------|------------------------------|
-|08:30-09:00|Coffee                        |
-|09:00-10:00|OHIP Overview                 |
-|10:00-11:30|Basic Setup                   |
-|11:30-11:40|Coffee                        |
-|11:40-13:00|Implementation Use Cases 1-12 |
-|13:00-14:00|Lunch                         |
-|14:00-14:30|Payment Card Tokenization     |
-|14:30-16:00|Implementation Use Cases 13-36|
-|16:00-16:10|Coffee                        |
-|16:10-17:10|OHIP Commercials              |
+|Time       |Activity                         |
+|-----------|---------------------------------|
+|08:30-09:00|Coffee                           |
+|09:00-09:30|OHIP Overview                    |
+|09:00-11:00|Basic Setup                      |
+|11:00-11:10|Coffee                           |
+|11:10-13:00|Implementation Use Cases 1-12    |
+|13:00-14:00|Lunch                            |
+|14:00-14:30|Payment Card Tokenization        |
+|14:30-16:30|Implementation Use Cases 13-36   |
+|16:30-16:40|Coffee                           |
+|16:40-17:00|OHIP Commercials                 |
+|18:00-20:00|Happy Hour (finger food & drinks)|
 
 ## Day 2
 
@@ -21,9 +22,9 @@
 |-----------|------------------------------------------|
 |08:30-09:00|Coffee                                    |
 |09:00-10:00|Async APIs                                |
-|10:00-11:20|Business Events                           |
-|11:20-11:30|Coffee                                    |
-|11:30-12:30|Anti-Patterns                             |
+|10:00-11:00|Business Events                           |
+|11:00-11:10|Coffee                                    |
+|11:10-12:30|Anti-Patterns                             |
 |12:30-13:30|Lunch                                     |
 |13:30-14:30|Troubleshooting                           |
 |14:30-15:30|Transition to OPERA Cloud Identity Manager|
