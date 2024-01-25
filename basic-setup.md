@@ -20,12 +20,17 @@ Getting started with Oracle Hospitality Integration Platform is easy.  Follow th
 
 ## 2. Understanding the Developer Portal
 
-1. Searching for the Customer Relationship Management API.  See [API Search Engine](https://docs.oracle.com/en/industries/hospitality/integration-platform/ohipu/ch_discover_and_subscribe_to_APIs.htm#OHIPU-APISearchEngine-3C569607)
-2. View the API specifications for the V1 Customer Relationship Management API
+### 2a. Finding APIs and workflows
+
+1. Searching for the Enterprise Configuration API.  See [API Search Engine](https://docs.oracle.com/en/industries/hospitality/integration-platform/ohipu/ch_discover_and_subscribe_to_APIs.htm#OHIPU-APISearchEngine-3C569607)
+2. View the API specifications for the V1 Enterprise Configuration API
 3. Search for the operation `getHotelDetails`
 4. Find the example request in Postman for `getHotelDetails` ![alt text](images/getting_started_2_4.png "screenshot of Oracle Hospitality Integration Platform developer portal searching for getHotelDetails highlighting the method to get to the Postman sample")
 5. Find the workflow for checking in
-6. Create an application and subscribe it to the Property APIs.  See [Registering an Application](https://docs.oracle.com/en/industries/hospitality/integration-platform/ohipu/c_register_and_manage_applications.htm#OHIPU-CreatingAnApplication-D59E4A5D).  Note down the Application Key.
+
+### 2b. Creating an application
+
+1. Create an application and subscribe it to the Property APIs.  See [Registering an Application](https://docs.oracle.com/en/industries/hospitality/integration-platform/ohipu/c_register_and_manage_applications.htm#OHIPU-CreatingAnApplication-D59E4A5D).  Note down the Application Key.
 
 ## 3. Obtaining credentials
 
