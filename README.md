@@ -1,8 +1,10 @@
 # Oracle Hospitality Integration Platform Bootcamp
 
-Materials for a bootcamp on the Oracle Hospitality Integration Platform:
+Materials for a bootcamp on the [Oracle Hospitality Integration Platform](https://www.oracle.com/industries/hospitality/integration-platform/):
 
-1. [Prerequisites](prerequisites.md)
-2. [Basic Setup](basic-setup)
-3. [Asynchronous APIs](async.md)
-4. [Business Events](business-events.md)
+1. [Agenda](bootcamp-agenda.md)
+2. [Prerequisites](prerequisites.md)
+3. [Basic Setup](basic-setup)
+4. [Asynchronous APIs](async.md)
+5. [Business Events](business-events.md)
+6. [Contactless Journey](contactless-journey.md)
