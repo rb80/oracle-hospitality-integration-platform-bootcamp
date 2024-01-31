@@ -32,10 +32,9 @@ This collection will provide you a head start on major APIs which are required f
 28. [Checkout- Fetch Folio](#28-getfolio)
 29. [Checkout - Post Payment on each Window 1-3](#29-postbillingpayment)
 30. [Checkout - Modify Reservation status to Early Departure](#30-putearlydeparture)
-31. [Checkout - Apply Final Charges](#31-postfinalcharges)
-32. [Checkout- Close Folios](#32-postfolios)
-33. [Checkout - Posting Checkout](#33-postcheckout)
-34. [Checkout - Email Invoice](#34-postemailfolioreport) (Optional)
+31. [Checkout- Close Folios](#32-postfolios)
+32. [Checkout - Posting Checkout](#33-postcheckout)
+33. [Checkout - Email Invoice](#34-postemailfolioreport) (Optional)
 
 ## 1. gettoken
 ### Get Token
@@ -270,22 +269,17 @@ Window 3 should be paid against payment Method `INV` which is invoiced to Travel
 
 As we are testing and no End of Day Routine will be run, use this API to change the Reservation to be able checkout Early.
 
-## 31-postfinalcharges
-### Apply Final Charges 
-
-Ensure that you are applying final charges
-
-## 32-postfolios
+## 31-postfolios
 ### Close Folio Windows 1-3
 
 Use this folio to settle the folio prior checkout. *This API needs to be executed to all 3 windows as charges were on all these 3 windows*. Make sure that you change folioWindow value for each API calls.
 
-## 33-postcheckout
+## 32-postcheckout
 ### Posting CheckOut
 
 Use this API to post checkout.
 
-## 34-postemailfolioreport
+## 33-postemailfolioreport
 ### Email Invoice
 
 Send copy of the invoice to email. Change the value within `emailAddress`
