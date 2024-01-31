@@ -35,7 +35,7 @@
 33. [Checkout - Posting Checkout]
 34. [Checkout - Email Invoice] (Optional)
 
-## 1-Get Token
+## 1 Get Token
 This is required to access Oracle Hospitality OPERA Cloud REST APIs.
 
 To obtain a token include the following headers:
@@ -51,18 +51,18 @@ And the following body parameters:
 - password. If `grant_type` is password, set this to your OPERA Cloud integration user's password. (commonly known as interface key)
 - scope. If `grant_type` is client_credentials, set this to your assigned scope.
 
-## 2-Create Guest Profile
+## 2 Create Guest Profile
 Create a guest Profile with minimum data. This is the main Guest Profile who is staying in the hotel
 
 Note that within the postman collection provided, from the POST response `ProfileId` will be automatically inserted into the Postman environment variables.
 
-## 3-Create Company Profile
+## 3 Create Company Profile
 Create Company Profile where by adding an AR address in the payload. This is required for successful checkout of the folio to Accounts Receivable. This is to show that Reservation can be linked to other Profile types as well. Please note that you can only attach maximum of one Company Profile. 
 
 1. Change `companyName`and `address`as required`
 2. Once Company Profile is created, ensure `getProfile` API is executed so that `AR address id` is inserted into environment variables `CompanyArAddressId`
 
-## 4-Create Accounts Receivable Number (AR Account Number) on Company Profile
+## 4 Create Accounts Receivable Number (AR Account Number) on Company Profile
 
 This API is to create an Account Receivable Number (AR Number) to the Company Profile created previously. This is required later if you want to check out the Opera Folio Window to City Ledger (Direct Billing).
 
