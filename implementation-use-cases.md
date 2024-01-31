@@ -163,7 +163,7 @@ Assign room which you got from earlier API call.
 ## 20-Modify Reservation to Pre-Register the Arrival
 Pre Register the guest. Ensure the `arrivalTime` is updated in the payload
 
-# 21-Checkin the reservation
+## 21-Checkin the reservation
 Checkin the reservation with the same roomId which you assigned.
 
 ## 22-Create Room Key
