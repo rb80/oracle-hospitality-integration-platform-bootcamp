@@ -28,6 +28,8 @@ Once you have sent this post request to OPERA Cloud, you should receive a 202 Ac
 
 * 30 minutes interval if same dates are present in the payload
 
+![alt text](images/async.png "screenshot of Postman sample of the dailySummary Async API, highlighting the Location response header")
+
 b. **HEAD** request is the second step from an external system to OPERA Cloud to check the status of the process started with POST request in the first step. Use the header parameter Location from the POST response in this HEAD request.  Once the process is completed, the HEAD request returns status of Completed and again, a header parameter Location will contain a summary ID required in step 3.
 
 Consider multiple `HEAD` retries for large data before finally sending the GET request. 
@@ -51,6 +53,8 @@ ___
 
 In the operation `startReservationsDailySummaryProcess` in the OPERA Cloud Reservation Asynchronous API a request that uses the parameter `lastModifiedDate` (available from OPERA Cloud 23.1) can be called only once every 3 hours.
 A given request body can be called only once every 30 minutes when starting an Asynchronous API request.
+
+![alt text](images/async_with_modified_date.png "screenshot of Postman sample of the dailySummary Async API, this time specifying a lastModifiedDate in the request body")
 ___
 
 If partner requests data with `startDate` and `endDate` and a duplicate request (having same criteria) is sent within 30 minutes the following response is received:
@@ -98,6 +102,8 @@ If your application is subscribed to the Streaming API you can also fetch Async 
 ## 8. Business Use Case
 
 To find more information on Async APIs, please navigate to your developer portal and under the tab `Business Use Cases` you will find more information.
+
+![alt text](images/business_use_case.png "screenshot of the OHIP Developer Portal Business Use Cases feature, highlighting the RMS - Revenue Management Systems business use case")
 
 ## 9. Upcoming Async APIs
 
