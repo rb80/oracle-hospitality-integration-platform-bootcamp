@@ -30,11 +30,12 @@ This collection will provide you a head start on major APIs which are required f
 26. [Stay - Post Billing Charges on windows 1 and 2](#26-postbillingcharges)
 27. [Stay - Create Advance Room Charges](#27-postadvanceroomcharges)
 28. [Checkout- Fetch Folio](#28-getfolio)
-29. [Checkout - Post Payment on each Window 1-3](#29-postbillingpayment)
-30. [Checkout - Modify Reservation status to Early Departure](#30-putearlydeparture)
-31. [Checkout- Close Folios](#32-postfolios)
-32. [Checkout - Posting Checkout](#33-postcheckout)
-33. [Checkout - Email Invoice](#34-postemailfolioreport) (Optional)
+29. [Checkout - Post Payment on each Window 1](#29-postbillingpayment)
+30. [Checkout - Post Payment on each Window 2-3](#30-postbillingpayment)
+31. [Checkout - Modify Reservation status to Early Departure](#31-putearlydeparture)
+32. [Checkout- Close Folios](#32-postfolios)
+33. [Checkout - Posting Checkout](#33-postcheckout)
+34. [Checkout - Email Invoice](#34-postemailfolioreport) (Optional)
 
 ## 1. gettoken
 ### Get Token
@@ -257,29 +258,35 @@ As we are testing and no End of Day Routine will be run, use this API to post Ro
 Use this API to fetch Folios from each window. Remember there are 3 Windows which should have Charges (Balances)
 
 ## 29-postbillingpayment
-### Post Payment on each Window 1-3
+### Post Payment on each Window 1
 
 Use this API to post payment against the folio on each Window. There should be no balance left
 Window 1 should be paid against Credit Card
+
+
+## 30-postbillingpayment
+### Post Payment on each Window 2-3
+
+Use this API to post payment against the folio on each Window. There should be no balance left
 Window 2 should be paid against payment Method `INV` which is invoiced to Company
 Window 3 should be paid against payment Method `INV` which is invoiced to Travel Agent
 
-## 30-putearlydeparture
-###  Modify Reservation status to Early Departure
+## 31-putearlydeparture
+### Modify Reservation status to Early Departure
 
 As we are testing and no End of Day Routine will be run, use this API to change the Reservation to be able checkout Early.
 
-## 31-postfolios
+## 32-postfolios
 ### Close Folio Windows 1-3
 
 Use this folio to settle the folio prior checkout. *This API needs to be executed to all 3 windows as charges were on all these 3 windows*. Make sure that you change folioWindow value for each API calls.
 
-## 32-postcheckout
+## 33-postcheckout
 ### Posting CheckOut
 
 Use this API to post checkout.
 
-## 33-postemailfolioreport
+## 34-postemailfolioreport
 ### Email Invoice
 
 Send copy of the invoice to email. Change the value within `emailAddress`
