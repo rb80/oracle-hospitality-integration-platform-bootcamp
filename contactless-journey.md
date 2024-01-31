@@ -5,7 +5,7 @@ This collection will provide you a head start on major APIs which are required f
 1. [Get Token](#1-gettoken)
 2. [Profile - Create Guest Profile](#2-postguestprofile)
 3. [Profile - Create Company Profile](#3-postcompany) (Optional)
-4. [Profile - Create Accounts Receivable Number on Company Profile](#4-postaccount) (Optional) 
+4. [Profile - Create Accounts Receivable Number on Company Profile](#4-postaccount) (Optional)
 5. [Profile - Create Travel Agent Profile](#5-postprofile) (Optional)
 6. [Profile - Create Accounts Receivable Number on Travel Agent](#6-postaccount) (Optional)
 7. [Booking - Fetch Hotel Availability](#7-gethotelavailability)
@@ -17,7 +17,7 @@ This collection will provide you a head start on major APIs which are required f
 13. [Pre Arrival - Create Routing Instruction to Travel Agent on Window 3](#13-postrouting) (Optional)
 14. [Pre Arrival - Modify Reservation to update Payment Method on Window 3](#14-putreservation) (Optional)
 15. [Pre Arrival - Convert Pan into token](#15-openpaymenttokenexchange)
-16. [Pre Arrival - Modify Reservation to Insert Credit Card Token as Payment Method on Window 1](#16-postPaymentMethod)
+16. [Pre Arrival - Modify Reservation to Insert Credit Card Token as Payment Method on Window 1](#16-postpaymentmethod)
 17. [Pre Arrival - Pre Authorise Credit Card](#17-postauthorisation)
 18. [Pre Arrival- Fetch Available Hotel Rooms](#18-gethotelrooms)
 19. [Pre Arrival - Assign Inspected  Vacant Rooms to Reservation](#19-postroomassignment)
@@ -172,7 +172,7 @@ Converts Primary Account Number (PAN) into Token issued by Payment Service Provi
 This is required to updated Window 1 payment method which belongs to guest
 Take any test Credit Card numbers and insert into the payload within the tag `pan`
 
-## 16-postPaymentMethod
+## 16-postpaymentmethod
 ## Modify Reservation to Insert Credit Card Token as Payment Method on Window 1
 
 Update existing Payment Method using this API. Make sure you update the tags
