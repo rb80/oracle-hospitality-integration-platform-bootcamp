@@ -190,7 +190,30 @@ Pre Register the guest. Ensure the `arrivalTime` is updated in the payload
 
 ## 21-Checkin the reservation
 
-Checkin the reservation with the same roomId which you assigned.
+Pre-Register Or Pre-Checkin
+You can offer your guests the ability to check in for their reservations by pre-registering. When a reservation is pre-registered, all of the guest’s information to finish the registration process is collected, including authorizing the guest's credit card for the reservation. This makes it easy to check in the reservation when the guests arrive and the assigned room is available.
+
+You can search for and manage pre-registered arrival reservations from Arrivals search by selecting the Pre-registered check box in advanced search.
+
+1. Pre Register the guest. Ensure the arrivalTime is updated in the payload
+
+
+Additional functionality - `Advanced Checkin`
+At times, when guests arrive to the property prior to a room being ready, you can flag a reservation as Advance Checked In for arrivals due in on the current business date. This enables guests to post charges to their reservation folio prior to check in, and helps the rooms management team prioritize room cleaning and assignment. Individual reservations (including Walk In reservations, Pre Registered reservations, and reservations that are in Queue) and group block reservations can be Advance Checked In.
+
+
+Benefits to the Guest and to the Property
+Advance Check In with the Expected Time of Return (ETR) parameter On provides the following benefits.
+The guest can:
+* Post charges to their reservation folio prior to checking in.
+* Receive notifications when the room is ready.
+The rooms management and front office teams can:
+* Easily identify which reservations are flagged Advance Checked In.
+* Prioritize and sort Advance Checked In reservations by expected time of return (ETR).
+* Assign rooms to reservations based on expected time of return (ETR).
+* Add ETR comments that link to the ETR time.
+* Set Advance Checked In reservations to automatically check in based on room status.
+* Check in multiple Advance Checked In reservations (Mass Advance Check In).
 
 ## 22-Create Room Key
 
@@ -230,7 +253,7 @@ Use this API to find the required transaction Code. For testing purpose we requi
 3. getTransactionCode
 Use this API to find the required transaction Code. For testing purpose we require transaction Sub Group value `FOD`where by you will need to find transaction Code `2800`. Make sure this inserted into environment Variable `TransactionCode`.
 
-4. Post charges (2800) to the window 1. The amount can be of your choice
+4. Post charges (2800) to the window 2. The amount can be of your choice
 
 ## 27-Create Advance Room Charges
 
