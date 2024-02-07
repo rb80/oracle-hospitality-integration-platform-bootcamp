@@ -186,16 +186,12 @@ Assign room which you got from earlier API call.
 
 ## 20-Modify Reservation to Pre-Register the Arrival
 
-Pre Register the guest. Ensure the `arrivalTime` is updated in the payload
-
-## 21-Checkin the reservation
-
 Pre-Register Or Pre-Checkin
 You can offer your guests the ability to check in for their reservations by pre-registering. When a reservation is pre-registered, all of the guest’s information to finish the registration process is collected, including authorizing the guest's credit card for the reservation. This makes it easy to check in the reservation when the guests arrive and the assigned room is available.
 
 You can search for and manage pre-registered arrival reservations from Arrivals search by selecting the Pre-registered check box in advanced search.
 
-1. Pre Register the guest. Ensure the arrivalTime is updated in the payload
+1. Pre Register the guest. Ensure the `arrivalTime` is updated in the payload
 
 
 Additional functionality - `Advanced Checkin`
@@ -214,6 +210,11 @@ The rooms management and front office teams can:
 * Add ETR comments that link to the ETR time.
 * Set Advance Checked In reservations to automatically check in based on room status.
 * Check in multiple Advance Checked In reservations (Mass Advance Check In).
+
+2. Ensure `expectedReturnTime` is updated and execute Advance checkin API
+
+## 21-Checkin the reservation
+Checkin the guest using this API
 
 ## 22-Create Room Key
 
