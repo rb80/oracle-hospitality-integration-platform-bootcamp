@@ -237,11 +237,6 @@ This API is useful for many Kiosk Partners who wants to save time to Pre Authori
 
 getHotelInterface API will show whether OPI is installed and configured. Look for `activeFlag=true`
 
-<!-- TOC --><a name="17-pre-authorize-credit-card"></a>
-## 17-Pre Authorize Credit Card
-
-This API is useful for many Kiosk Partners who wants to save time to Pre Authorize card prior checkin API.
-
 
 <!-- TOC --><a name="18-fetch-available-hotel-rooms"></a>
 ## 18-Fetch Available Hotel Rooms
@@ -280,14 +275,6 @@ Creating a Key. KeyType by default should be `New`
 
 3. Fetch the Service Request Codes applied to the reservation
 
-<!-- TOC --><a name="24-set-wake-up-call"></a>
-## 24-Set Wake up Call
-1. Check whether Opera Control for Wakeup call function is active
-
-
-Create a Service request to provide towel by Housekeeping department. Ensure you change the dates within the payload
-
-1. getServiceRequestCodes.  Fetch the Service Request Codes and Department Code
 
 <!-- TOC --><a name="24-set-wake-up-call-1"></a>
 ## 24-Set Wake up Call
@@ -333,20 +320,6 @@ Use this API to fetch Folios from each window. Remember there are 3 Windows whic
 1. Fetch the cardId required for posting payment against Credit Card which was insrted earlier. 
 
 2. Use this API to post payment against the folio on each Window. There should be no balance left. Window 1 should be paid against Credit Card
-
-
-As we are testing and no End of Day Routine will be run, use this API to post Room Charges in advance
-
-<!-- TOC --><a name="28-fetch-folio"></a>
-## 28-Fetch Folio
-
-Use this API to fetch Folios from each window. Remember there are 3 Windows which should have Charges (Balances)
-
-<!-- TOC --><a name="29-post-payment-on-each-window-1-1"></a>
-## 29-Post Payment on each Window 1
-
-Use this API to post payment against the folio on each Window. There should be no balance left
-Window 1 should be paid against Credit Card
 
 
 <!-- TOC --><a name="30-post-payment-on-each-window-2-3"></a>
