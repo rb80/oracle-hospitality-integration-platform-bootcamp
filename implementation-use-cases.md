@@ -3,7 +3,7 @@
 1. [Get Token]
 2. [Profile - Create Guest Profile]
 3. [Profile - Create Company Profile] (Optional)
-4. [Profile - Create Accounts Receivable Number on Company Profile] (Optional) 
+4. [Profile - Create AR Account for Company Profile] (Optional) 
 5. [Profile - Create Travel Agent Profile] (Optional)
 6. [Profile - Create Accounts Receivable Number on Travel Agent] (Optional)
 7. [Booking - Fetch Hotel Availability]
@@ -27,7 +27,7 @@
 25. [Stay - Create Cashier]
 26. [Stay - Post Billing Charges on windows 1 and 2]
 27. [Stay - Create Advance Room Charges]
-28. [Checkout- Fetch Folio]
+28. [Checkout- Fetch Folio postings from each window]
 29. [Checkout - Post Payment on each Window 1]
 30. [Checkout - Post Payment on each Window 2-3]
 31. [Checkout - Modify Reservation status to Early Departure]
@@ -59,10 +59,10 @@ Note that within the postman collection provided, from the POST response `Profil
 ## 3 Create Company Profile
 Create Company Profile where by adding an AR address in the payload. This is required for successful checkout of the folio to Accounts Receivable. This is to show that Reservation can be linked to other Profile types as well. Please note that you can only attach maximum of one Company Profile. 
 
-1. Change `companyName`and `address`as required`
+1. Change `companyName`and `address`as required`. Do not change the address type 'AR ADDRESS'
 2. Once Company Profile is created, ensure `getProfile` API is executed so that `AR address id` is inserted into environment variables `CompanyArAddressId`
 
-## 4 Create Accounts Receivable Number (AR Account Number) on Company Profile
+## 4 Create AR Account for Company Profile
 
 This API is to create an Account Receivable Number (AR Number) to the Company Profile created previously. This is required later if you want to check out the Opera Folio Window to City Ledger (Direct Billing).
 
@@ -70,14 +70,14 @@ This API is to create an Account Receivable Number (AR Number) to the Company Pr
 2. Create Company AR Account. Make sure the AR number (accountNo) is inserted and also the environment variable is populated `CompanyAccountNo`
 3. Use getProfile API to check all of the above values are responded correctly
 
-## 5-Create Travel Agent Profile
+## 5 Create Travel Agent Profile
 Create Travel Agent Profile with AR Address. This is to show that Reservation can be linked to other Profile types as well. Please note that you can only attach maximum of one Travel Agent Profile. The `TravelAgentProfileId` is auto populated in Environment variables with Test Scripts inserted into collection
 
 1. Once Travel Agent Profile is created, ensure `getProfile` API is executed so that `TaArAddressId` is inserted into environment variables
 2. Account Receivable account types (AR Types) enable you to categorize AR accounts. The account type selected in each AR Account is used for filtering in both the application and also on reports, such as when generating an AR aging report subtotaled by account type. Account types also determine the stationery templates to use when generating statements and reminder letters for each AR account. 
 Fetch AR types which is required to create Travel Agent AR account and set environment variable `ArAccountType`. If the value doesnt differ from Company, no changes required.
 
-## 6-Create Accounts Receivable Number (AR Account Number) on Travel Agent Profile
+## 6 Create AR Account for Travel Agent Profile
 1. Create Travel Agent AR Account. Make sure the AR number (accountNo) is inserted and also the environment variable `TravelAgentAccountNo` is populated
 2. Use getProfile API to check all of the above values are responded correctly
 
@@ -96,22 +96,17 @@ The variables `Currentdate` and `Currentdateplus1` variable are created from get
 ## 8-Create Reservation
 Create Reservation with Company and Travel Agent attached.
 
-Change `id` values within `reservationIdList` and `ExternalReferences`
-Other field changes required maybe are `Company Name` and `Travel Agent Name` as per your changes from earlier steps. 
-
 1. Fetch MarketCode.  This API is required so that the variable `MarketCode` can be inserted into the environment variable
 2. Fetch SourceCode.  This API is required so that the variable `SourceCode` can be inserted into the environment variable
 3. Fetch BookingMedium.  This API is required so that the variable `BookingMedium` can be inserted into the environment variable. This is commonly called Origin Code in OPERA Cloud UI.
 4. Fetch Guarantee Code (Reservation Type).  This API is required so that the variable `GuaranteeCode` can be inserted into the environment variable
 5. Fetch Payment Method.  This API is required so that the variable `PaymentMethod` can be inserted into the environment variable
-6. Fetch Reservation.  Once postReservation is executed, please check whether all required details are entered correctly with this API. Ensure the value from reservationIdList Confirmation is copied into environment variable `Confirmationid`
+6. Fetch Reservation.  Once postReservation is executed, please check whether all required details are entered correctly with this API. Ensure the value from reservationIdList Confirmation is copied into environment variable `Confirmationid` and also `id` from `externalReferences` into `ExternalReferences`
 
 ## 9-Create Multi Leg Reservation
-Create Reservation which is multi leg reservation
-Change the value within `id` of `ExternalReferences` or `idContext`
-After successful post, make sure the environment Variable `ReservationId2`
+Create Reservation which is multi leg reservation. This API is to show you how to create Multileg and will not be further used in this collection and therefore do not require any environment variables. 
 
-1. Verify the data with `getReservation` whereby Leg 2 should be visible within External References type=OPERA
+1. Verify the data with `getReservations` whereby making use of `confirmationNumberList` query parameter which shows you can fetch all leg Reservations with one API
 
 ## 10-Modify Reservation Add Preference
 Pre Arrival where a preference will be added.
@@ -141,6 +136,7 @@ Posting a routing instruction to existing reservation where `Room` charges goes 
 Converts Primary Account Number (PAN) into Token issued by Payment Service Providers
 This is required to updated Window 1 payment method which belongs to guest
 Take any test Credit Card numbers and insert into the payload within the tag `pan`
+Kindly note that this environment is linked to a PSP simulator and therefore every PAN number conversion will respond with different Token numbers for same PAN number. 
 
 ## 16-Modify Reservation to Insert Credit Card Token as Payment Method on Window 1
 Update existing Payment Method using this API. Make sure you update the tags
@@ -148,10 +144,14 @@ Update existing Payment Method using this API. Make sure you update the tags
 1. cardNumber with `token` value  which you received in `openPaymentTokenExchange`
 2. cardNumberMasked with `pan`  which you received in `openPaymentTokenExchange`
 3. Expiration Date
+4. citId is an id which is usually sent by PSP into OPERA through OPI. This is not visible anywhere in OPERA Cloud UI. It is saved in OPERA DB only. 
+
 And any other value which you changed
 
 ## 17-Pre Authorise Credit Card
-This API is useful for many Kiosk Partners who wants to save time to Pre Authorise card prior checkin API.
+This API is useful for many Kiosk Partners who wants to save time to Pre Authorise card prior checkin API. Make sure the terminalId has the value for your testing is `PD1` 
+
+getHotelInterface API will show whether OPI is installed and configured. Look for `activeFlag=true`
 
 ## 18-Fetch Available Hotel Rooms
 Find vacant and inspected rooms so that you can assign to the reservation.
@@ -172,14 +172,18 @@ Creating a Key. KeyType by default should be `New`
 *Please note this API is only for illustration purpose as the API is not available yet*
 
 ## 23-Create a Service Request
-Create a Service request to provide towel by Housekeeping department. Ensure you change the dates within the payload
+1. Fetch Service request Codes
 
-1. getServceRequestCodes.  Fetch the Service Request Codes and Department Code
+2. Create a Service request to provide towel by Housekeeping department. Ensure you change the dates within the payload
+
+3. Fetch the Service Request Codes applied to the reservation
 
 ## 24-Set Wake up Call
-Create a Wakeup call on the reservation. Ensure you change the dates within the payload
+1. Check whether Opera Control for Wakeup call function is active
 
-1. getWakeUpcall.  Use this API to check whether the postWakeUpcall was inserted successfully into the reservation
+2. Create a Wakeup call on the reservation.
+
+3. getWakeUpcall.  Use this API to check whether the postWakeUpcall was inserted successfully into the reservation
 
 ## 25-Create Cashier
 This API is required for `postBillingCharges" whereby it is mandatory that API requires a cashier id.
@@ -188,29 +192,32 @@ This API is required for `postBillingCharges" whereby it is mandatory that API r
 
 ## 26-Post Billing Charges on windows 1 and 2
 1. getTransactionCode
-Use this API to find the required transaction Code. For testing purpose we require transaction Sub Group value `FOD`where by you will need to find transaction Code `2800`. Make sure this inserted into environment Variable `TransactionCode`
-2. Post charges (2800) to the window 2
+Use this API to find the required transaction Code. For testing purpose we require transaction Sub Group value `COM`where by you will need to find transaction Code `5000`. Make sure this inserted into environment Variable `TransactionCode`
+
+2. Post charges (5000) to the window 1. The amount can be of your choice
 
 3. getTransactionCode
-Use this API to find the required transaction Code. For testing purpose we require transaction Sub Group value `COM`where by you will need to find transaction Code `5000`. Make sure this inserted into environment Variable `TransactionCode`
-4. Post charges (5000) to the window 1
+Use this API to find the required transaction Code. For testing purpose we require transaction Sub Group value `FOD`where by you will need to find transaction Code `2800`. Make sure this inserted into environment Variable `TransactionCode`.
+
+4. Post charges (2800) to the window 1. The amount can be of your choice
 
 
 ## 27-Create Advance Room Charges
-As we are testing and no End of Day Routine will be run, use this API to post Room Charges in advance
+As we are testing and no End of Day Routine will be run, use this API to post Room Charges in advance which will post room charges to window 3 as per Routing instructions you inserted earlier. 
 
-## 28-Fetch Folio
+## 28-Fetch Folio postings from each window
 Use this API to fetch Folios from each window. Remember there are 3 Windows which should have Charges (Balances)
 
 ## 29-Post Payment on each Window 1
-Use this API to post payment against the folio on each Window. There should be no balance left
-Window 1 should be paid against Credit Card
+1. Fetch the cardId required for posting payment against Credit Card which was insrted earlier. 
+
+2. Use this API to post payment against the folio on each Window. There should be no balance left. Window 1 should be paid against Credit Card
 
 
 ## 30-Post Payment on each Window 2-3
 Use this API to post payment against the folio on each Window. There should be no balance left
-Window 2 should be paid against payment Method `INV` which is invoiced to Company
-Window 3 should be paid against payment Method `INV` which is invoiced to Travel Agent
+1. Window 2 should be paid against payment Method `INV` which is invoiced to Company
+2. Window 3 should be paid against payment Method `INV` which is invoiced to Travel Agent
 
 ## 31-Modify Reservation status to Early Departure
 As we are testing and no End of Day Routine will be run, use this API to change the Reservation to be able checkout Early.
@@ -222,6 +229,9 @@ Use this folio to settle the folio prior checkout. *This API needs to be execute
 Use this API to post checkout.
 
 ## 34-Email Invoice
-Send copy of the invoice to email. Change the value within `emailAddress`
 
 1. getFolioTypes.  Use this API to fetch the folio type configured for executing postEmailFolioReport API
+
+2. Send copy of the invoice to email. Change the value within `emailAddress`
+
+3. Fetch copy of the invoice in Base64 format. Use any public website to convert Base64 into pdf to view it. 
