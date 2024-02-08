@@ -67,6 +67,9 @@ ___
 Since OPERA Cloud 23.2 HEAD requests return a header `retry-after` containing the number of seconds we recommend waiting before calling HEAD again.
 ___
 
+Messages are available for 6 hours in the queue
+___
+
 ## 5. Async APIs
 
 * ReservationDailySummary
