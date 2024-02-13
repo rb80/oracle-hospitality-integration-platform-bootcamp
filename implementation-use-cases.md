@@ -162,7 +162,8 @@ Posting a routing instruction to existing reservation where Room charges goes to
 
 ## 15-Convert PAN into Token
 
-Converts Primary Account Number (PAN) into Token issued by Payment Service Providers
+1. Verify whether OPI cloud is active 
+2. Converts Primary Account Number (PAN) into Token issued by Payment Service Providers
 This is required to updated Window 1 payment method which belongs to guest
 Take any test Credit Card numbers and insert into the payload within the tag `pan`
 Kindly note that this environment is linked to a PSP simulator and therefore every PAN number conversion will respond with different Token numbers for same PAN number.
@@ -262,12 +263,12 @@ This API is required for `postBillingCharges" whereby it is mandatory that API r
 ## 26-Post Billing Charges on windows 1 and 2
 
 1. getTransactionCode
-Use this API to find the required transaction Code. For testing purpose we require transaction Sub Group value `FOD` where by you will need to find transaction Code `2800`. Make sure this inserted into environment Variable `TransactionCode`.
+Use this API to find the required transaction Code. For testing purpose we require transaction Sub Group value `FOD` where by you will need to find transaction Code `2800`. Make sure this inserted into environment Variable `TransactionCode`. Kindly note that transactionCodes should be created with manualPost tag which is true. Only these transaction Codes can be used at preset to be able to post through OHIP. 
 
 2. Post charges (2800) to the window 2. The amount can be of your choice
 
 3. getTransactionCode
-Use this API to find the required transaction Code. For testing purpose we require transaction Sub Group value `COM` where by you will need to find transaction Code `5000`. Make sure this inserted into environment Variable `TransactionCode`
+Use this API to find the required transaction Code. For testing purpose we require transaction Sub Group value `COM` where by you will need to find transaction Code `5000`. Make sure this inserted into environment Variable `TransactionCode`. Kindly note that transactionCodes should be created with manualPost tag which is true. Only these transaction Codes can be used at preset to be able to post through OHIP. 
 
 4. Post charges (5000) to the window 1. The amount can be of your choice
 
