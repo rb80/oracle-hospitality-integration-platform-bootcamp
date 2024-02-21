@@ -187,7 +187,6 @@ This API is useful for many Kiosk Partners who wants to save time to Pre Authori
 2. Pre Authorise card. Make sure terminalId value is not changed. After execution, make sure following values are inserted into Environment variables
 `cardId`
 `approvalCode`
-`originalAuthSequence`
 `vendorTranId` Kindly note that there is space after last digit. Do not include this in your environment. 
 3. Check whether PreAuthorisation was successful with fetchAuthorizationHostory API
 
@@ -242,8 +241,8 @@ Creating a Key. KeyType by default should be `New`
 ## 23-Create a Service Request
 
 1. Fetch Service request Codes
-2. Create a Service request to provide towel by Housekeeping department. Ensure you change the dates within the payload
-3. Fetch the Service Request Codes applied to the reservation
+2. Create a Service request to provide towel by Housekeeping department. Ensure you change the tag`openDate` within the payload
+3. Fetch the Service Request Codes applied to the reservation to see whether it was successfully inserted
 
 ## 24-Set Wake up Call
 
@@ -257,8 +256,9 @@ Create a Wakeup call on the reservation. Ensure you change the dates within the 
 
 This API is required for `postBillingCharges" whereby it is mandatory that API requires a cashier id.
 
-1. Create Cashier  
-2. Use this API to check whether postCashier API has successfully inserted cashier id. If inserted, please insert the environment variable `CashierId`
+1. Fetch the next available cashier number id and insert into Create Cashier id API.
+2. Create Cashier  
+3. Use this API to check whether postCashier API has successfully inserted cashier id. If inserted, please insert the environment variable `CashierId`
 
 ## 26-Post Billing Charges on windows 1 and 2
 
