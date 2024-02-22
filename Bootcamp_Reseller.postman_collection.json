@@ -1,0 +1,5337 @@
+{
+	"info": {
+		"_postman_id": "11062da9-f745-41c3-9f82-893f91ae958a",
+		"name": "Bootcamp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "809897"
+	},
+	"item": [
+		{
+			"name": "Implementation Use Cases",
+			"item": [
+				{
+					"name": "01. Get oAuth Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"Token\", jsonData.access_token);\r",
+									"//Set Currentdate and Currentdateplus1 variables\r",
+									"var moment = require('moment');\r",
+									"pm.environment.set('Currentdate', moment().format((\"YYYY-MM-DD\")))\r",
+									"pm.environment.set('Currentdateplus1', moment().add(1, 'days').format((\"YYYY-MM-DD\")))\r",
+									"pm.environment.set('Currentdateplus2', moment().add(2, 'days').format((\"YYYY-MM-DD\")))\r",
+									"pm.environment.set('Currentdateplus3', moment().add(3, 'days').format((\"YYYY-MM-DD\")))\r",
+									"pm.environment.set('Currentdateplus4', moment().add(4, 'days').format((\"YYYY-MM-DD\")))\r",
+									"pm.environment.set('Currentdateplus5', moment().add(5, 'days').format((\"YYYY-MM-DD\")))"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{CLIENT_SECRET}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{CLIENT_ID}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "{{Username}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{Password}}",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HostName}}/oauth/v1/tokens",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"oauth",
+								"v1",
+								"tokens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02.Profile - Create Guest Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.headers.get(\"Location\").split(\"/\").pop();\r",
+									"postman.setEnvironmentVariable(\"ProfileId\", data);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-externalSystem",
+								"value": "{{externalSystemCode}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"guestDetails\": {\n        \"customer\": {\n            \"personName\": [\n                {\n                    \"givenName\": \"{{$randomFirstName}}\",\n                    \"surname\": \"{{$randomLastName}}\",\n                    \"nameTitle\": \"Mr\",\n                    \"nameType\": \"PRIMARY\",\n                    \"language\": \"E\"\n                }\n            ],\n            \"language\": \"E\"\n        },\n        \"profileType\": \"GUEST\",\n        \"statusCode\": \"ACTIVE\",\n        \"registeredProperty\": \"{{HotelId}}\",\n        \"markForHistory\": true\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/crm/v1/guests",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"crm",
+								"v1",
+								"guests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "03.Profile - Create Company Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.headers.get(\"Location\").split(\"/\").pop();\r",
+									"postman.setEnvironmentVariable(\"CompanyId\", data);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-externalSystem",
+								"value": "{{externalSystemCode}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"companyDetails\": {\n    \"company\": {\n      \"companyName\": \"Bootcamp Company 26\"\n    },\n    \"addresses\": {\n      \"addressInfo\": [\n        {\n          \"address\": {\n            \"addressLine\": [\n              \"Europadamm 40\"\n            ],\n            \"cityName\": \"Neuss\",\n            \"postalCode\": \"41460\",\n            \"country\": {\n              \"code\": \"DE\"\n            },\n            \"language\": \"E\",\n            \"type\": \"AR ADDRESS\",\n            \"primaryInd\": false\n          }\n        }\n      ]\n    },\n    \"profileType\": \"Company\",\n    \"statusCode\": \"Active\",\n    \"registeredProperty\": \"{{HotelId}}\",\n    \"markForHistory\": false\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/crm/v1/companies",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"crm",
+								"v1",
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "03a.Profile getCompanyProfile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-externalSystem",
+								"value": "{{externalSystemCode}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/crm/v1/profiles/{{CompanyId}}?fetchInstructions=Address&fetchInstructions=Profile",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"crm",
+								"v1",
+								"profiles",
+								"{{CompanyId}}"
+							],
+							"query": [
+								{
+									"key": "fetchInstructions",
+									"value": "Address"
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Communication",
+									"disabled": true
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Comment",
+									"disabled": true
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Membership",
+									"disabled": true
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Preference",
+									"disabled": true
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Keyword",
+									"disabled": true
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Correspondence",
+									"disabled": true
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Profile"
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Indicators",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04.Profile getAR Types Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-externalSystem",
+								"value": "{{externalSystemCode}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/lov/v1/listOfValues/hotels/{{HotelId}}/arAccountTypes?includeInactiveFlag=false",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"lov",
+								"v1",
+								"listOfValues",
+								"hotels",
+								"{{HotelId}}",
+								"arAccountTypes"
+							],
+							"query": [
+								{
+									"key": "includeInactiveFlag",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04a.Profile - Create AR Account for Company Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-externalSystem",
+								"value": "{{externalSystemCode}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"criteria\": {\n        \"hotelId\": \"{{HotelId}}\",\n        \"accountName\": \"Bootcamp Company 26\",\n        \"accountNo\": \"BOOT026\",\n        \"profileId\": {\n            \"id\": \"{{CompanyId}}\",\n            \"idContext\": \"OPERA\",\n            \"type\": \"Profile\"\n        },\n        \"creditLimit\": {\n            \"amount\": \"100000\"\n        },\n        \"monthEndCalcYN\": false,\n        \"address\": {\n            \"type\": \"Address\",\n            \"id\": \"{{CompanyArAddressId}}\"\n        },\n        \"status\": {\n            \"restricted\": false\n        },\n        \"batchStatement\": true,\n        \"emailStatementsReminders\": false,\n        \"primary\": true,\n        \"type\": \"{{ArAccountType}}\",\n        \"permanent\": true\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/ars/v1/hotels/{{HotelId}}/accounts",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"ars",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04b. Profile - getCompany Account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							}
+						],
+						"url": {
+							"raw": "{{HostName}}/ars/v1/accounts?hotelIds={{HotelId}}&limit=20&profileIdContext=OPERA&accountNo={{CompanyAccountNo}}&profileType=Company",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"ars",
+								"v1",
+								"accounts"
+							],
+							"query": [
+								{
+									"key": "hotelIds",
+									"value": "{{HotelId}}"
+								},
+								{
+									"key": "limit",
+									"value": "20"
+								},
+								{
+									"key": "profileIdContext",
+									"value": "OPERA"
+								},
+								{
+									"key": "accountNo",
+									"value": "{{CompanyAccountNo}}"
+								},
+								{
+									"key": "profileType",
+									"value": "Company"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "05.Profile - Create Travel Agent Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.headers.get(\"Location\").split(\"/\").pop();\r",
+									"postman.setEnvironmentVariable(\"TravelAgentProfileId\", data);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-externalSystem",
+								"value": "{{externalSystemCode}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"profileDetails\": {\n    \"company\": {\n      \"companyName\": \"American Express Bootcamp 26\",\n      \"companyName2\": \"Asian travel Section\",\n      \"companyName3\": \"Far East\"\n    },\n    \"addresses\": {\n      \"addressInfo\": [\n        {\n          \"address\": {\n            \"addressLine\": [\n              \"Street 1\",\n              \"Street 2\",\n              \"Street 3\",\n              \"Street 4\"\n            ],\n            \"postalCode\": \"50887\",\n            \"country\": {\n              \"value\": \"DE\"\n            },\n            \"language\": \"E\",\n            \"type\": \"BUSINESS\",\n            \"primaryInd\":\"true\",\n            \"updateReservations\": false\n          }\n        },\n                {\n          \"address\": {\n            \"addressLine\": [\n              \"Europadamm 40\"\n            ],\n            \"cityName\": \"Neuss\",\n            \"postalCode\": \"41460\",\n            \"country\": {\n              \"code\": \"DE\"\n            },\n            \"language\": \"E\",\n            \"type\": \"AR ADDRESS\",\n            \"primaryInd\": false\n          }\n        }\n      ]\n    },\n    \"ownerCode\": \"ALL\",\n    \"telephones\": {\n      \"telephoneInfo\": [\n        {\n          \"telephone\": {\n            \"phoneTechType\": \"PHONE\",\n            \"phoneUseType\": \"BUSINESS\",\n            \"phoneNumber\": \"009654444455666\",\n            \"orderSequence\": \"1\",\n            \"primaryInd\": true\n          }\n        }\n      ]\n    },\n    \"emails\": {\n      \"emailInfo\": [\n        {\n          \"email\": {\n            \"emailAddress\": \"fake@api.com\",\n            \"type\": \"EMAIL\",\n            \"emailFormat\": \"HTML\",\n            \"primaryInd\": true,\n            \"orderSequence\": \"2\"\n          }\n        }\n      ]\n    },\n    \"profileRestrictions\": {\n      \"restricted\": false\n    },\n    \"mailingActions\": {\n      \"active\": true\n    },\n    \"privacyInfo\": {\n      \"marketResearchParticipation\": true,\n      \"infoFromThirdParty\": true,\n      \"autoEnrollLoyaltyProgram\": true,\n      \"allowPhone\": true,\n      \"allowSMS\": true,\n      \"allowEmail\": true\n    },\n    \"cashiering\": {\n      \"vATOffsetYN\": \"N\"\n    },\n    \"statusCode\": \"Active\",\n    \"requestForHotel\": \"{{HotelId}}\",\n    \"protectedBy\": \"NONE\",\n    \"profileType\": \"Agent\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/crm/v1/profiles",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"crm",
+								"v1",
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "05a.Profile getTAProfile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-externalSystem",
+								"value": "{{externalSystemCode}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/crm/v1/profiles/{{TravelAgentProfileId}}?fetchInstructions=Address&fetchInstructions=Profile",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"crm",
+								"v1",
+								"profiles",
+								"{{TravelAgentProfileId}}"
+							],
+							"query": [
+								{
+									"key": "fetchInstructions",
+									"value": "Address"
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Communication",
+									"disabled": true
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Comment",
+									"disabled": true
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Membership",
+									"disabled": true
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Preference",
+									"disabled": true
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Keyword",
+									"disabled": true
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Correspondence",
+									"disabled": true
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Profile"
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Indicators",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "06.Profile getAR Types",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-externalSystem",
+								"value": "{{externalSystemCode}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/lov/v1/listOfValues/hotels/{{HotelId}}/arAccountTypes?includeInactiveFlag=false",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"lov",
+								"v1",
+								"listOfValues",
+								"hotels",
+								"{{HotelId}}",
+								"arAccountTypes"
+							],
+							"query": [
+								{
+									"key": "includeInactiveFlag",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "06a.Profile -  Create AR Account for Travel Agent Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-externalSystem",
+								"value": "{{externalSystemCode}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"criteria\": {\n        \"hotelId\": \"{{HotelId}}\",\n        \"accountName\": \"American Express Bootcamp 26\",\n        \"accountNo\": \"AMEX026\",\n        \"profileId\": {\n            \"id\": \"{{TravelAgentProfileId}}\",\n            \"idContext\": \"OPERA\",\n            \"type\": \"Profile\"\n        },\n        \"creditLimit\": {\n            \"amount\": \"100000\"\n        },\n        \"monthEndCalcYN\": false,\n        \"address\": {\n            \"type\": \"Address\",\n            \"id\": \"{{TaArAddressId}}\"\n        },\n        \"status\": {\n            \"restricted\": false\n        },\n        \"batchStatement\": true,\n        \"emailStatementsReminders\": false,\n        \"primary\": true,\n        \"type\": \"{{ArAccountType}}\",\n        \"permanent\": true\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/ars/v1/hotels/{{HotelId}}/accounts",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"ars",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "06b. Profile - getTA Account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							}
+						],
+						"url": {
+							"raw": "{{HostName}}/ars/v1/accounts?hotelIds={{HotelId}}&limit=20&profileIdContext=OPERA&accountNo={{TravelAgentAccountNo}}&profileType=Travel",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"ars",
+								"v1",
+								"accounts"
+							],
+							"query": [
+								{
+									"key": "hotelIds",
+									"value": "{{HotelId}}"
+								},
+								{
+									"key": "limit",
+									"value": "20"
+								},
+								{
+									"key": "profileIdContext",
+									"value": "OPERA"
+								},
+								{
+									"key": "accountNo",
+									"value": "{{TravelAgentAccountNo}}"
+								},
+								{
+									"key": "profileType",
+									"value": "Travel"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "07. Booking - Fetch Hotel Availability",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"pm.environment.set('currentdate', moment().format((\"YYYY-MM-DD\")));\r",
+									"\r",
+									"var moment = require('moment');\r",
+									"pm.environment.set('currentdateplus1', moment().add(1,'days').format((\"YYYY-MM-DD\")));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/par/v1/hotels/{{HotelId}}/availability?adults=1&children=0&roomStayQuantity=1&limit=10&offset=0&roomStayStartDate={{Currentdate}}&roomStayEndDate={{Currentdateplus1}}",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"par",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"availability"
+							],
+							"query": [
+								{
+									"key": "adults",
+									"value": "1"
+								},
+								{
+									"key": "children",
+									"value": "0"
+								},
+								{
+									"key": "roomStayQuantity",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "ratePlanCode",
+									"value": "{{RatePlanCode}}",
+									"disabled": true
+								},
+								{
+									"key": "roomStayStartDate",
+									"value": "{{Currentdate}}"
+								},
+								{
+									"key": "roomStayEndDate",
+									"value": "{{Currentdateplus1}}"
+								},
+								{
+									"key": "roomType",
+									"value": "{{RoomType}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08. Booking getMarketCode",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/rsv/config/v1/marketCodes?limit=20&hotelIds={{HotelId}}&includeInactive=false",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"rsv",
+								"config",
+								"v1",
+								"marketCodes"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "20"
+								},
+								{
+									"key": "hotelIds",
+									"value": "{{HotelId}}"
+								},
+								{
+									"key": "includeInactive",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08a. Booking getSourceCode",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/rsv/config/v1/hotels/{{HotelId}}/sourceCodes/?limit=20&includeInactive=false",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"rsv",
+								"config",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"sourceCodes",
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "20"
+								},
+								{
+									"key": "includeInactive",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08b. Booking getBookingMedium",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/rsv/config/v1/originCodes?fetchInactive=false",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"rsv",
+								"config",
+								"v1",
+								"originCodes"
+							],
+							"query": [
+								{
+									"key": "fetchInactive",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08c. Booking getGuaranteeCode",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/rsv/config/v1/guaranteeCodes?limit=20&hotelIds={{HotelId}}&inactive=false",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"rsv",
+								"config",
+								"v1",
+								"guaranteeCodes"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "20"
+								},
+								{
+									"key": "hotelIds",
+									"value": "{{HotelId}}"
+								},
+								{
+									"key": "inactive",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08d. Booking getPaymentMethod",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/fof/config/v1/hotelPaymentMethods?hotelIds={{HotelId}}&limit=20&offset=0",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"fof",
+								"config",
+								"v1",
+								"hotelPaymentMethods"
+							],
+							"query": [
+								{
+									"key": "hotelIds",
+									"value": "{{HotelId}}"
+								},
+								{
+									"key": "limit",
+									"value": "20"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08e. Booking - Create Reservation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.headers.get(\"Location\").split(\"/\").pop();\r",
+									"postman.setEnvironmentVariable(\"ReservationId\", data);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"reservations\": {\r\n    \"reservation\": [\r\n      {\r\n        \"reservationIdList\": [\r\n          {\r\n            \"id\": \"{{$randomBankAccountBic}}\",\r\n            \"type\": \"TaRecordLocator\"\r\n          }\r\n        ],\r\n        \"externalReferences\": [\r\n          {\r\n            \"id\": \"{{$randomBankAccountBic}}\",\r\n            \"idExtension\": 1,\r\n            \"idContext\": \"Expedia\"\r\n          }\r\n        ],\r\n        \"sourceOfSale\": {\r\n          \"sourceType\": \"PMS\",\r\n          \"sourceCode\": \"{{HotelId}}\"\r\n        },\r\n        \"roomStay\": {\r\n          \"roomRates\": [\r\n            {\r\n              \"total\": {\r\n                \"amountBeforeTax\": \"250\"\r\n              },\r\n              \"rates\": {\r\n                \"rate\": [\r\n                  {\r\n                    \"base\": {\r\n                      \"amountBeforeTax\": \"250\",\r\n                      \"currencyCode\": \"{{CurrencyCode}}\"\r\n                    },\r\n                    \"shareDistributionInstruction\": \"Full\",\r\n                    \"total\": {\r\n                      \"amountBeforeTax\": \"250\"\r\n                    },\r\n                    \"start\": \"{{Currentdate}}\",\r\n                    \"end\": \"{{Currentdateplus1}}\"\r\n                  }\r\n                ]\r\n              },\r\n              \"guestCounts\": {\r\n                \"adults\": \"1\",\r\n                \"children\": \"0\"\r\n              },\r\n              \"roomType\": \"{{RoomType}}\",\r\n              \"ratePlanCode\": \"{{RatePlanCode}}\",\r\n              \"start\": \"{{Currentdate}}\",\r\n              \"end\": \"{{Currentdateplus1}}\",\r\n              \"marketCode\": \"{{MarketCode}}\",\r\n              \"sourceCode\": \"{{SourceCode}}\",\r\n              \"numberOfUnits\": \"1\",\r\n              \"roomTypeCharged\": \"{{RoomType}}\",\r\n              \"fixedRate\": true\r\n            }\r\n          ],\r\n          \"guestCounts\": {\r\n            \"adults\": \"1\",\r\n            \"children\": \"0\"\r\n          },\r\n          \"arrivalDate\": \"{{Currentdate}}\",\r\n          \"departureDate\": \"{{Currentdateplus1}}\",\r\n          \"guarantee\": {\r\n            \"onHold\": false,\r\n            \"guaranteeCode\": \"{{GuaranteeCode}}\"\r\n          },\r\n          \"bookingMedium\": \"{{BookingMedium}}\"\r\n        },\r\n        \"reservationGuests\": [\r\n          {\r\n            \"profileInfo\": {\r\n              \"profileIdList\": {\r\n                \"id\": \"{{ProfileId}}\",\r\n                \"type\": \"Profile\"\r\n              }\r\n            }\r\n          }\r\n        ],\r\n        \"reservationProfiles\": {\r\n          \"reservationProfile\": [\r\n            {\r\n              \"profileIdList\": [\r\n                {\r\n                  \"id\": \"{{CompanyId}}\",\r\n                  \"type\": \"Profile\"\r\n                }\r\n              ],\r\n              \"profile\": {\r\n              },\r\n              \"reservationProfileType\": \"Company\"\r\n            },\r\n            {\r\n              \"profileIdList\": [\r\n                {\r\n                  \"id\": \"{{TravelAgentProfileId}}\",\r\n                  \"type\": \"Profile\"\r\n                }\r\n              ],\r\n              \"profile\": {\r\n              },\r\n              \"reservationProfileType\": \"TravelAgent\"\r\n            }\r\n          ],\r\n          \"commissionPayoutTo\": \"TravelAgent\"\r\n        },\r\n        \"reservationPaymentMethods\": [\r\n          {\r\n            \"paymentMethod\": \"{{PaymentMethod}}\",\r\n            \"folioView\": \"1\"\r\n          }\r\n        ],\r\n        \"hotelId\": \"{{HotelId}}\",\r\n        \"reservationStatus\": \"Reserved\"\r\n      }\r\n    ]\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"rsv",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08f. Booking - getReservation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}?fetchInstructions=ReservationPaymentMethods&fetchInstructions=RoutingInstructions&fetchInstructions=Preferences&fetchInstructions=Indicators&fetchInstructions=Reservation",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"rsv",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}"
+							],
+							"query": [
+								{
+									"key": "fetchInstructions",
+									"value": "ReservationPaymentMethods"
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "RoutingInstructions"
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Preferences"
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Indicators"
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Reservation"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "09. Booking - Create Multi Leg Reservation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.headers.get(\"Location\").split(\"/\").pop();\r",
+									"postman.setEnvironmentVariable(\"ReservationId2\", data);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"reservations\": {\r\n        \"reservation\": [\r\n            {\r\n                \"reservationIdList\": [\r\n                    {\r\n                        \"id\": \"{{ConfirmationId}}\",\r\n                        \"type\": \"Confirmation\"\r\n                    }\r\n                ],\r\n                \"externalReferences\": [\r\n                    {\r\n                        \"id\": \"{{ExternalReferences}}\",\r\n                        \"idExtension\": 2,\r\n                        \"idContext\": \"Expedia\"\r\n                    }\r\n                ],\r\n                \"sourceOfSale\": {\r\n                    \"sourceType\": \"PMS\",\r\n                    \"sourceCode\": \"{{HotelId}}\"\r\n                },\r\n                \"roomStay\": {\r\n                    \"roomRates\": [\r\n                        {\r\n                            \"total\": {\r\n                                \"amountBeforeTax\": \"200\"\r\n                            },\r\n                            \"rates\": {\r\n                                \"rate\": [\r\n                                    {\r\n                                        \"base\": {\r\n                                            \"amountBeforeTax\": \"200\",\r\n                                            \"currencyCode\": \"{{CurrencyCode}}\"\r\n                                        },\r\n                                        \"shareDistributionInstruction\": \"Full\",\r\n                                        \"total\": {\r\n                                            \"amountBeforeTax\": \"200\"\r\n                                        },\r\n                                        \"start\": \"{{Currentdate}}\",\r\n                                        \"end\": \"{{Currentdateplus1}}\"\r\n                                    }\r\n                                ]\r\n                            },\r\n                            \"guestCounts\": {\r\n                                \"adults\": \"1\",\r\n                                \"children\": \"0\"\r\n                            },\r\n                            \"roomType\": \"{{RoomType}}\",\r\n                            \"ratePlanCode\": \"{{RatePlanCode}}\",\r\n                            \"start\": \"{{Currentdate}}\",\r\n                            \"end\": \"{{Currentdateplus1}}\",\r\n                            \"marketCode\": \"{{MarketCode}}\",\r\n                            \"sourceCode\": \"{{SourceCode}}\",\r\n                            \"numberOfUnits\": \"1\",\r\n                            \"roomTypeCharged\": \"{{RoomType}}\",\r\n                            \"fixedRate\": true\r\n                        }\r\n                    ],\r\n                    \"guestCounts\": {\r\n                        \"adults\": \"1\",\r\n                        \"children\": \"0\"\r\n                    },\r\n                    \"arrivalDate\": \"{{Currentdate}}\",\r\n                    \"departureDate\": \"{{Currentdateplus1}}\",\r\n                    \"guarantee\": {\r\n                        \"onHold\": false,\r\n                        \"guaranteeCode\": \"{{GuaranteeCode}}\"\r\n                    },\r\n                    \"bookingMedium\": \"{{BookingMedium}}\"\r\n                },\r\n                \"reservationGuests\": [\r\n                    {\r\n                        \"profileInfo\": {\r\n                            \"profileIdList\": {\r\n                                \"id\": \"{{ProfileId}}\",\r\n                                \"type\": \"Profile\"\r\n                            }\r\n                        }\r\n                    }\r\n                ],\r\n                \"reservationProfiles\": {\r\n                    \"reservationProfile\": [\r\n                        {\r\n                            \"profileIdList\": [\r\n                                {\r\n                                    \"id\": \"{{CompanyId}}\",\r\n                                    \"type\": \"Profile\"\r\n                                }\r\n                            ],\r\n                            \"profile\": {\r\n                                \"company\": {\r\n                                    \"companyName\": \"Huel - Schaefer\"\r\n                                }\r\n                            },\r\n                            \"reservationProfileType\": \"Company\"\r\n                        },\r\n                        {\r\n                            \"profileIdList\": [\r\n                                {\r\n                                    \"id\": \"{{TravelAgentProfileId}}\",\r\n                                    \"type\": \"Profile\"\r\n                                }\r\n                            ],\r\n                            \"profile\": {\r\n                                \"company\": {\r\n                                    \"companyName\": \"American Express Duesseldorf\"\r\n                                }\r\n                            },\r\n                            \"reservationProfileType\": \"TravelAgent\"\r\n                        }\r\n                    ],\r\n                    \"commissionPayoutTo\": \"TravelAgent\"\r\n                },\r\n                \"reservationPaymentMethods\": [\r\n                    {\r\n                        \"paymentMethod\": \"{{PaymentMethod}}\",\r\n                        \"folioView\": \"1\"\r\n                    }\r\n                ],\r\n                \"hotelId\": \"{{HotelId}}\",\r\n                \"reservationStatus\": \"Reserved\"\r\n            }\r\n        ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"rsv",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "09a. Booking - getReservations by confirmation number",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations?limit=100&offset=0&confirmationNumberList={{ConfirmationId}}&excludePseudoRoomReservations=true&fetchInstructions=Reservation&fetchInstructions=MasterInfo",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"rsv",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "100"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "confirmationNumberList",
+									"value": "{{ConfirmationId}}"
+								},
+								{
+									"key": "excludePseudoRoomReservations",
+									"value": "true"
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Reservation"
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "MasterInfo"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "10.Pre-Arrival getPreference",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"value": "{{HotelId}}",
+								"type": "text"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/crm/config/v1/hotels/{{HotelId}}/preferences?preferenceGroupsCodes=ROOM FEATURES",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"crm",
+								"config",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"preferences"
+							],
+							"query": [
+								{
+									"key": "preferenceGroupsCodes",
+									"value": "ROOM FEATURES"
+								}
+							]
+						},
+						"description": "To update an existing reservation in OPERA by attaching Preferences."
+					},
+					"response": []
+				},
+				{
+					"name": "10a. Pre Arrival - Modify Reservation Add Preference",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"value": "{{HotelId}}",
+								"type": "text"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"reservations\": [\r\n        {\r\n            \"reservationIdList\": [\r\n                {\r\n                    \"type\": \"Reservation\",\r\n                    \"id\": \"{{ReservationId}}\"\r\n                }\r\n            ],\r\n            \"preferenceCollection\": [\r\n                {\r\n                    \"preference\": [\r\n                        {\r\n                            \"preferenceValue\": \"{{PreferenceCode}}\",\r\n                            \"hotels\": \"{{HotelId}}\",\r\n                            \"global\": false\r\n                        }\r\n                    ],\r\n                    \"preferenceType\": \"ROOM FEATURES\"\r\n                }\r\n            ],\r\n            \"hotelId\": \"{{HotelId}}\",\r\n            \"customReference\": \"\",\r\n            \"preRegistered\": false,\r\n            \"allowMobileCheckout\": false\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"rsv",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}"
+							]
+						},
+						"description": "To update an existing reservation in OPERA by attaching Preferences."
+					},
+					"response": []
+				},
+				{
+					"name": "10b.Pre-Arrival getReservation check Preference",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"value": "{{HotelId}}",
+								"type": "text"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}?fetchInstructions=Preferences",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"rsv",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}"
+							],
+							"query": [
+								{
+									"key": "fetchInstructions",
+									"value": "Preferences"
+								}
+							]
+						},
+						"description": "To update an existing reservation in OPERA by attaching Preferences."
+					},
+					"response": []
+				},
+				{
+					"name": "11. Pre-Arrival getRoutingCodes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"value": "{{HotelId}}",
+								"type": "text"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/fof/config/v1/routingInstructions?hotelId={{HotelId}}",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"fof",
+								"config",
+								"v1",
+								"routingInstructions"
+							],
+							"query": [
+								{
+									"key": "hotelId",
+									"value": "{{HotelId}}"
+								}
+							]
+						},
+						"description": "To update an existing reservation in OPERA by attaching Preferences."
+					},
+					"response": []
+				},
+				{
+					"name": "11a.Pre Arrival - Create Routing Instruction to Company on Window 2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"value": "{{HotelId}}",
+								"type": "text"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"criteria\": {\n        \"hotelId\": \"{{HotelId}}\",\n        \"reservationId\": {\n            \"type\": \"Reservation\",\n            \"id\": \"{{ReservationId}}\"\n        },\n        \"refreshFolio\": true,\n        \"retrievePostingsForRoomRouting\": false,\n        \"folio\": {\n            \"guestInfo\": {\n                \"profileIdList\": []\n            },\n            \"payeeInfo\": {\n                \"payeeId\": {\n                    \"type\": \"Profile\",\n                    \"id\": \"{{CompanyId}}\"\n                },\n                \"payeeAddress\": {\n                    \"address\": {\n                        \"addressLine\": [\n                            null\n                        ]\n                    }\n                }\n            },\n            \"aRNumber\": \"{{CompanyAccountNo}}\",\n            \"instructions\": [\n                {\n                    \"duration\": {\n                        \"daily\": false,\n                        \"sunday\": true,\n                        \"monday\": true,\n                        \"tuesday\": true,\n                        \"wednesday\": true,\n                        \"thursday\": true,\n                        \"friday\": true,\n                        \"saturday\": true\n                    },\n                    \"billingInstructions\": [\n                        {\n                            \"billingCode\": \"{{CompanyRoutingCode}}\"\n                        }\n                    ],\n                    \"limitUsed\": \"0\"\n                }\n            ],\n            \"folioWindowNo\": \"2\",\n            \"paymentMethod\": \"INV\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/csh/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/routingInstructions/create",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"csh",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"routingInstructions",
+								"create"
+							]
+						},
+						"description": "To update an existing reservation in OPERA by attaching Preferences."
+					},
+					"response": []
+				},
+				{
+					"name": "11b.Pre-Arrival getReservation Routing",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"value": "{{HotelId}}",
+								"type": "text"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}?fetchInstructions=RoutingInstructions",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"rsv",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}"
+							],
+							"query": [
+								{
+									"key": "fetchInstructions",
+									"value": "RoutingInstructions"
+								}
+							]
+						},
+						"description": "To update an existing reservation in OPERA by attaching Preferences."
+					},
+					"response": []
+				},
+				{
+					"name": "12. Pre-Arrival getPaymentMethod",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"value": "{{HotelId}}",
+								"type": "text"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/lov/v1/listOfValues/hotels/{{HotelId}}/paymentMethods?includeInactiveFlag=false",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"lov",
+								"v1",
+								"listOfValues",
+								"hotels",
+								"{{HotelId}}",
+								"paymentMethods"
+							],
+							"query": [
+								{
+									"key": "includeInactiveFlag",
+									"value": "false"
+								}
+							]
+						},
+						"description": "To update an existing reservation in OPERA by attaching Preferences."
+					},
+					"response": []
+				},
+				{
+					"name": "12a. Pre Arrival - Modify Reservation to update Payment Method on Window 2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"value": "{{HotelId}}",
+								"type": "text"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"reservations\": [\n    {\n      \"reservationIdList\": [\n        {\n          \"type\": \"Reservation\",\n          \"id\": \"{{ReservationId}}\"\n        }\n      ],\n      \"reservationPaymentMethods\": [\n        {\n          \"paymentMethod\": \"INV\",\n          \"folioView\": \"2\"\n        }\n      ],\n      \"hotelId\": \"{{HotelId}}\",\n      \"preRegistered\": false,\n      \"allowMobileCheckout\": false\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"rsv",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}"
+							]
+						},
+						"description": "To update an existing reservation in OPERA by attaching Preferences."
+					},
+					"response": []
+				},
+				{
+					"name": "12b.Pre-Arrival getReservation Payment",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"value": "{{HotelId}}",
+								"type": "text"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}?fetchInstructions=ReservationPaymentMethods",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"rsv",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}"
+							],
+							"query": [
+								{
+									"key": "fetchInstructions",
+									"value": "ReservationPaymentMethods"
+								}
+							]
+						},
+						"description": "To update an existing reservation in OPERA by attaching Preferences."
+					},
+					"response": []
+				},
+				{
+					"name": "13. Pre-Arrival getRoutingCodes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"value": "{{HotelId}}",
+								"type": "text"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/fof/config/v1/routingInstructions?hotelId={{HotelId}}",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"fof",
+								"config",
+								"v1",
+								"routingInstructions"
+							],
+							"query": [
+								{
+									"key": "hotelId",
+									"value": "{{HotelId}}"
+								}
+							]
+						},
+						"description": "To update an existing reservation in OPERA by attaching Preferences."
+					},
+					"response": []
+				},
+				{
+					"name": "13a. Pre Arrival - Create Routing Instruction to Travel Agent on Window 3",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"value": "{{HotelId}}",
+								"type": "text"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"criteria\": {\n        \"hotelId\": \"{{HotelId}}\",\n        \"reservationId\": {\n            \"type\": \"Reservation\",\n            \"id\": \"{{ReservationId}}\"\n        },\n        \"refreshFolio\": true,\n        \"retrievePostingsForRoomRouting\": false,\n        \"folio\": {\n            \"guestInfo\": {\n                \"profileIdList\": []\n            },\n            \"payeeInfo\": {\n                \"payeeId\": {\n                    \"type\": \"Profile\",\n                    \"id\": \"{{TravelAgentProfileId}}\"\n                },\n                \"payeeAddress\": {\n                    \"address\": {\n                        \"addressLine\": [\n                            null\n                        ]\n                    }\n                }\n            },\n            \"instructions\": [\n                {\n                    \"duration\": {\n                        \"daily\": false,\n                        \"sunday\": true,\n                        \"monday\": true,\n                        \"tuesday\": true,\n                        \"wednesday\": true,\n                        \"thursday\": true,\n                        \"friday\": true,\n                        \"saturday\": true\n                    },\n                    \"billingInstructions\": [\n                        {\n                            \"billingCode\": \"{{TravelAgentRoutingCode}}\"\n                        }\n                    ],\n                    \"limitUsed\": \"0\"\n                }\n            ],\n            \"folioWindowNo\": \"3\",\n            \"paymentMethod\": \"INV\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/csh/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/routingInstructions/create",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"csh",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"routingInstructions",
+								"create"
+							]
+						},
+						"description": "To update an existing reservation in OPERA by attaching Preferences."
+					},
+					"response": []
+				},
+				{
+					"name": "13b.Pre-Arrival getReservation Routing",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"value": "{{HotelId}}",
+								"type": "text"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}?fetchInstructions=RoutingInstructions",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"rsv",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}"
+							],
+							"query": [
+								{
+									"key": "fetchInstructions",
+									"value": "RoutingInstructions"
+								}
+							]
+						},
+						"description": "To update an existing reservation in OPERA by attaching Preferences."
+					},
+					"response": []
+				},
+				{
+					"name": "14. Pre-Arrival getPaymentMethod",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"value": "{{HotelId}}",
+								"type": "text"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/lov/v1/listOfValues/hotels/{{HotelId}}/paymentMethods?includeInactiveFlag=false",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"lov",
+								"v1",
+								"listOfValues",
+								"hotels",
+								"{{HotelId}}",
+								"paymentMethods"
+							],
+							"query": [
+								{
+									"key": "includeInactiveFlag",
+									"value": "false"
+								}
+							]
+						},
+						"description": "To update an existing reservation in OPERA by attaching Preferences."
+					},
+					"response": []
+				},
+				{
+					"name": "14a. Pre Arrival - Modify Reservation to update Payment Method on Window 3",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"value": "{{HotelId}}",
+								"type": "text"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"reservations\": [\n    {\n      \"reservationIdList\": [\n        {\n          \"type\": \"Reservation\",\n          \"id\": \"{{ReservationId}}\"\n        }\n      ],\n      \"reservationPaymentMethods\": [\n        {\n          \"paymentMethod\": \"INV\",\n          \"folioView\": \"3\"\n        }\n      ],\n      \"hotelId\": \"{{HotelId}}\",\n      \"preRegistered\": false,\n      \"allowMobileCheckout\": false\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"rsv",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}"
+							]
+						},
+						"description": "To update an existing reservation in OPERA by attaching Preferences."
+					},
+					"response": []
+				},
+				{
+					"name": "14b.Pre-Arrival getReservation Payment",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"value": "{{HotelId}}",
+								"type": "text"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}?fetchInstructions=ReservationPaymentMethods",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"rsv",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}"
+							],
+							"query": [
+								{
+									"key": "fetchInstructions",
+									"value": "ReservationPaymentMethods"
+								}
+							]
+						},
+						"description": "To update an existing reservation in OPERA by attaching Preferences."
+					},
+					"response": []
+				},
+				{
+					"name": "15. Check OPI Cloud Active",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n    \"expiryDate\": \"2612\",\n    \"pan\": \"4012888888881881\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/ent/config/v1/settings?hotelId={{HotelId}}&parameterNameWildCard=OPI Cloud Credit Card Processing",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"ent",
+								"config",
+								"v1",
+								"settings"
+							],
+							"query": [
+								{
+									"key": "hotelId",
+									"value": "{{HotelId}}"
+								},
+								{
+									"key": "parameterNameWildCard",
+									"value": "OPI Cloud Credit Card Processing"
+								}
+							]
+						},
+						"description": "To fetch reservation from OPERA using ID"
+					},
+					"response": []
+				},
+				{
+					"name": "15a. Pre Arrival - Convert Pan into token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n    \"expiryDate\": \"2612\",\n    \"pan\": \"4012888888881881\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/tokenExchange/v1/hotels/{{HotelId}}/tokens",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"tokenExchange",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"tokens"
+							]
+						},
+						"description": "To fetch reservation from OPERA using ID"
+					},
+					"response": []
+				},
+				{
+					"name": "16. Pre Arrival - Modify Reservation to Insert Credit Card Token as Payment Method on Window 1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"reservationId\": {\n        \"type\": \"Reservation\",\n        \"id\": \"{{ReservationId}}\"\n    },\n    \"reservationPaymentMethods\": [\n        {\n            \"paymentCard\": {\n                \"cardType\": \"Va\",\n                \"cardNumber\": \"4012188141402878\",\n                \"cardNumberMasked\": \"XXXXXXXXXXXX1881\",\n                \"expirationDate\": \"2026-12-31\",\n                \"expirationDateExpired\": false,\n                \"cardHolderName\": \"Charlie\",\n                \"cardOrToken\": \"Token\",\n                \"citId\": \"654321ABC1234581\"\n            },\n            \"emailFolioInfo\": {\n                \"email\": {\n                    \"emailAddress\": \"name@example.com\"\n                },\n                \"emailFolio\": true\n            },\n            \"authorizationRule\": {\n                \"code\": \"2\",\n                \"amount\": {\n                    \"amount\": \"50\",\n                    \"currencyCode\": \"USD\"\n                }\n            },\n            \"paymentMethod\": \"VA\",\n            \"folioView\": 1\n        }\n    ],\n    \"hotelId\": \"{{HotelId}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/paymentMethods",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"rsv",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"paymentMethods"
+							]
+						},
+						"description": "To update an existing reservation in OPERA by adding or updating reservation comments."
+					},
+					"response": []
+				},
+				{
+					"name": "17. Verify Interface active",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "logLevel",
+								"value": "ALL",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/int/config/v1/hotelInterfaceTypes?includeInactive=false&hotelIds={{HotelId}}&interfaceTypes=EFT",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"int",
+								"config",
+								"v1",
+								"hotelInterfaceTypes"
+							],
+							"query": [
+								{
+									"key": "transactionType",
+									"value": "Additional",
+									"description": "Additional, ArPayment, Batch, BatchDeposit, BatchDepositRefund, Billing, CheckIn, CheckInManualAuth, Deposit, EndOfDay, EndOfDayDeposit, Manual, Other, PasserBy, PostIt, PreCheckIn, Refund, Schedule",
+									"disabled": true
+								},
+								{
+									"key": "transactionType",
+									"value": "CheckIn",
+									"disabled": true
+								},
+								{
+									"key": "includeInactive",
+									"value": "false"
+								},
+								{
+									"key": "hotelIds",
+									"value": "{{HotelId}}"
+								},
+								{
+									"key": "interfaceTypes",
+									"value": "EFT"
+								}
+							]
+						},
+						"description": "In the response, you will see all available options you can then pass in a new request, to find the details for that subject.\r\nEG name = ProfileIdCountries.  Now you can post the request - {{HostName}}/lov/v1/listOfValues/ProfileIdCountries\r\n\r\nYou will also see in the response of this request if the \"name\" has parameters than can be passed in the request too, and if they are mandatory or not."
+					},
+					"response": []
+				},
+				{
+					"name": "17a. Pre Arrival - Pre Authorise Credit Card",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "logLevel",
+								"value": "ALL",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"criteria\": {\n        \"amount\": {\n            \"amount\": \"250\",\n            \"currencyCode\": \"USD\"\n        },\n        \"payment\": {\n            \"paymentCard\": {\n                \"cardType\": \"Va\",\n                \"cardHolderName\": \"Charlie\"\n            },\n            \"paymentMethod\": \"VA\",\n            \"folioView\": \"1\"\n        },\n        \"terminalId\": \"PD1\",\n        \"incidentalAmount\": {\n            \"amount\": \"0\",\n            \"currencyCode\": \"USD\"\n        },\n        \"evaluateApprovalAmount\": false,\n        \"sourceOfAuthorization\": \"PreCheckIn\",\n        \"updateReservation\": true\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/csh/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/paymentMethods/creditCard/authorize",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"csh",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"paymentMethods",
+								"creditCard",
+								"authorize"
+							]
+						},
+						"description": "In the response, you will see all available options you can then pass in a new request, to find the details for that subject.\r\nEG name = ProfileIdCountries.  Now you can post the request - {{HostName}}/lov/v1/listOfValues/ProfileIdCountries\r\n\r\nYou will also see in the response of this request if the \"name\" has parameters than can be passed in the request too, and if they are mandatory or not."
+					},
+					"response": []
+				},
+				{
+					"name": "17a. Check PreAuth",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "logLevel",
+								"value": "ALL",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/csh/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/authorizationHistory?includeAuthorizations=true&type=Reservation&idContext=OPERA&includePayments=false&includeRefunds=false&includeFailures=false&folioView=1",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"csh",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"authorizationHistory"
+							],
+							"query": [
+								{
+									"key": "includeAuthorizations",
+									"value": "true"
+								},
+								{
+									"key": "type",
+									"value": "Reservation"
+								},
+								{
+									"key": "idContext",
+									"value": "OPERA"
+								},
+								{
+									"key": "includePayments",
+									"value": "false"
+								},
+								{
+									"key": "includeRefunds",
+									"value": "false"
+								},
+								{
+									"key": "includeFailures",
+									"value": "false"
+								},
+								{
+									"key": "folioView",
+									"value": "1"
+								},
+								{
+									"key": "transactionType",
+									"value": "Additional",
+									"description": "Additional, ArPayment, Batch, BatchDeposit, BatchDepositRefund, Billing, CheckIn, CheckInManualAuth, Deposit, EndOfDay, EndOfDayDeposit, Manual, Other, PasserBy, PostIt, PreCheckIn, Refund, Schedule",
+									"disabled": true
+								},
+								{
+									"key": "transactionType",
+									"value": "CheckIn",
+									"disabled": true
+								}
+							]
+						},
+						"description": "In the response, you will see all available options you can then pass in a new request, to find the details for that subject.\r\nEG name = ProfileIdCountries.  Now you can post the request - {{HostName}}/lov/v1/listOfValues/ProfileIdCountries\r\n\r\nYou will also see in the response of this request if the \"name\" has parameters than can be passed in the request too, and if they are mandatory or not."
+					},
+					"response": []
+				},
+				{
+					"name": "18. Pre Arrival- Fetch Available Hotel Rooms",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/fof/v1/hotels/{{HotelId}}/rooms?hotelRoomStartDate={{Currentdate}}&hotelRoomEndDate={{Currentdateplus1}}&roomFeatureCode={{PreferenceCode}}&hotelRoomStatus=Inspected&hotelRoomFrontOfficeStatus=Vacant&roomType={{RoomType}}&offset=0&limit=20",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"fof",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"rooms"
+							],
+							"query": [
+								{
+									"key": "hotelRoomStartDate",
+									"value": "{{Currentdate}}"
+								},
+								{
+									"key": "hotelRoomEndDate",
+									"value": "{{Currentdateplus1}}"
+								},
+								{
+									"key": "roomFeatureCode",
+									"value": "{{PreferenceCode}}"
+								},
+								{
+									"key": "hotelRoomStatus",
+									"value": "Inspected"
+								},
+								{
+									"key": "hotelRoomFrontOfficeStatus",
+									"value": "Vacant"
+								},
+								{
+									"key": "roomType",
+									"value": "{{RoomType}}"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "20"
+								}
+							]
+						},
+						"description": "To fetch rooms from OPERA Cloud.\r\nYou could filter by hotelRoomStatus too, to only return Clean, Dirty, Inspected rooms for example."
+					},
+					"response": []
+				},
+				{
+					"name": "19.Pre Arrival - Assign Inspected Vacant Rooms to Reservation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"criteria\": {\r\n        \"hotelId\": \"{{HotelId}}\",\r\n        \"reservationIdList\": [\r\n            {\r\n                \"id\": \"{{ReservationId}}\",\r\n                \"type\": \"Reservation\"\r\n            }\r\n        ],\r\n        \"roomId\": \"{{RoomNumber}}\",\r\n        \"overrideInstructions\": {\r\n            \"dirtyRoom\": true\r\n        },\r\n        \"updateRoomTypeCharged\": true,\r\n        \"includeDepartureRooms\": true,\r\n        \"roomNumberLocked\": false\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/fof/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/roomAssignments",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"fof",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"roomAssignments"
+							]
+						},
+						"description": "Use this API to add/assign a room number to a guests reservation. This is required before they can check into the property."
+					},
+					"response": []
+				},
+				{
+					"name": "20.Pre Arrival- Modify Reservation to insert Pre-Registeration",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "x-hotelid",
+								"value": "{{HotelId}}",
+								"type": "text"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"reservation\": {\r\n        \"reservationId\": {\r\n            \"type\": \"Reservation\"\r\n        },\r\n        \"preCheckInDetails\": {\r\n            \"arrival\": {\r\n                \"arrivalTime\": \"2024-02-21T17:00:00\"\r\n            }\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/preCheckIn",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"rsv",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"preCheckIn"
+							]
+						},
+						"description": "To preregister reservaiton in OPERA"
+					},
+					"response": []
+				},
+				{
+					"name": "20.Pre Arrival- Modify Reservation to insert Advance Checkin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "x-hotelid",
+								"value": "{{HotelId}}",
+								"type": "text"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"reservation\": {\r\n    \"eTRComments\": \"Guest going out for Dinner. Please email when room is ready\",\r\n    \"expectedReturnTime\": \"2024-02-21T19:15:00\",\r\n    \"hotelId\": \"{{HotelId}}\",\r\n    \"optedForCommunication\": true,\r\n    \"reservationCommunication\": {\r\n      \"emails\": {\r\n        \"emailInfo\": [\r\n          {\r\n            \"email\": {\r\n              \"emailAddress\": \"example@example.com\",\r\n              \"orderSequence\": 1,\r\n              \"primaryInd\": true,\r\n              \"type\": \"EMAIL\"\r\n            }\r\n          }\r\n        ]\r\n      }\r\n    },\r\n    \"reservationId\": {\r\n      \"id\": \"{{Reservationid}}\",\r\n      \"type\": \"Reservation\"\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/fof/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/advanceCheckIns",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"fof",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"advanceCheckIns"
+							]
+						},
+						"description": "To preregister reservaiton in OPERA"
+					},
+					"response": []
+				},
+				{
+					"name": "21. Checkin the reservation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"reservation\": {\r\n        \"ignoreWarnings\": false,\r\n        \"stopCheckin\": false,\r\n        \"printRegistration\": false\r\n    },\r\n    \"fetchReservationInstruction\": [\r\n        \"ReservationDetail\"\r\n    ],\r\n    \"includeNotifications\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/fof/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/checkIns",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"fof",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"checkIns"
+							],
+							"query": [
+								{
+									"key": "fetchInstructions",
+									"value": "Reservation",
+									"disabled": true
+								},
+								{
+									"key": null,
+									"value": "26098972",
+									"disabled": true
+								}
+							]
+						},
+						"description": "To check in a guest at the property."
+					},
+					"response": []
+				},
+				{
+					"name": "22.. Check-In - getKeyOption",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							},
+							{
+								"key": "x-hotelId",
+								"value": "{{HotelId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/lov/v1/listOfValues/hotels/{{HotelId}}/keyOptions",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"lov",
+								"v1",
+								"listOfValues",
+								"hotels",
+								"{{HotelId}}",
+								"keyOptions"
+							]
+						},
+						"description": "This operation will only be available if the property has a valid intergration to a doorlocking system."
+					},
+					"response": []
+				},
+				{
+					"name": "22a. Check-In - getkeyType&encoder",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							},
+							{
+								"key": "x-hotelId",
+								"value": "{{HotelId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/fof/v1/hotels/{{HotelId}}/keyInterfaces",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"fof",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"keyInterfaces"
+							]
+						},
+						"description": "This operation will only be available if the property has a valid intergration to a doorlocking system."
+					},
+					"response": []
+				},
+				{
+					"name": "22b. Checkin- Create Room Key",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							},
+							{
+								"key": "x-hotelId",
+								"value": "{{HotelId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"reservationIdList\": [\n        {\n            \"type\": \"Reservation\",\n            \"id\": \"{{ReservationId}}\"\n        }\n    ],\n    \"keyOptions\": \"GAR,POOL\",\n    \"keyValidityStart\": \"2023-12-20 12:00:00.0\",\n    \"noOfKeys\": \"1\",\n    \"encoderTerminal\": \"IFC8DLSNEW\",\n    \"encoderId\": {\n        \"id\": \"0\"\n    },\n    \"resort\": \"{{HotelId}}\",\n    \"keyType\": \"New\",\n    \"keyValidityEnd\": \"2023-12-21 13:00:00.0\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/fof/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/roomKeys",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"fof",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"roomKeys"
+							]
+						},
+						"description": "This operation will only be available if the property has a valid intergration to a doorlocking system."
+					},
+					"response": []
+				},
+				{
+					"name": "23. Stay - getServiceRequest",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/rsv/config/v1/hotels/{{HotelId}}/serviceRequestCodes?limit=20",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"rsv",
+								"config",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"serviceRequestCodes"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "20"
+								}
+							]
+						},
+						"description": "Use this API to add/assign a room number to a guests reservation. This is required before they can check into the property."
+					},
+					"response": []
+				},
+				{
+					"name": "23a. Stay- Create a Service Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"serviceRequestsDetails\": [\r\n        {\r\n            \"hotelId\": \"{{HotelId}}\",\r\n            \"code\": \"{{ServiceRequestCodes}}\",\r\n            \"status\": \"Open\",\r\n            \"priority\": \"ASAP\",\r\n            \"department\": {\r\n                \"code\": \"{{DeptCode}}\"\r\n            },\r\n            \"reservationIdList\": [\r\n                {\r\n                    \"type\": \"Reservation\",\r\n                    \"id\": \"{{ReservationId}}\"\r\n                }\r\n            ],\r\n            \"room\": \"{{RoomNumber}}\",\r\n            \"openDate\": \"2024-02-21 16:00:00.0\",\r\n            \"comment\": \"3 Fresh Towels Please\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/fof/v1/hotels/{{HotelId}}/serviceRequests",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"fof",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"serviceRequests"
+							]
+						},
+						"description": "Use this API to add/assign a room number to a guests reservation. This is required before they can check into the property."
+					},
+					"response": []
+				},
+				{
+					"name": "23b. Stay - getServiceRequest on Reservation",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/fof/v1/hotels/{{HotelId}}/serviceRequests?reservationid={{ReservationId}}&status=Open&reservationIdContext=OPERA",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"fof",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"serviceRequests"
+							],
+							"query": [
+								{
+									"key": "reservationid",
+									"value": "{{ReservationId}}"
+								},
+								{
+									"key": "status",
+									"value": "Open",
+									"description": "\"Closed\" \"DoNotDisturb\" \"MakeUpRoom\" \"Open\" \"PendingFollowUp\""
+								},
+								{
+									"key": "reservationIdContext",
+									"value": "OPERA"
+								},
+								{
+									"key": "hotelIds",
+									"value": "{{HotelId}}",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Use this API to add/assign a room number to a guests reservation. This is required before they can check into the property."
+					},
+					"response": []
+				},
+				{
+					"name": "24. Stay - check Wakeup function active",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"calls\": [\n        {\n            \"reservationInfo\": {\n                \"reservationIdList\": [\n                    {\n                        \"type\": \"Reservation\",\n                        \"id\": \"{{ReservationId}}\"\n                    }\n                ],\n                \"hotelId\": \"{{HotelId}}\",\n                \"room\": \"{{RoomId}}\"\n            },\n            \"callTime\": \"2024-01-10 12:00:00\",\n            \"isFollowUpCall\": false,\n            \"status\": \"Pending\",\n            \"timeSpan\": {\n                \"startDate\": \"2024-01-10\"\n            }\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/ent/config/v1/settings?hotelId={{HotelId}}&parameterNameWildCard=Wake Up Calls",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"ent",
+								"config",
+								"v1",
+								"settings"
+							],
+							"query": [
+								{
+									"key": "hotelId",
+									"value": "{{HotelId}}"
+								},
+								{
+									"key": "parameterNameWildCard",
+									"value": "Wake Up Calls"
+								}
+							]
+						},
+						"description": "Use this API to add/assign a room number to a guests reservation. This is required before they can check into the property."
+					},
+					"response": []
+				},
+				{
+					"name": "24a. Stay - Set Wakeup call",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"calls\": [\n        {\n            \"reservationInfo\": {\n                \"reservationIdList\": [\n                    {\n                        \"type\": \"Reservation\",\n                        \"id\": \"{{ReservationId}}\"\n                    }\n                ],\n                \"hotelId\": \"{{HotelId}}\",\n                \"room\": \"{{RoomNumber}}\"\n            },\n            \"callTime\": \"{{Currentdateplus1}} 07:30:00\",\n            \"isFollowUpCall\": false,\n            \"status\": \"Pending\",\n            \"timeSpan\": {\n                \"startDate\": \"{{Currentdateplus1}}\"\n            }\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/fof/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/wakeUpCalls",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"fof",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"wakeUpCalls"
+							]
+						},
+						"description": "Use this API to add/assign a room number to a guests reservation. This is required before they can check into the property."
+					},
+					"response": []
+				},
+				{
+					"name": "24b. Stay - getWakeup",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"calls\": [\n        {\n            \"reservationInfo\": {\n                \"reservationIdList\": [\n                    {\n                        \"type\": \"Reservation\",\n                        \"id\": \"{{ReservationId}}\"\n                    }\n                ],\n                \"hotelId\": \"{{HotelId}}\",\n                \"room\": \"{{RoomId}}\"\n            },\n            \"callTime\": \"2024-01-10 12:00:00\",\n            \"isFollowUpCall\": false,\n            \"status\": \"Pending\",\n            \"timeSpan\": {\n                \"startDate\": \"2024-01-10\"\n            }\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/fof/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/wakeUpCalls?fetchCancelled=true&fetchCompleted=true&fetchPending=true&fetchNoAnswer=true&reservationIdContext=OPERA&reservationIdType=Reservation",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"fof",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"wakeUpCalls"
+							],
+							"query": [
+								{
+									"key": "fetchCancelled",
+									"value": "true"
+								},
+								{
+									"key": "fetchCompleted",
+									"value": "true"
+								},
+								{
+									"key": "fetchPending",
+									"value": "true"
+								},
+								{
+									"key": "fetchNoAnswer",
+									"value": "true"
+								},
+								{
+									"key": "reservationIdContext",
+									"value": "OPERA"
+								},
+								{
+									"key": "reservationIdType",
+									"value": "Reservation"
+								}
+							]
+						},
+						"description": "Use this API to add/assign a room number to a guests reservation. This is required before they can check into the property."
+					},
+					"response": []
+				},
+				{
+					"name": "25. Stay findNextCashierNumber",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/fof/config/v1/cashierDetails/cashiers?offset=0&limit=100",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"fof",
+								"config",
+								"v1",
+								"cashierDetails",
+								"cashiers"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "25a. Stay - Create Cashier",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cashiers\": [\r\n    {\r\n      \"usageInfo\": {\r\n        \"maximumDailyUses\": 9999\r\n      },\r\n      \"inactive\": false,\r\n      \"name\": \"Partner 8 Cashier\",\r\n      \"floatOverShort\": true,\r\n      \"cashierId\": 8,\r\n      \"attachedUser\": \"\",\r\n      \"startingAmount\": 1000,\r\n      \"kiosk\": false,\r\n      \"currencyCode\": \"USD\",\r\n      \"cashierType\": \"InterfaceCashier\",\r\n      \"open\": false\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/fof/config/v1/cashiers",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"fof",
+								"config",
+								"v1",
+								"cashiers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "25a. Stay getCashiers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/fof/config/v1/cashierDetails/cashiers?offset=0&limit=100",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"fof",
+								"config",
+								"v1",
+								"cashierDetails",
+								"cashiers"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "26b.Stay getTransactionCode 2800",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/fof/config/v1/transactionCodes?hotelIds={{HotelId}}&includeInactive=false&transactionSubgroupsCodes=FOD&transactionSubgroupsCodes=COM",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"fof",
+								"config",
+								"v1",
+								"transactionCodes"
+							],
+							"query": [
+								{
+									"key": "hotelIds",
+									"value": "{{HotelId}}"
+								},
+								{
+									"key": "includeInactive",
+									"value": "false"
+								},
+								{
+									"key": "transactionSubgroupsCodes",
+									"value": "FOD"
+								},
+								{
+									"key": "transactionSubgroupsCodes",
+									"value": "COM"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "26c. Stay - Post Billing Charges on window 2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"criteria\": {\r\n        \"charges\": {\r\n            \"postingQuantity\": 1,\r\n            \"usePackageAllowance\": false,\r\n            \"price\": {\r\n                \"amount\": 50,\r\n                \"currencyCode\": \"USD\"\r\n            },\r\n            \"transactionCode\": {{TransactionCode}},\r\n            \"applyRoutingInstructions\": true,\r\n            \"folioWindowNo\": \"2\"\r\n        },\r\n        \"reservationId\": {\r\n            \"idContext\": \"OPERA\",\r\n            \"id\": {{ReservationId}},\r\n            \"type\": \"Reservation\"\r\n        },\r\n        \"cashierId\": {{CashierId}},\r\n        \"hotelId\": \"{{HotelId}}\",\r\n        \"postIt\": false\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/csh/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/charges",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"csh",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"charges"
+							]
+						},
+						"description": "You can use getTransactionCodes, to see what other available charges a guest could make on their reservation/folio."
+					},
+					"response": []
+				},
+				{
+					"name": "26.Stay getTransactionCode 5000",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/fof/config/v1/transactionCodes?hotelIds={{HotelId}}&includeInactive=false&transactionSubgroupsCodes=COM",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"fof",
+								"config",
+								"v1",
+								"transactionCodes"
+							],
+							"query": [
+								{
+									"key": "hotelIds",
+									"value": "{{HotelId}}"
+								},
+								{
+									"key": "includeInactive",
+									"value": "false"
+								},
+								{
+									"key": "transactionSubgroupsCodes",
+									"value": "COM"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "26a. Stay - Post Billing Charges on window 1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"criteria\": {\r\n        \"charges\": {\r\n            \"postingQuantity\": 1,\r\n            \"usePackageAllowance\": false,\r\n            \"price\": {\r\n                \"amount\": 12,\r\n                \"currencyCode\": \"USD\"\r\n            },\r\n            \"transactionCode\": {{TransactionCode}},\r\n            \"applyRoutingInstructions\": true,\r\n            \"folioWindowNo\": \"1\"\r\n        },\r\n        \"reservationId\": {\r\n            \"idContext\": \"OPERA\",\r\n            \"id\": {{ReservationId}},\r\n            \"type\": \"Reservation\"\r\n        },\r\n        \"cashierId\": {{CashierId}},\r\n        \"hotelId\": \"{{HotelId}}\",\r\n        \"postIt\": false\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/csh/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/charges",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"csh",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"charges"
+							]
+						},
+						"description": "You can use getTransactionCodes, to see what other available charges a guest could make on their reservation/folio."
+					},
+					"response": []
+				},
+				{
+					"name": "27. Stay - Create Advance Room Charges",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"criteria\": {\r\n        \"reservationIdList\": [\r\n            {\r\n                \"id\": \"{{Reservationid}}\",\r\n                \"type\": \"Reservation\"\r\n            }\r\n        ],\r\n        \"postForEntireStay\": \"true\",\r\n        \"endDateToCharge\": \"{{Currentdate}}\",\r\n        \"cashierId\": \"{{CashierId}}\",\r\n        \"hotelId\": \"{{HotelId}}\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/csh/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/advanceRoomCharges",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"csh",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"advanceRoomCharges"
+							]
+						},
+						"description": "You can use getTransactionCodes, to see what other available charges a guest could make on their reservation/folio."
+					},
+					"response": []
+				},
+				{
+					"name": "28. Checkout- Fetch Folio postings from each window",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"value": "{{HotelId}}",
+								"type": "text"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/csh/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/folios?fetchInstructions=Windowbalances&limit=50",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"csh",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"folios"
+							],
+							"query": [
+								{
+									"key": "folioWindowNo",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Account",
+									"disabled": true
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Payee",
+									"disabled": true
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Windowbalances"
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Payment",
+									"disabled": true
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Postings",
+									"disabled": true
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Transactioncodes",
+									"disabled": true
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Totalbalance",
+									"disabled": true
+								},
+								{
+									"key": "fetchInstructions",
+									"value": "Reservation",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "29. Checkout - Post Payment on each Window 1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"criteria\": {\r\n    \"action\": \"Billing\",\r\n    \"overrideInsufficientCC\": false,\r\n    \"applyCCSurcharge\": false,\r\n    \"vATOffset\": false,\r\n    \"reservationId\": {\r\n      \"idContext\": \"OPERA\",\r\n      \"id\": \"{{ReservationId}}\",\r\n      \"type\": \"Reservation\"\r\n    },\r\n    \"paymentMethod\": {\r\n      \"authorizationApproval\": {\r\n        \"approvalAmount\": {\r\n          \"amount\": 250\r\n        },\r\n        \"approvalCode\": \"{{ApprovalCode}}\",\r\n        \"originalAuthSequence\": \"{{OriginalAuthSequene}}\",\r\n        \"vendorTranId\": \"{{VendorTranId}}\"\r\n      },\r\n      \"paymentCard\": {\r\n        \"cardType\": \"Va\",\r\n        \"cardNumberMasked\": \"\",\r\n        \"expirationDate\": \"2029-12-01\",\r\n        \"cardId\": {\r\n          \"id\": \"{{CardId}}\",\r\n          \"type\": \"CreditCard\"\r\n        }\r\n      },\r\n      \"paymentMethod\": \"VA\",\r\n      \"folioView\": \"1\"\r\n    },\r\n    \"postingReference\": \"Paid by Guest\",\r\n    \"postingAmount\": {\r\n      \"amount\": \"12.00\",\r\n      \"currencyCode\": \"USD\"\r\n    },\r\n    \"cashierId\": \"{{CashierId}}\",\r\n    \"hotelId\": \"{{HotelId}}\",\r\n    \"folioWindowNo\": \"1\",\r\n    \"overrideARCreditLimit\": false\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/csh/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/payments",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"csh",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "30. Checkout - Post Payment on each Window 2-3",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"criteria\": {\r\n    \"overrideInsufficientCC\": false,\r\n    \"applyCCSurcharge\": false,\r\n    \"vATOffset\": false,\r\n    \"reservationId\": {\r\n      \"idContext\": \"OPERA\",\r\n      \"id\": {{ReservationId}},\r\n      \"type\": \"Reservation\"\r\n    },\r\n    \"paymentMethod\": {\r\n      \"paymentMethod\": \"INV\"\r\n    },\r\n    \"postingReference\": \"Paid by Company\",\r\n    \"postingAmount\": {\r\n      \"amount\": \"50\",\r\n      \"currencyCode\": \"USD\"\r\n    },\r\n    \"cashierId\": \"{{CashierId}}\",\r\n    \"hotelId\": \"{{HotelId}}\",\r\n    \"folioWindowNo\": \"2\",\r\n    \"overrideARCreditLimit\": false\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/csh/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/payments",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"csh",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "31. Checkout - Modify Reservation status to Early Departure",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"criteria\": {\r\n        \"hotelId\": \"{{HotelId}}\",\r\n        \"reservationIdList\": [\r\n            {\r\n                \"type\": \"Reservation\",\r\n                \"id\": \"{{ReservationId}}\"\r\n            }\r\n        ],\r\n        \"ignoreRateRestriction\": true,\r\n        \"postConsumedAllowanceToGuest\": true,\r\n        \"ignoreCheckOnTieredRate\": true,\r\n        \"postEarlyDeparturePenalty\": false,\r\n        \"cashierId\": \"{{CashierId}}\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/csh/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/earlyDeparture",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"csh",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"earlyDeparture"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "32. Checkout- Close Folios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"criteria\": {\r\n        \"reservationId\": {\r\n            \"idContext\": \"OPERA\",\r\n            \"id\": {{ReservationId}},\r\n            \"type\": \"Reservation\"\r\n        },\r\n        \"profileId\": {\r\n            \"idContext\": \"OPERA\",\r\n            \"id\": {{ProfileId}},\r\n            \"type\": \"Profile\"\r\n        },\r\n        \"fiscalFolioInstruction\": \"New\",\r\n        \"allFolioWindow\": false,\r\n        \"folioQueue\": {\r\n            \"generateFiscalFolio\": false\r\n        },\r\n        \"cashierId\": {{CashierId}},\r\n        \"hotelId\": \"{{HotelId}}\",\r\n        \"eventType\": \"CheckOut\",\r\n        \"folioWindowNo\": 1,\r\n        \"correction\": false,\r\n        \"debitFolio\": false\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/csh/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/folios",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"csh",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"folios"
+							],
+							"query": [
+								{
+									"key": null,
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "33. Checkout - Posting Checkout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"reservation\": {\r\n    \"reservationIdList\": {\r\n      \"id\": {{ReservationId}},\r\n      \"type\": \"Reservation\"\r\n    },\r\n    \"stopCheckout\": false,\r\n    \"cashierId\": {{CashierId}},\r\n    \"hotelId\": \"{{HotelId}}\",\r\n    \"eventType\": \"CheckOut\",\r\n    \"autoCheckout\": false,\r\n    \"checkoutInstr\": {\r\n      \"roomStatus\": \"Dirty\",\r\n      \"ignoreWarnings\": false\r\n    }\r\n  },\r\n  \"verificationOnly\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/csh/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/checkOuts",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"csh",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"checkOuts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "34. getFolioTypes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "logLevel",
+								"value": "ALL",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/lov/v1/listOfValues/hotels/{{HotelId}}/folioTypes",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"lov",
+								"v1",
+								"listOfValues",
+								"hotels",
+								"{{HotelId}}",
+								"folioTypes"
+							]
+						},
+						"description": "In the response, you will see all available options you can then pass in a new request, to find the details for that subject.\r\nEG name = ProfileIdCountries.  Now you can post the request - {{HostName}}/lov/v1/listOfValues/ProfileIdCountries\r\n\r\nYou will also see in the response of this request if the \"name\" has parameters than can be passed in the request too, and if they are mandatory or not."
+					},
+					"response": []
+				},
+				{
+					"name": "34a. Checkout - Email copy of Invoice",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "logLevel",
+								"value": "ALL",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"folioInfo\": {\r\n        \"hotelId\": \"{{HotelId}}\",\r\n        \"reservationId\": {\r\n            \"id\": \"{{ReservationId}}\",\r\n            \"type\": \"Reservation\"\r\n        },\r\n        \"folioWindowNo\": \"1\",\r\n        \"folioType\": \"{{FolioType}}\",\r\n        \"folioDate\": \"{{Currentdate}}\"\r\n    },\r\n    \"emailRecipients\": [\r\n        {\r\n            \"emailAddress\": \"sobin.mathew@oracle.com\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/med/config/v1/folioReports/email",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"med",
+								"config",
+								"v1",
+								"folioReports",
+								"email"
+							]
+						},
+						"description": "In the response, you will see all available options you can then pass in a new request, to find the details for that subject.\r\nEG name = ProfileIdCountries.  Now you can post the request - {{HostName}}/lov/v1/listOfValues/ProfileIdCountries\r\n\r\nYou will also see in the response of this request if the \"name\" has parameters than can be passed in the request too, and if they are mandatory or not."
+					},
+					"response": []
+				},
+				{
+					"name": "34b. Checkout - Get Copy of Invoice",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-app-key",
+								"type": "text",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "x-hotelid",
+								"type": "text",
+								"value": "{{HotelId}}"
+							},
+							{
+								"key": "logLevel",
+								"value": "ALL",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/med/config/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/folioReports?reservationIdContext=OPERA&reservationIdType=Reservation&folioWindowNo=1&folioType=BILLING&folioDate={{Currentdate}}",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"med",
+								"config",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"folioReports"
+							],
+							"query": [
+								{
+									"key": "reservationIdContext",
+									"value": "OPERA"
+								},
+								{
+									"key": "reservationIdType",
+									"value": "Reservation"
+								},
+								{
+									"key": "folioWindowNo",
+									"value": "1"
+								},
+								{
+									"key": "folioType",
+									"value": "BILLING"
+								},
+								{
+									"key": "folioDate",
+									"value": "{{Currentdate}}"
+								}
+							]
+						},
+						"description": "In the response, you will see all available options you can then pass in a new request, to find the details for that subject.\r\nEG name = ProfileIdCountries.  Now you can post the request - {{HostName}}/lov/v1/listOfValues/ProfileIdCountries\r\n\r\nYou will also see in the response of this request if the \"name\" has parameters than can be passed in the request too, and if they are mandatory or not."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
