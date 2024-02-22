@@ -12,7 +12,6 @@ For long-running operations such as adding, updating, or retrieving large amount
 8. [Business Use Cases](#8-business-use-case)
 9. [Upcoming Async APIs](#9-upcoming-async-apis)
 
-
 ## 1. How to call Async APIs
 
 For Async APIs the data flow is a three step process. All 3 steps must be performed, that is, you cannot skip any step.
@@ -32,7 +31,7 @@ Once you have sent this post request to OPERA Cloud, you should receive a 202 Ac
 
 b. **HEAD** request is the second step from an external system to OPERA Cloud to check the status of the process started with POST request in the first step. Use the header parameter Location from the POST response in this HEAD request.  Once the process is completed, the HEAD request returns status of Completed and again, a header parameter Location will contain a summary ID required in step 3.
 
-Consider multiple `HEAD` retries for large data before finally sending the GET request. 
+Consider multiple `HEAD` retries for large data before finally sending the GET request.
 
 c. **GET** request is the third step from an external system to OPERA Cloud to either collect the bulk data, or confirm the post of data was successful. Use the Location Header returned by the HEAD response in step two. This GET response returns the requested data or log details in the case you have added data, and if advises if there is any failure.
 
@@ -40,7 +39,7 @@ c. **GET** request is the third step from an external system to OPERA Cloud to e
 
 Recommendation is to wait 1-2 minutes before sending HEAD request after Post
 
-Since OPERA Cloud 23.2 HEAD requests return a header `retry-after` containing the number of seconds we recommend waiting before calling HEAD again. There is known Bug at present which is addressed with `HOPCS-63293`
+Since OPERA Cloud 23.2 HEAD requests return a header `retry-after` containing the number of seconds we recommend waiting before calling HEAD again. There is known Bug at present which is addressed with `HOPCS-63293`.
 
 ## 3. When will the response be available?
 
@@ -67,7 +66,7 @@ ___
 Since OPERA Cloud 23.2 HEAD requests return a header `retry-after` containing the number of seconds we recommend waiting before calling HEAD again.
 ___
 
-Messages are available for 6 hours in the queue
+Messages are available for 6 hours in the queue.
 ___
 
 ## 5. Async APIs
@@ -82,13 +81,13 @@ ___
 * HurdleRates
 * RatePlanHeaders
 
-Fetch Data from OPERA Cloud
-`getReservationDailySummary`
-`getBlockAllocationSummary`
-`getRevenueInventoryStatistics`
+Fetch Data from OPERA Cloud:
 
-Others are Post Data to OPERA Cloud
+* getReservationDailySummary
+* getBlockAllocationSummary
+* getRevenueInventoryStatistics
 
+Others are for Posting Data to OPERA Cloud
 
 ## 6. Async APIs Size Limits
 
@@ -98,9 +97,9 @@ For example if you want to update Daily Rates using `DailyRatePlanSchedules` the
 
 ## 7. Creating an External System in OPERA Cloud
 
-Please follow [this guide](https://docs.oracle.com/en/industries/hospitality/integration-platform/ohipu/t_polling_api.htm#PollingAPIpull-170089A2) to see how External System is created in OPERA Cloud which is required for Async APIs.
+Please follow [this guide](https://docs.oracle.com/en/industries/hospitality/integration-platform/ohipu/t_polling_api.htm#PollingAPIpull-170089A2) to see how an External System is created in OPERA Cloud which is required for Async APIs.
 
-If your application is subscribed to the Streaming API you can also fetch Async APIs using the external system code displayed on the Application > Events > Subscribed tab in the Developer Portal
+If your application is subscribed to the Streaming API you can also fetch Async APIs using the external system code displayed on the Application > Events > Subscribed tab in the Developer Portal.
 
 ## 8. Business Use Case
 
@@ -110,6 +109,6 @@ To find more information on Async APIs, please navigate to your developer portal
 
 ## 9. Upcoming Async APIs
 
-- Mass Update Reservations – Target OC 24.1
-- Stay records – Target OC 24.2
-- Tax breakdown n Reservation Daily Summary Response – Target OC 24.5
+* Mass Update Reservations - Target OPERA Cloud 24.1
+* Stay records - Target OPERA Cloud 24.2
+* Tax breakdown n Reservation Daily Summary Response - Target OPERA Cloud 24.5

@@ -57,24 +57,25 @@ Oracle Hospitality APIs are protected by oAuth2.  There are two "flows" used in 
 ## 5. Setting up Postman
 
 1. Download the latest Postman collections and the [Postman Environment](https://github.com/oracle/hospitality-api-docs/blob/main/postman-collections/oracle-hospitality-property.postman_environment.json) from the [Oracle Hospitality Github repository](https://github.com/oracle/hospitality-api-docs/tree/main/postman-collections)
-2. Download the Postman collection in this repository (TO DO: Add Link)
-3. Import these Postman collections and Environment into Postman
-4. In the Postman Environment fill in the below details:
+2. Download the [Bootcamp Postman collection in this repository](Bootcamp_Reseller.postman_collection.json)
+3. Download the [Bootcamp Postman environment in this repository](Bootcamp_Reseller.postman_environment.json)
+4. Import these Postman collections and Environment into Postman
+5. In the Postman Environment fill in the below details:
 
 | **Variable Name** | **Value** |
 | --- | --- |
 | AppKey | Application key you noted down in [Creating an application](#2b-creating-an-application) |
-| ClientId | ClientId obtained from the Environment card in [Obtaining Credentials](#3-obtaining-credentials) |
-| ClientSecret | ClientSecret obtained from the Environment card in [Obtaining Credentials](#3-obtaining-credentials) |
+| CLIENT_ID | ClientId obtained from the Environment card in [Obtaining Credentials](#3-obtaining-credentials) |
+| CLIENT_SECRET | ClientSecret obtained from the Environment card in [Obtaining Credentials](#3-obtaining-credentials) |
 | HostName | Gateway URL obtained from the Environment card in [Obtaining Credentials](#3-obtaining-credentials) |
-| HotelId | Value supplied by the Oracle team |
+| HotelId | Value supplied by the Oracle team.  This is already filled in for the Bootcamp environment |
 | Password | `Interface Key` from the Vendor Self-Registration Portal in [Credentials](#3-obtaining-credentials) |
 | Username | `Interface ID` from the Vendor Self-Registration Portal in [Credentials](#3-obtaining-credentials) |
 
 ## 6. Obtaining an oAuth token
 
-1. Expand the "Property REST APIs by Module" collection, inside the "OAuth Token" folder
-2. Click the saved request `POST Get OAuth Token //initialize currentdate`
+1. Expand the "Bootcamp" collection, inside the "Implementation Use Cases" folder
+2. Click the saved request `01. Get oAuth Token`
 3. Click Send
 4. Note that this populates the variable `Token` in the Postman environment with the value `access_token` returned in the response
 
