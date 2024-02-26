@@ -13,7 +13,7 @@
 |13:45-14:30|Payment Card Tokenization        |
 |14:30-16:30|Implementation Use Cases 15-34   |
 |16:30-16:40|Coffee                           |
-|16:40-17:00|OHIP Commercials                 |
+|16:40-17:00|Integration Patterns             |
 |18:00-20:00|Happy Hour (finger food & drinks)|
 
 ## Day 2
