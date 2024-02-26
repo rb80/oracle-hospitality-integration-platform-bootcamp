@@ -16,7 +16,7 @@
 * [14-Modify Reservation to update Payment Method on Window 3 Optional](#14-modify-reservation-to-update-payment-method-on-window-3-optional)
 * [15-Convert PAN into Token Optional](#15-convert-pan-into-token-optional)
 * [16-Modify Reservation to Insert Credit Card Token as Payment Method on Window 1 Optional](#16-modify-reservation-to-insert-credit-card-token-as-payment-method-window-1-optional)
-* [17-Pre Authorize Credit Card Optional(#17-pre-authorize-credit-card-optional)
+* [17-Pre Authorize Credit Card Optional](#17-pre-authorize-credit-card-optional)
 * [18-Fetch Available Hotel Rooms](#18-fetch-available-hotel-rooms)
 * [19-Assign Inspected Vacant Rooms to Reservation](#19-assign-inspected-vacant-rooms-to-reservation)
 * [20-Modify Reservation to Pre-Register the Arrival Optional](#20-modify-reservation-to-pre-register-the-arrival-optional)
