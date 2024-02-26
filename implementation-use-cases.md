@@ -163,9 +163,10 @@ Posting a routing instruction to existing reservation where Room charges goes to
 ## 15-Convert PAN into Token OPTIONAL
 
 1. Verify whether OPI cloud is active
-2. Converts Primary Account Number (PAN) into Token issued by Payment Service Providers
-This is required to updated Window 1 payment method which belongs to guest
-Take any test Credit Card numbers and insert into the payload within the tag `pan`
+2. Convert Primary Account Number (PAN) into Token issued by Payment Service Providers.
+This is required to updated Window 1 payment method to the payment method which belongs to guest.
+Take any [test Credit Card numbers](https://www.paypalobjects.com/en_AU/vhelp/paypalmanager_help/credit_card_numbers.htm) and insert into the payload within the tag `pan`.
+
 Kindly note that this environment is linked to a PSP simulator and therefore every PAN number conversion will respond with different Token numbers for same PAN number.
 
 ## 16-Modify Reservation to Insert Credit Card Token as Payment Method on Window 1 OPTIONAL
@@ -309,4 +310,4 @@ Send copy of the invoice to email. Change the value within `emailAddress`
 
 2. Send copy of the invoice to email. Change the value within `emailAddress`
 
-3. Fetch copy of the invoice in Base64 format. Use any public website to convert Base64 into pdf to view it.
+3. Fetch copy of the invoice in Base64 format. Use any public website to convert Base64 into pdf to view it, for example [Base64 Guru](https://base64.guru/converter/decode/pdf).
