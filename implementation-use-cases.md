@@ -2,7 +2,7 @@
 
 * [1 Get Token](#1-get-token)
 * [2 Create Guest Profile](#2-create-guest-profile)
-* [3 Create Company Profile Optional](#3-create-company-profile-optional) 
+* [3 Create Company Profile Optional](#3-create-company-profile-optional)
 * [4 Create AR Account for Company Profile Optional](#4-create-ar-account-for-company-profile-optional)
 * [5-Create Travel Agent Profile Optional](#5-create-travel-agent-profile-optional)
 * [6 Create AR Account for Travel Agent Profile Optional](#6-create-ar-account-for-travel-agent-profile-optional)
@@ -15,7 +15,7 @@
 * [13-Create Routing Instruction to Travel Agent on Window 3 Optional](#13-create-routing-instruction-to-travel-agent-on-window-3-optional)
 * [14-Modify Reservation to update Payment Method on Window 3 Optional](#14-modify-reservation-to-update-payment-method-on-window-3-optional)
 * [15-Convert PAN into Token Optional](#15-convert-pan-into-token-optional)
-* [16-Modify Reservation to Insert Credit Card Token as Payment Method on Window 1 Optional](#16-modify-reservation-to-insert-credit-card-token-as-payment-method-window-1-optional)
+* [16-Modify Reservation to Insert Credit Card Token as Payment Method on Window 1 Optional](#16-modify-reservation-to-insert-credit-card-token-as-payment-method-on-window-1-optional)
 * [17-Pre Authorize Credit Card Optional](#17-pre-authorize-credit-card-optional)
 * [18-Fetch Available Hotel Rooms](#18-fetch-available-hotel-rooms)
 * [19-Assign Inspected Vacant Rooms to Reservation](#19-assign-inspected-vacant-rooms-to-reservation)
@@ -28,13 +28,12 @@
 * [26-Post Billing Charges on windows 1 and 2 Optional](#26-post-billing-charges-on-windows-1-and-2-optional)
 * [27-Create Advance Room Charges](#27-create-advance-room-charges)
 * [28-Fetch Folio postings from each window](#28-fetch-folio-postings-from-each-window)
-* [29-Post Payment on each Window 1](#29-post-payment-on-each-window-1)
+* [29-Post Payment on each Window 1 Optional](#29-post-payment-on-each-window-1-optional)
 * [30-Post Payment on each Window 2-3 Optional](#30-post-payment-on-each-window-2-3-optional)
 * [31-Modify Reservation status to Early Departure](#31-modify-reservation-status-to-early-departure)
 * [32-Close Folio Windows 1-3](#32-close-folio-windows-1-3)
 * [33-Posting CheckOut](#33-posting-checkout)
 * [34-Email Invoice Optional](#34-email-invoice-optional)
-
 
 ## 1 Get Token
 
