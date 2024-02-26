@@ -11,6 +11,7 @@ For long-running operations such as adding, updating, or retrieving large amount
 7. [Creating an External System in OPERA Cloud](#7-creating-an-external-system-in-opera-cloud)
 8. [Business Use Cases](#8-business-use-case)
 9. [Upcoming Async APIs](#9-upcoming-async-apis)
+10. [Async Lab](#10-async-lab)
 
 ## 1. How to call Async APIs
 
@@ -39,7 +40,7 @@ c. **GET** request is the third step from an external system to OPERA Cloud to e
 
 Recommendation is to wait 1-2 minutes before sending HEAD request after Post
 
-Since OPERA Cloud 23.2 HEAD requests return a header `retry-after` containing the number of seconds we recommend waiting before calling HEAD again. There is known Bug at present which is addressed with `HOPCS-63293`.
+Since OPERA Cloud 24.1 HEAD requests return a header `retry-after` containing the number of seconds we recommend waiting before calling HEAD again.
 
 ## 3. When will the response be available?
 
@@ -63,7 +64,7 @@ ___
 If partner requests data with `startLastModifiedDate` & `endLastModifiedDate`; irrespective of whether the subsequent request is duplicate or new, the partner will not be able to request the data again for the next 3 hours. This is intended behavior. The thought process is no one should use `LastModifiedDate` criteria more frequently than 3 hrs because it is very heavy on database.
 ___
 
-Since OPERA Cloud 23.2 HEAD requests return a header `retry-after` containing the number of seconds we recommend waiting before calling HEAD again.
+Since OPERA Cloud 24.1 HEAD requests return a header `retry-after` containing the number of seconds we recommend waiting before calling HEAD again.
 ___
 
 Messages are available for 6 hours in the queue.
@@ -112,3 +113,45 @@ To find more information on Async APIs, please navigate to your developer portal
 * Mass Update Reservations - Target OPERA Cloud 24.1
 * Stay records - Target OPERA Cloud 24.2
 * Tax breakdown n Reservation Daily Summary Response - Target OPERA Cloud 24.5
+
+## 10. Async Lab
+
+1. Ensure the environment selected is "Bootcamp Reseller".
+2. Set the `ExtSystemCode` parameter to the external system code provided to you by the Oracle team.
+
+### Send the first request
+
+1. In Postman expand the `1. Property REST APIs By Module` collection, then expand the folder `Asynchronous APIs`, then expand the folder `Reservation (RSVASYNC)`.
+2. Click the request `start Reservations Daily Summary Process`
+3. Click the `Body` tab and change the dates in the payload to the below
+4. Send the request
+5. Open the console, click the request, and scroll down to the Response Headers.  Highlight the last part of the URL in the `Location` header and choose `Set:Bootcamp Reseller` then choose `SummaryId`
+
+``` json
+{
+  "criteria": {
+    "hotelId": "{{HotelId}}",
+    "timeSpan": {
+      "startDate": "2024-01-02",
+      "endDate": "2024-03-31"
+    }
+  }
+}
+```
+
+### Send the second request
+
+1. In Postman expand the `1. Property REST APIs By Module` collection, then expand the folder `Asynchronous APIs`, then expand the folder `Reservation (RSVASYNC)`.
+2. Click the request `get Reservations Process Status`
+3. Send the request
+4. Look in the Console to see the response headers
+5. If the `status` header is `COMPLETED` then:
+
+a. Highlight the last part of the URL in the `Location` response headerand choose `Set:Bootcamp Reseller` then choose `SummaryId`
+b. Proceed to send the third request
+
+### Send the third request
+
+1. In Postman expand the `1. Property REST APIs By Module` collection, then expand the folder `Asynchronous APIs`, then expand the folder `Reservation (RSVASYNC)`.
+2. Click the request `get Reservations Daily Summary`
+3. Send the request
