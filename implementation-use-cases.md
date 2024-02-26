@@ -2,10 +2,10 @@
 
 * [1 Get Token](#1-get-token)
 * [2 Create Guest Profile](#2-create-guest-profile)
-* [3 Create Company Profile](#3-create-company-profile) OPTIONAL
-* [4 Create AR Account for Company Profile](#4-create-ar-account-for-company-profile) OPTIONAL
-* [5-Create Travel Agent Profile](#5-create-travel-agent-profile) OPTIONAL
-* [6 Create AR Account for Travel Agent Profile](#6-create-ar-account-for-travel-agent-profile) OPTIONAL
+* [3 Create Company Profile](#3-create-company-profile-optional) 
+* [4 Create AR Account for Company Profile](#4-create-ar-account-for-company-profile-optional)
+* [5-Create Travel Agent Profile](#5-create-travel-agent-profile-optional)
+* [6 Create AR Account for Travel Agent Profile](#6-create-ar-account-for-travel-agent-profile-optional)
 * [7-Fetch Hotel Availability](#7-fetch-hotel-availability)
 * [8-Create Reservation](#8-create-reservation)
 * [9-Create Multi Leg Reservation](#9-create-multi-leg-reservation) OPTIONAL
