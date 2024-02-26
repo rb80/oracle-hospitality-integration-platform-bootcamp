@@ -8,32 +8,32 @@
 * [6 Create AR Account for Travel Agent Profile](#6-create-ar-account-for-travel-agent-profile-optional)
 * [7-Fetch Hotel Availability](#7-fetch-hotel-availability)
 * [8-Create Reservation](#8-create-reservation)
-* [9-Create Multi Leg Reservation](#9-create-multi-leg-reservation) OPTIONAL
-* [10-Modify Reservation Add Preference](#10-modify-reservation-add-preference) OPTIONAL
-* [11-Create Routing Instruction to Company on Window 2](#11-create-routing-instruction-to-company-on-window-2) OPTIONAL
-* [12-Modify Reservation to update Payment Method on Window 2](#12-modify-reservation-to-update-payment-method-on-window-2) OPTIONAL
-* [13-Create Routing Instruction to Travel Agent on Window 3](#13-create-routing-instruction-to-travel-agent-on-window-3) OPTIONAL
-* [14-Modify Reservation to update Payment Method on Window 3](#14-modify-reservation-to-update-payment-method-on-window-3) OPTIONAL
-* [15-Convert PAN into Token](#15-convert-pan-into-token) OPTIONAL
-* [16-Modify Reservation to Insert Credit Card Token as Payment Method on Window 1](#modify-reservation-to-insert-credit-card-token-as-payment-method-window-1) OPTIONAL
-* [17-Pre Authorize Credit Card](#17-pre-authorize-credit-card) OPTIONAL
+* [9-Create Multi Leg Reservation](#9-create-multi-leg-reservation-optional)
+* [10-Modify Reservation Add Preference](#10-modify-reservation-add-preference-optional)
+* [11-Create Routing Instruction to Company on Window 2](#11-create-routing-instruction-to-company-on-window-2-optional)
+* [12-Modify Reservation to update Payment Method on Window 2](#12-modify-reservation-to-update-payment-method-on-window-2-optional)
+* [13-Create Routing Instruction to Travel Agent on Window 3](#13-create-routing-instruction-to-travel-agent-on-window-3-optional)
+* [14-Modify Reservation to update Payment Method on Window 3](#14-modify-reservation-to-update-payment-method-on-window-3-optional)
+* [15-Convert PAN into Token](#15-convert-pan-into-token-optional)
+* [16-Modify Reservation to Insert Credit Card Token as Payment Method on Window 1](#modify-reservation-to-insert-credit-card-token-as-payment-method-window-1-optional)
+* [17-Pre Authorize Credit Card](#17-pre-authorize-credit-card-optional)
 * [18-Fetch Available Hotel Rooms](#18-fetch-available-hotel-rooms)
 * [19-Assign Inspected Vacant Rooms to Reservation](#19-assign-inspected-vacant-rooms-to-reservation)
-* [20-Modify Reservation to Pre-Register the Arrival](#20-modify-reservation-to-pre-register-the-arrival) OPTIONAL
+* [20-Modify Reservation to Pre-Register the Arrival](#20-modify-reservation-to-pre-register-the-arrival-optional)
 * [21-Checkin the reservation](#21-checkin-the-reservation)
 * [22-Create Room Key](#22-create-room-key)
-* [23-Create a Service Request](#23-create-a-service-request) OPTIONAL
-* [24-Set Wake up Call](#24-set-wake-up-call) OPTIONAL
+* [23-Create a Service Request](#23-create-a-service-request-optional)
+* [24-Set Wake up Call](#24-set-wake-up-call-optional)
 * [25-Create Cashier](#25-create-cashier)
-* [26-Post Billing Charges on windows 1 and 2](#26-post-billing-charges-on-windows-1-and-2) OPTIONAL
+* [26-Post Billing Charges on windows 1 and 2](#26-post-billing-charges-on-windows-1-and-2-optional)
 * [27-Create Advance Room Charges](#27-create-advance-room-charges)
 * [28-Fetch Folio postings from each window](#28-fetch-folio-postings-from-each-window)
 * [29-Post Payment on each Window 1](#29-post-payment-on-each-window-1)
-* [30-Post Payment on each Window 2-3](#30-post-payment-on-each-window-2-3) OPTIONAL
+* [30-Post Payment on each Window 2-3](#30-post-payment-on-each-window-2-3-optional)
 * [31-Modify Reservation status to Early Departure](#31-modify-reservation-status-to-early-departure)
 * [32-Close Folio Windows 1-3](#32-close-folio-windows-1-3)
 * [33-Posting CheckOut](#33-posting-checkout)
-* [34-Email Invoice](#34-email-invoice) OPTIONAL
+* [34-Email Invoice](#34-email-invoice-optional)
 
 ## 1 Get Token
 
