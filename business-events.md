@@ -9,8 +9,8 @@
 [Streaming Lab](#streaming-lab)
 
 1. [Configure Streaming in the Developer Portal](#1-configure-streaming-in-the-developer-portal)
-2. [Use Postman to stream events](#3-use-postman-to-stream-events)
-3. [Use GraphiQL to stream events - Optional](#2-use-graphiql-to-stream-events-optional)
+2. [Use Postman to stream events](#2-use-postman-to-stream-events)
+3. [Use GraphiQL to stream events - Optional](#3-use-graphiql-to-stream-events-optional)
 4. [Use the NodeJS reference implementation to stream events - Optional](#4-use-the-nodejs-reference-implementation-to-stream-events-optional)
 
 ## Polling
@@ -72,9 +72,10 @@ Streaming means opening a WebSocket connection, then Oracle Hospitality pushing 
 7. Send the `init` message ![alt text](images/business_events_streaming_3_7.png "Screenshot of Postman sample for Streaming Business Events")
 8. Send the `subscribe` message within 5 seconds of sending the `init` message
 9. Observe events flowing through
-10. Generate some events by calling the `post Profile` operation and observe these events come through
-11. Keep sending the `ping` request to keep the connection open
-12. Send the `complete` request to close the connection
+10. In the `1. Property REST APIs By Module` collection expand the `OPERA Cloud REST APIs By Module` folder, then the `Profiles (CRM)` folder, then the `Post Profile (create)` folder, open the `Post Profile` request and click Send a few times.
+11. In the `1. Property REST APIs By Module` collection expand the `OPERA Cloud REST APIs By Module` folder, then the `Profiles (CRM)` folder, then the `Put Profile (update)` folder, open the `Put Profile` request and click Send a few times
+12. Keep sending the `ping` request to keep the connection open
+13. Send the `complete` request to close the connection
 
 ### 3. Use GraphiQL to stream events - Optional
 
@@ -88,8 +89,9 @@ Streaming means opening a WebSocket connection, then Oracle Hospitality pushing 
 8. In the request payload ensure the `chainCode` reflects the tenant code given to you by the Oracle team ![alt text](images/business_events_streaming_2_8.png "Screenshot of the GraphiQL page after authentication showing the subscribe message")
 9. _Optional_ Open developer tools in the browser and go to the "Network" tab, filtering this for `WS` (WebSocket traffic) and clicking the "Response" tab
 10. Click Play.  Observe the `subscribe` event being sent, followed by events flowing through
-11. In the `1. Property REST APIs By Module` collection expand the `OPERA Cloud REST APIs By Module` folder, then the `Profiles (CRM)` folder, then the `Post Profile (create)` folder, open the `Post Profile` request and click Send a few times
-12. Click Stop to close the WebSocket connection.  Observe the `complete` message sent and the `Connection Closed: 1000` response
+11. In the `1. Property REST APIs By Module` collection expand the `OPERA Cloud REST APIs By Module` folder, then the `Profiles (CRM)` folder, then the `Post Profile (create)` folder, open the `Post Profile` request and click Send a few times.
+12. In the `1. Property REST APIs By Module` collection expand the `OPERA Cloud REST APIs By Module` folder, then the `Profiles (CRM)` folder, then the `Put Profile (update)` folder, open the `Put Profile` request and click Send a few times
+13. Click Stop to close the WebSocket connection.  Observe the `complete` message sent and the `Connection Closed: 1000` response
 
 ### 4. Use the NodeJS reference implementation to stream events (Optional)
 
@@ -121,6 +123,6 @@ Streaming means opening a WebSocket connection, then Oracle Hospitality pushing 
     npm start
 ```
 
-Observe the Business Events flowing through.
-
-Generate some events by calling the `post Profile` operation and observe these events come through.
+1. In the `1. Property REST APIs By Module` collection expand the `OPERA Cloud REST APIs By Module` folder, then the `Profiles (CRM)` folder, then the `Post Profile (create)` folder, open the `Post Profile` request and click Send a few times.
+2. In the `1. Property REST APIs By Module` collection expand the `OPERA Cloud REST APIs By Module` folder, then the `Profiles (CRM)` folder, then the `Put Profile (update)` folder, open the `Put Profile` request and click Send a few times
+3. Observe the Business Events flowing through.
