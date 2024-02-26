@@ -2,38 +2,38 @@
 
 * [1 Get Token](#1-get-token)
 * [2 Create Guest Profile](#2-create-guest-profile)
-* [3 Create Company Profile](#3-create-company-profile)
-* [4 Create AR Account for Company Profile](#4-create-ar-account-for-company-profile)
-* [5-Create Travel Agent Profile](#5-create-travel-agent-profile)
-* [6 Create AR Account for Travel Agent Profile](#6-create-ar-account-for-travel-agent-profile)
+* [3 Create Company Profile](#3-create-company-profile) OPTIONAL
+* [4 Create AR Account for Company Profile](#4-create-ar-account-for-company-profile) OPTIONAL
+* [5-Create Travel Agent Profile](#5-create-travel-agent-profile) OPTIONAL
+* [6 Create AR Account for Travel Agent Profile](#6-create-ar-account-for-travel-agent-profile) OPTIONAL
 * [7-Fetch Hotel Availability](#7-fetch-hotel-availability)
 * [8-Create Reservation](#8-create-reservation)
-* [9-Create Multi Leg Reservation](#9-create-multi-leg-reservation)
-* [10-Modify Reservation Add Preference](#10-modify-reservation-add-preference)
-* [11-Create Routing Instruction to Company on Window 2](#11-create-routing-instruction-to-company-on-window-2)
-* [12-Modify Reservation to update Payment Method on Window 2](#12-modify-reservation-to-update-payment-method-on-window-2)
-* [13-Create Routing Instruction to Travel Agent on Window 3](#13-create-routing-instruction-to-travel-agent-on-window-3)
-* [14-Modify Reservation to update Payment Method on Window 3](#14-modify-reservation-to-update-payment-method-on-window-3)
-* [15-Convert PAN into Token](#15-convert-pan-into-token)
-* [16-Modify Reservation to Insert Credit Card Token as Payment Method on Window 1](#16-modify-reservation-to-insert-credit-card-token-as-payment-method-on-window-1)
-* [17-Pre Authorize Credit Card](#17-pre-authorize-credit-card)
+* [9-Create Multi Leg Reservation](#9-create-multi-leg-reservation) OPTIONAL
+* [10-Modify Reservation Add Preference](#10-modify-reservation-add-preference) OPTIONAL
+* [11-Create Routing Instruction to Company on Window 2](#11-create-routing-instruction-to-company-on-window-2) OPTIONAL
+* [12-Modify Reservation to update Payment Method on Window 2](#12-modify-reservation-to-update-payment-method-on-window-2) OPTIONAL
+* [13-Create Routing Instruction to Travel Agent on Window 3](#13-create-routing-instruction-to-travel-agent-on-window-3) OPTIONAL
+* [14-Modify Reservation to update Payment Method on Window 3](#14-modify-reservation-to-update-payment-method-on-window-3) OPTIONAL
+* [15-Convert PAN into Token](#15-convert-pan-into-token) OPTIONAL
+* [16-Modify Reservation to Insert Credit Card Token as Payment Method on Window 1] OPTIONAL(#16-modify-reservation-to-insert-credit-card-token-as-payment-method-on-window-1) OPTIONAL
+* [17-Pre Authorize Credit Card](#17-pre-authorize-credit-card) OPTIONAL
 * [18-Fetch Available Hotel Rooms](#18-fetch-available-hotel-rooms)
 * [19-Assign Inspected Vacant Rooms to Reservation](#19-assign-inspected-vacant-rooms-to-reservation)
-* [20-Modify Reservation to Pre-Register the Arrival](#20-modify-reservation-to-pre-register-the-arrival)
+* [20-Modify Reservation to Pre-Register the Arrival](#20-modify-reservation-to-pre-register-the-arrival) OPTIONAL
 * [21-Checkin the reservation](#21-checkin-the-reservation)
 * [22-Create Room Key](#22-create-room-key)
-* [23-Create a Service Request](#23-create-a-service-request)
-* [24-Set Wake up Call](#24-set-wake-up-call)
+* [23-Create a Service Request](#23-create-a-service-request) OPTIONAL
+* [24-Set Wake up Call](#24-set-wake-up-call) OPTIONAL
 * [25-Create Cashier](#25-create-cashier)
-* [26-Post Billing Charges on windows 1 and 2](#26-post-billing-charges-on-windows-1-and-2)
+* [26-Post Billing Charges on windows 1 and 2](#26-post-billing-charges-on-windows-1-and-2) OPTIONAL
 * [27-Create Advance Room Charges](#27-create-advance-room-charges)
 * [28-Fetch Folio postings from each window](#28-fetch-folio-postings-from-each-window)
 * [29-Post Payment on each Window 1](#29-post-payment-on-each-window-1)
-* [30-Post Payment on each Window 2-3](#30-post-payment-on-each-window-2-3)
+* [30-Post Payment on each Window 2-3](#30-post-payment-on-each-window-2-3) OPTIONAL
 * [31-Modify Reservation status to Early Departure](#31-modify-reservation-status-to-early-departure)
 * [32-Close Folio Windows 1-3](#32-close-folio-windows-1-3)
 * [33-Posting CheckOut](#33-posting-checkout)
-* [34-Email Invoice](#34-email-invoice)
+* [34-Email Invoice](#34-email-invoice) OPTIONAL
 
 ## 1 Get Token
 
@@ -58,7 +58,7 @@ Create a guest Profile with minimum data. This is the main Guest Profile who is 
 Within payload we have included Postman default variables for First name and Last name. Therefore no change required
 Also note that within the postman collection provided, from the POST response `ProfileId` will be automatically inserted into the Postman environment variables.
 
-## 3 Create Company Profile
+## 3 Create Company Profile OPTIONAL
 
 Create Company Profile where by adding an AR address in the payload. This is required for successful checkout of the folio to Accounts Receivable. This is to show that Reservation can be linked to other Profile types as well. Please note that you can only attach maximum of one Company Profile.
 
@@ -67,7 +67,7 @@ Kindly note that there are test scripts which takes Company Profile id and inser
 1. Change `companyName`and `address` as required. Not mandatory to change. Do not change the address type 'AR ADDRESS'
 2. Once Company Profile is created, ensure `getProfile` API is executed so that `AR address id` is inserted into environment variables `CompanyArAddressId`
 
-## 4 Create AR Account for Company Profile
+## 4 Create AR Account for Company Profile OPTIONAL
 
 This API is to create an Account Receivable Number (AR Number) to the Company Profile created previously. This is required later if you want to check out the Opera Folio Window to City Ledger (Direct Billing).
 
@@ -76,14 +76,14 @@ This API is to create an Account Receivable Number (AR Number) to the Company Pr
 
 3. Use getProfile API to check all of the above values are responded correctly
 
-## 5-Create Travel Agent Profile
+## 5-Create Travel Agent Profile OPTIONAL
 
 Create Travel Agent Profile with AR Address. This is to show that Reservation can be linked to other Profile types as well. Please note that you can only attach maximum of one Travel Agent Profile. The `TravelAgentProfileId` is auto populated in Environment variables with Test Scripts inserted into collection
 
 1. Change `companyName`and `address` as required. Not mandatory to change. Do not change the address type 'AR ADDRESS'. The payload contains multiple address. This is just to show that multiple addresses can be inserted with one API call.  
 2. Once Travel Agent Profile is created, ensure `getProfile` API is executed so that `TaArAddressId` is inserted into environment variables. Note that there are 2 addresses in the response. Make sure you insert correct Address into Environment variable.
 
-## 6 Create AR Account for Travel Agent Profile
+## 6 Create AR Account for Travel Agent Profile OPTIONAL
 
 1. Account Receivable account types (AR Types) enable you to categorize AR accounts. The account type selected in each AR Account is used for filtering in both the application and also on reports, such as when generating an AR aging report subtotaled by account type. Account types also determine the stationery templates to use when generating statements and reminder letters for each AR account. Fetch AR types which is required to create Travel Agent AR account and set environment variable `ArAccountType`. If the value doesn't differ from Company, no changes required.
 2. Create Travel Agent AR Account. Make sure the AR number (accountNo) is inserted and also the environment variable `TravelAgentAccountNo` is populated. Change `accountName` name value which was inserted with point 5.
@@ -118,14 +118,14 @@ Values within `TaRecordLocator`and `Expedia` will be autopopulated with postman 
 6. Create Reservation. This API will create Reservation.
 7. Fetch Reservation.  Once postReservation is executed, please check whether all required details are entered correctly with this API. Ensure the value from reservationIdList type=Confirmation is copied into environment variable `Confirmationid` and also `id` from `externalReferences` into `ExternalReferences`
 
-## 9-Create Multi Leg Reservation
+## 9-Create Multi Leg Reservation OPTIONAL
 
 Create Reservation which is multi leg reservation. This API is to show you how to create Multileg and will not be further used in this collection and therefore do not require any environment variables.
 
 1. After successful post, Postman will automatically populate environment variable `ReservationId2`
 2. Verify the data with `getReservations` whereby making use of `confirmationNumberList` query parameter which shows you can fetch all leg Reservations with one API. You should get 2 Reservations in the response.
 
-## 10-Modify Reservation Add Preference
+## 10-Modify Reservation Add Preference OPTIONAL
 
 Pre Arrival where a preference will be added.
 
@@ -133,20 +133,20 @@ Pre Arrival where a preference will be added.
 2. Modify Reservation to insert Preference Code `FBAL`
 3. Fetch Reservation.  Once putReservation is executed, check whether your preference has been attached on the reservation
 
-## 11-Create Routing Instruction to Company on Window 2
+## 11-Create Routing Instruction to Company on Window 2 OPTIONAL
 
 Posting a routing instruction to existing reservation where `Food` charges goes to the Company which is linked to the reservation. Make sure the routing code `FOOD` is directed to window 2.
 
 1. Fetch the routing Codes with `getRoutingCodes` and set Environment Variable of `CompanyRoutingCode`
 2. Create Routing Instructions
 
-## 12-Modify Reservation to update Payment Method on Window 2
+## 12-Modify Reservation to update Payment Method on Window 2 OPTIONAL
 
 1. To find the Payment Method use `getPaymentMethod` API. For testing purpose use `INV`. No Environment is defined here. Use the value within payload.
 2. Modify Payment Method on Reservation.  Once Routing is done, modification is required to existing Reservation to inform that window 2 will be paid by Direct Billing as Payment Method. Kindly note Routing instructions and Payment Method are 2 different APIs at present.
 3. Use fetch Reservation to check whether modification of Payment Method was successful on Window 2
 
-## 13-Create Routing Instruction to Travel Agent on Window 3
+## 13-Create Routing Instruction to Travel Agent on Window 3 OPTIONAL
 
 Posting a routing instruction to existing reservation where Room charges goes to the Travel Agent which is linked to the reservation. Make sure the routing is done to window 3. Make sure the routing code `BB` is directed to window 3.
 
@@ -154,13 +154,13 @@ Posting a routing instruction to existing reservation where Room charges goes to
 2. Create Routing Instructions on Reservation
 3. Check whether Routing Instructions was successful on Window 3
 
-## 14-Modify Reservation to update Payment Method on Window 3
+## 14-Modify Reservation to update Payment Method on Window 3 OPTIONAL
 
 1. To find the Payment Method use `getPaymentMethod` API. For testing purpose use `INV`. No Environment is defined here. Use the value within payload.
 2. Modify Payment Method on Reservation.  Once Routing is done, modification is required to existing Reservation to inform that window 3 will be paid by Direct Billing as Payment Method. Kindly note Routing instructions and Payment Method are 2 different APIs at present.
 3. Use fetch Reservation to check whether modification of Payment Method was successful on Window 3
 
-## 15-Convert PAN into Token
+## 15-Convert PAN into Token OPTIONAL
 
 1. Verify whether OPI cloud is active
 2. Converts Primary Account Number (PAN) into Token issued by Payment Service Providers
@@ -168,7 +168,7 @@ This is required to updated Window 1 payment method which belongs to guest
 Take any test Credit Card numbers and insert into the payload within the tag `pan`
 Kindly note that this environment is linked to a PSP simulator and therefore every PAN number conversion will respond with different Token numbers for same PAN number.
 
-## 16-Modify Reservation to Insert Credit Card Token as Payment Method on Window 1
+## 16-Modify Reservation to Insert Credit Card Token as Payment Method on Window 1 OPTIONAL
 
 Update existing Payment Method using this API. Make sure you update the tags
 
@@ -179,7 +179,7 @@ Update existing Payment Method using this API. Make sure you update the tags
 
 And any other value which you changed
 
-## 17-Pre Authorize Credit Card
+## 17-Pre Authorize Credit Card OPTIONAL
 
 This API is useful for many Kiosk Partners who wants to save time to Pre Authorize card prior Checkin API. Make sure the terminalId has the value for your testing is `PD1`
 
@@ -199,7 +199,7 @@ Make sure you insert the `RoomNumber` into environment variable.
 
 Assign room which you got from earlier API call.
 
-## 20-Modify Reservation to Pre-Register the Arrival
+## 20-Modify Reservation to Pre-Register the Arrival OPTIONAL
 
 Pre-Register Or Pre-Checkin
 You can offer your guests the ability to check in for their reservations by pre-registering. When a reservation is pre-registered, all of the guest's information to finish the registration process is collected, including authorizing the guest's credit card for the reservation. This makes it easy to check in the reservation when the guests arrive and the assigned room is available.
@@ -236,13 +236,13 @@ Creating a Key. KeyType by default should be `New`
 
 > Please note this API is only for illustration purpose as the API is not available yet.
 
-## 23-Create a Service Request
+## 23-Create a Service Request OPTIONAL
 
 1. Fetch Service request Codes
 2. Create a Service request to provide towel by Housekeeping department. Ensure you change the tag`openDate` within the payload
 3. Fetch the Service Request Codes applied to the reservation to see whether it was successfully inserted
 
-## 24-Set Wake up Call
+## 24-Set Wake up Call OPTIONAL
 
 Create a Wakeup call on the reservation. Ensure you change the dates within the payload
 
@@ -258,7 +258,7 @@ This API is required for `postBillingCharges" whereby it is mandatory that API r
 2. Create Cashier  
 3. Use this API to check whether postCashier API has successfully inserted cashier id. If inserted, please insert the environment variable `CashierId`
 
-## 26-Post Billing Charges on windows 1 and 2
+## 26-Post Billing Charges on windows 1 and 2 OPTIONAL
 
 1. getTransactionCode
 Use this API to find the required transaction Code. For testing purpose we require transaction Sub Group value `FOD` where by you will need to find transaction Code `2800`. Make sure this inserted into environment Variable `TransactionCode`. Kindly note that transactionCodes should be created with manualPost tag which is true. Only these transaction Codes can be used at preset to be able to post through OHIP.
@@ -278,11 +278,11 @@ As we are testing and no End of Day Routine will be run, use this API to post Ro
 
 Use this API to fetch Folios from each window. Remember there are 3 Windows which should have Charges (Balances)
 
-## 29-Post Payment on each Window 1
+## 29-Post Payment on each Window 1 OPTIONAL
 
 1. Use this API to post payment against the folio on each Window. There should be no balance left. Window 1 should be paid against Credit Card
 
-## 30-Post Payment on each Window 2-3
+## 30-Post Payment on each Window 2-3 OPTIONAL
 
 Use this API to post payment against the folio on each Window. There should be no balance left
 
@@ -301,7 +301,7 @@ Use this folio to settle the folio prior checkout. *This API needs to be execute
 
 Use this API to post checkout.
 
-## 34-Email Invoice
+## 34-Email Invoice OPTIONAL
 
 Send copy of the invoice to email. Change the value within `emailAddress`
 
