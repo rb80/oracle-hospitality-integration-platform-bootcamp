@@ -6,12 +6,12 @@
 2. [Configuring an External System for Events](#2-configuring-the-external-system-for-events)
 3. [Calling the getBusinessEvents API](#3-calling-the-getbusinessevents-api)
 
-[Streaming](#streaming)
+[Streaming Lab](#streaming-lab)
 
 1. [Configure Streaming in the Developer Portal](#1-configure-streaming-in-the-developer-portal)
-2. [Use GraphiQL to stream events](#2-use-graphiql-to-stream-events)
-3. [Use Postman to stream events](#3-use-postman-to-stream-events)
-4. [Use the NodeJS reference implementation to stream events](#4-use-the-nodejs-reference-implementation-to-stream-events)
+2. [Use Postman to stream events](#3-use-postman-to-stream-events)
+3. [Use GraphiQL to stream events - Optional](#2-use-graphiql-to-stream-events-optional)
+4. [Use the NodeJS reference implementation to stream events - Optional](#4-use-the-nodejs-reference-implementation-to-stream-events-optional)
 
 ## Polling
 
@@ -47,7 +47,7 @@ Polling means sending repeated requests to ask "are there any events for my exte
 5. Generate some events by calling the `post Profile` operation
 6. Call the `get Business Events` operation again to observe the event arrive for the new profile created
 
-## Streaming
+## Streaming Lab
 
 Streaming means opening a WebSocket connection, then Oracle Hospitality pushing events on that connection as they occur.  Streaming is configured in the Oracle Hospitality Integration Platform Developer Portal.
 
@@ -61,22 +61,7 @@ Streaming means opening a WebSocket connection, then Oracle Hospitality pushing 
 6. Verify that the events listed are the same as those on the template
 7. Notify the Oracle team to approve the subscription.  In production, this would be approved by the hoteliers.
 
-### 2. Use GraphiQL to stream events
-
-1. Download the [GraphiQL page from the Oracle Hospitality Github repository](https://github.com/oracle/hospitality-api-docs/blob/main/graphql/graphiql.html)
-2. Open the GraphiQL HTML page ![alt text](images/business_events_streaming_2_2.png "Screenshot of the GraphiQL page")
-3. Obtain an oAuth token (see the "Basic Setup" workshop) using the clientId, clientSecret, and gateway URL of the environment given by the Oracle team
-4. Paste the value of the `access_token` to the `Auth Token` field
-5. Enter the Gateway URL in the `URL` field, but change the scheme from `https://` to `wss://`  (see the "Basic Setup" workshop for obtaining the Gateway URL)
-6. Enter the application key in the `Application Key` field  (see the "Basic Setup" workshop for obtaining the application key).  Use the application subscribed to consume events from the environment supplied by the Oracle team - see [Configure Streaming in the Developer Portal](#1-configure-streaming-in-the-developer-portal)
-7. Click Start
-8. In the request payload ensure the `chainCode` reflects the tenant code given to you by the Oracle team ![alt text](images/business_events_streaming_2_8.png "Screenshot of the GraphiQL page after authentication showing the subscribe message")
-9. _Optional_ Open developer tools in the browser and go to the "Network" tab, filtering this for `WS` (WebSocket traffic) and clicking the "Response" tab
-10. Click Play.  Observe the `subscribe` event being sent, followed by events flowing through
-11. Generate some events by calling the `post Profile` operation and view these events come through
-12. Click Stop to close the WebSocket connection.  Observe the `complete` message sent and the `Connection Closed: 1000` response
-
-### 3. Use Postman to stream events
+### 2. Use Postman to stream events
 
 1. Sign in to Postman.com
 2. Fork [this collection](https://www.postman.com/hospitalityapis/workspace/oracle-hospitality-apis/collection/64e77a3c0d2905380767b08e) to your own user
@@ -91,7 +76,22 @@ Streaming means opening a WebSocket connection, then Oracle Hospitality pushing 
 11. Keep sending the `ping` request to keep the connection open
 12. Send the `complete` request to close the connection
 
-### 4. Use the NodeJS reference implementation to stream events
+### 3. Use GraphiQL to stream events - Optional
+
+1. Download the [GraphiQL page from the Oracle Hospitality Github repository](https://github.com/oracle/hospitality-api-docs/blob/main/graphql/graphiql.html)
+2. Open the GraphiQL HTML page ![alt text](images/business_events_streaming_2_2.png "Screenshot of the GraphiQL page")
+3. Obtain an oAuth token (see the "Basic Setup" workshop) using the clientId, clientSecret, and gateway URL of the environment given by the Oracle team
+4. Paste the value of the `access_token` to the `Auth Token` field
+5. Enter the Gateway URL in the `URL` field, but change the scheme from `https://` to `wss://`  (see the "Basic Setup" workshop for obtaining the Gateway URL)
+6. Enter the application key in the `Application Key` field  (see the "Basic Setup" workshop for obtaining the application key).  Use the application subscribed to consume events from the environment supplied by the Oracle team - see [Configure Streaming in the Developer Portal](#1-configure-streaming-in-the-developer-portal)
+7. Click Start
+8. In the request payload ensure the `chainCode` reflects the tenant code given to you by the Oracle team ![alt text](images/business_events_streaming_2_8.png "Screenshot of the GraphiQL page after authentication showing the subscribe message")
+9. _Optional_ Open developer tools in the browser and go to the "Network" tab, filtering this for `WS` (WebSocket traffic) and clicking the "Response" tab
+10. Click Play.  Observe the `subscribe` event being sent, followed by events flowing through
+11. In the `1. Property REST APIs By Module` collection expand the `OPERA Cloud REST APIs By Module` folder, then the `Profiles (CRM)` folder, then the `Post Profile (create)` folder, open the `Post Profile` request and click Send a few times
+12. Click Stop to close the WebSocket connection.  Observe the `complete` message sent and the `Connection Closed: 1000` response
+
+### 4. Use the NodeJS reference implementation to stream events (Optional)
 
 #### 4.1 Prerequisites for using the NodeJS reference implementation
 
