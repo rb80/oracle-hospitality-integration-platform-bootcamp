@@ -15,7 +15,7 @@
 * [13-Create Routing Instruction to Travel Agent on Window 3](#13-create-routing-instruction-to-travel-agent-on-window-3) OPTIONAL
 * [14-Modify Reservation to update Payment Method on Window 3](#14-modify-reservation-to-update-payment-method-on-window-3) OPTIONAL
 * [15-Convert PAN into Token](#15-convert-pan-into-token) OPTIONAL
-* [16-Modify Reservation to Insert Credit Card Token as Payment Method on Window 1] OPTIONAL(#16-modify-reservation-to-insert-credit-card-token-as-payment-method-on-window-1) OPTIONAL
+* [16-Modify Reservation to Insert Credit Card Token as Payment Method on Window 1](#modify-reservation-to-insert-credit-card-token-as-payment-method-window-1) OPTIONAL
 * [17-Pre Authorize Credit Card](#17-pre-authorize-credit-card) OPTIONAL
 * [18-Fetch Available Hotel Rooms](#18-fetch-available-hotel-rooms)
 * [19-Assign Inspected Vacant Rooms to Reservation](#19-assign-inspected-vacant-rooms-to-reservation)
