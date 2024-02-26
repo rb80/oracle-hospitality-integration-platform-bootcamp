@@ -35,6 +35,7 @@
 * [33-Posting CheckOut](#33-posting-checkout)
 * [34-Email Invoice](#34-email-invoice-optional)
 
+
 ## 1 Get Token
 
 This is required to access Oracle Hospitality OPERA Cloud REST APIs.
