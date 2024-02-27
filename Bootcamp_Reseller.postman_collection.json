@@ -5066,7 +5066,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"folioInfo\": {\r\n        \"hotelId\": \"{{HotelId}}\",\r\n        \"reservationId\": {\r\n            \"id\": \"{{ReservationId}}\",\r\n            \"type\": \"Reservation\"\r\n        },\r\n        \"folioWindowNo\": \"1\",\r\n        \"folioType\": \"{{FolioType}}\",\r\n        \"folioDate\": \"{{Currentdate}}\"\r\n    },\r\n    \"emailRecipients\": [\r\n        {\r\n            \"emailAddress\": \"sobin.mathew@oracle.com\"\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"folioInfo\": {\r\n        \"hotelId\": \"{{HotelId}}\",\r\n        \"reservationId\": {\r\n            \"id\": \"{{ReservationId}}\",\r\n            \"type\": \"Reservation\"\r\n        },\r\n        \"folioWindowNo\": \"1\",\r\n        \"folioType\": \"{{FolioType}}\",\r\n        \"folioDate\": \"{{Currentdate}}\"\r\n    },\r\n    \"emailRecipients\": [\r\n        {\r\n            \"emailAddress\": \"test@example.com\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
