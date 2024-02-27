@@ -74,7 +74,7 @@ Kindly note that there are test scripts which take Company Profile Id and insert
 This API is to create an Account Receivable Number (AR Number) to the Company Profile created previously. This is required later if you want to check out the Opera Folio Window to City Ledger (Direct Billing).
 
 1. Account Receivable account types (AR Types) enable you to categorize AR accounts. The account type selected in each AR Account is used for filtering in both the application and also on reports, such as when generating an AR aging report subtotaled by account type. Account types also determine the stationery templates to use when generating statements and reminder letters for each AR account. Fetch AR types which is required to create Company AR account and set environment variable `ArAccountType`
-2. Create Company AR Account. Make sure the AR number (accountNo) is inserted and also the environment variable is populated `CompanyAccountNo`. Change `accountName` name value which was inserted with point 3
+2. Create Company AR Account. Create your own AR account number in the format `AAAA<nnn>` where `<nnn>` are three digits.  Create an environment variable `CompanyAccountNo` and set it to this value.  In the body of step 4a change the `accountNo` to be `{{CompanyAccountNo}}`. In the body of step 4a change the `accountName` name value to the value inserted in step 3
 3. Use getProfile API to check all of the above values are responded correctly
 
 ## 5-Create Travel Agent Profile OPTIONAL
@@ -89,7 +89,7 @@ Please note that you can only attach a maximum of one Travel Agent Profile. The 
 ## 6 Create AR Account for Travel Agent Profile OPTIONAL
 
 1. Account Receivable account types (AR Types) enable you to categorize AR accounts. The account type selected in each AR Account is used for filtering in both the application and also on reports, such as when generating an AR aging report subtotaled by account type. Account types also determine the stationery templates to use when generating statements and reminder letters for each AR account. Fetch AR types which is required to create Travel Agent AR account and set environment variable `ArAccountType`. If the value doesn't differ from Company, no changes required.
-2. Create Travel Agent AR Account. Make sure the AR number (accountNo) is inserted and also the environment variable `TravelAgentAccountNo` is populated. Change `accountName` name value which was inserted with point 5.
+2. Create Travel Agent AR Account. Create your own Travel Agent AR account number in the format `AAAA<nnn>` where `<nnn>` are three digits.  Create an environment variable `TravelAgentAccountNo` and set it to this value.  In the body of step 6a change the `accountNo` to be `{{TravelAgentAccountNo}}`. In the body of step 6a change `accountName` name value to that which was inserted with point 5.
 3. Use getProfile API to check all of the above values are responded correctly
 
 ## 7-Fetch Hotel Availability
@@ -159,7 +159,7 @@ Posting a routing instruction to an existing reservation where Room charges go t
 
 ## 14-Modify Reservation to update Payment Method on Window 3 OPTIONAL
 
-1. To find the Payment Method use `getPaymentMethod` API. For testing purpose use `INV`. No Environment variable is defined here. Use the value within the payload.
+1. To find the Payment Method use `getPaymentMethod` API. For testing purposes change the request body of step 14a to have `paymentMethod` =  `INV`. No Environment variable is defined here.
 2. Modify Payment Method on Reservation.  Once Routing is done, modification is required to the existing Reservation to inform that window 3 will be paid by Direct Billing as the Payment Method. Kindly note Routing instructions and Payment Method are 2 different APIs at present.
 3. Use fetch Reservation to check whether the modification  of the Payment Method was successful on Window 3
 
