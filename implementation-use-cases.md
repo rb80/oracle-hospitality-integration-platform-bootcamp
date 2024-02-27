@@ -174,12 +174,12 @@ Kindly note that this environment is linked to a PSP simulator and therefore eve
 
 ## 16-Modify Reservation to Insert Credit Card Token as Payment Method on Window 1 OPTIONAL
 
-Update an existing Payment Method using this API. Make sure you update the environment variables.
+Update an existing Payment Method using this API. Make sure you update the request body:
 
-1. cardNumber with `token` value which you received in `openPaymentTokenExchange`
-2. cardNumberMasked with `pan` which you received in `openPaymentTokenExchange`
-3. Expiration Date
-4. `citId` is an id which is usually sent by PSP into OPERA through OPI. This is not visible anywhere in OPERA Cloud UI. It is saved in the OPERA database only. For testing you can use any value as there is no validation.
+1. Set `cardNumber` to be the value in the `token` property you received from the response body to `openPaymentTokenExchange`
+2. Set `cardNumberMasked` to be the value in the `pan` property you received from the response body to `openPaymentTokenExchange`
+3. Set `expirationDate` to be some time in the future
+4. Set `citId`.  citId is an id which is usually sent by PSP into OPERA through OPI. This is not visible anywhere in OPERA Cloud UI. It is saved in the OPERA database only. For testing you can use any value as there is no validation.
 
 And any other value which you changed.
 
@@ -188,16 +188,18 @@ And any other value which you changed.
 This API is useful for many Kiosk Partners who want to save time to Pre Authorize the card prior to calling the Checkin API. Make sure the terminalId has the value for your testing as `PD1`
 
 1. getHotelInterface API will show whether OPI is installed and configured. Look for `activeFlag=true`
-2. Pre Authorize card. Make sure terminalId value is not changed. After execution, make sure the following values are inserted into Environment variables
+2. Pre Authorize card. Make sure the `terminalId` value is not changed. After execution, make sure the following values are inserted into Environment variables
 `cardId`
 `approvalCode`
 `vendorTranId`
-Kindly note that there is space after last digit. Do not include this in your environment.
+Kindly note that there is space after the last digit. Do not include this in your environment.
 3. Check whether PreAuthorization was successful with the fetchAuthorizationHistory API
 
 ## 18-Fetch Available Hotel Rooms
 
 Find vacant and inspected rooms so that you can assign one to the reservation.
+
+Bear in mind that others in the bootcamp will be checking into rooms, so keep trying until you find an empty room.
 
 Make sure you insert the `RoomNumber` into the environment variable.
 
