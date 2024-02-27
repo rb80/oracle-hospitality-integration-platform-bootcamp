@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "11062da9-f745-41c3-9f82-893f91ae958a",
+		"_postman_id": "ca8f10e8-89c1-47bc-bd38-f787c9f526a3",
 		"name": "Bootcamp",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "809897"
+		"_exporter_id": "15729853",
+		"_collection_link": "https://hospitalityapis.postman.co/workspace/Team-Workspace~f6e529a2-8cdb-43d1-8526-1aa5d61f48e4/collection/15729853-ca8f10e8-89c1-47bc-bd38-f787c9f526a3?action=share&source=collection_link&creator=15729853"
 	},
 	"item": [
 		{
@@ -1865,9 +1866,6 @@
 				},
 				{
 					"name": "10.Pre-Arrival getPreference",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1898,15 +1896,6 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{HostName}}/crm/config/v1/hotels/{{HotelId}}/preferences?preferenceGroupsCodes=ROOM FEATURES",
 							"host": [
@@ -1992,9 +1981,6 @@
 				},
 				{
 					"name": "10b.Pre-Arrival getReservation check Preference",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2025,15 +2011,6 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}?fetchInstructions=Preferences",
 							"host": [
@@ -2060,9 +2037,6 @@
 				},
 				{
 					"name": "11. Pre-Arrival getRoutingCodes",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2093,15 +2067,6 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{HostName}}/fof/config/v1/routingInstructions?hotelId={{HotelId}}",
 							"host": [
@@ -2187,9 +2152,6 @@
 				},
 				{
 					"name": "11b.Pre-Arrival getReservation Routing",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2220,15 +2182,6 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}?fetchInstructions=RoutingInstructions",
 							"host": [
@@ -2255,9 +2208,6 @@
 				},
 				{
 					"name": "12. Pre-Arrival getPaymentMethod",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2288,15 +2238,6 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{HostName}}/lov/v1/listOfValues/hotels/{{HotelId}}/paymentMethods?includeInactiveFlag=false",
 							"host": [
@@ -2382,9 +2323,6 @@
 				},
 				{
 					"name": "12b.Pre-Arrival getReservation Payment",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2415,15 +2353,6 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}?fetchInstructions=ReservationPaymentMethods",
 							"host": [
@@ -2450,9 +2379,6 @@
 				},
 				{
 					"name": "13. Pre-Arrival getRoutingCodes",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2483,15 +2409,6 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{HostName}}/fof/config/v1/routingInstructions?hotelId={{HotelId}}",
 							"host": [
@@ -2577,9 +2494,6 @@
 				},
 				{
 					"name": "13b.Pre-Arrival getReservation Routing",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2610,15 +2524,6 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}?fetchInstructions=RoutingInstructions",
 							"host": [
@@ -2645,9 +2550,6 @@
 				},
 				{
 					"name": "14. Pre-Arrival getPaymentMethod",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2678,15 +2580,6 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{HostName}}/lov/v1/listOfValues/hotels/{{HotelId}}/paymentMethods?includeInactiveFlag=false",
 							"host": [
@@ -2772,9 +2665,6 @@
 				},
 				{
 					"name": "14b.Pre-Arrival getReservation Payment",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2805,15 +2695,6 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}?fetchInstructions=ReservationPaymentMethods",
 							"host": [
@@ -2840,9 +2721,6 @@
 				},
 				{
 					"name": "15. Check OPI Cloud Active",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2873,15 +2751,6 @@
 								"value": "{{AppKey}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\n    \"expiryDate\": \"2612\",\n    \"pan\": \"4012888888881881\"\n\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{HostName}}/ent/config/v1/settings?hotelId={{HotelId}}&parameterNameWildCard=OPI Cloud Credit Card Processing",
 							"host": [
@@ -3998,9 +3867,6 @@
 				},
 				{
 					"name": "24. Stay - check Wakeup function active",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -4031,15 +3897,6 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"calls\": [\n        {\n            \"reservationInfo\": {\n                \"reservationIdList\": [\n                    {\n                        \"type\": \"Reservation\",\n                        \"id\": \"{{ReservationId}}\"\n                    }\n                ],\n                \"hotelId\": \"{{HotelId}}\",\n                \"room\": \"{{RoomId}}\"\n            },\n            \"callTime\": \"2024-01-10 12:00:00\",\n            \"isFollowUpCall\": false,\n            \"status\": \"Pending\",\n            \"timeSpan\": {\n                \"startDate\": \"2024-01-10\"\n            }\n        }\n    ]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{HostName}}/ent/config/v1/settings?hotelId={{HotelId}}&parameterNameWildCard=Wake Up Calls",
 							"host": [
@@ -4128,9 +3985,6 @@
 				},
 				{
 					"name": "24b. Stay - getWakeup",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -4161,15 +4015,6 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"calls\": [\n        {\n            \"reservationInfo\": {\n                \"reservationIdList\": [\n                    {\n                        \"type\": \"Reservation\",\n                        \"id\": \"{{ReservationId}}\"\n                    }\n                ],\n                \"hotelId\": \"{{HotelId}}\",\n                \"room\": \"{{RoomId}}\"\n            },\n            \"callTime\": \"2024-01-10 12:00:00\",\n            \"isFollowUpCall\": false,\n            \"status\": \"Pending\",\n            \"timeSpan\": {\n                \"startDate\": \"2024-01-10\"\n            }\n        }\n    ]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{HostName}}/fof/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/wakeUpCalls?fetchCancelled=true&fetchCompleted=true&fetchPending=true&fetchNoAnswer=true&reservationIdContext=OPERA&reservationIdType=Reservation",
 							"host": [
