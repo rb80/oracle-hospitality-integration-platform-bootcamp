@@ -29,11 +29,12 @@
 * [27-Create Advance Room Charges](#27-create-advance-room-charges)
 * [28-Fetch Folio postings from each window](#28-fetch-folio-postings-from-each-window)
 * [29-Post Payment on each Window 1 Optional](#29-post-payment-on-each-window-1-optional)
-* [30-Post Payment on each Window 2-3 Optional](#30-post-payment-on-each-window-2-3-optional)
-* [31-Modify Reservation status to Early Departure](#31-modify-reservation-status-to-early-departure)
-* [32-Close Folio Windows 1-3](#32-close-folio-windows-1-3)
-* [33-Posting CheckOut](#33-posting-checkout)
-* [34-Email Invoice Optional](#34-email-invoice-optional)
+* [30-Post Payment on each Window 2 Optional](#30-post-payment-on-each-window-2-optional)
+[31-Post Payment on each Window 2 Optional](#31-post-payment-on-each-window-3-optional)
+* [32-Modify Reservation status to Early Departure](#32-modify-reservation-status-to-early-departure)
+* [33-Close Folio Windows 1-3](#33-close-folio-windows-1-3)
+* [34-Posting CheckOut](#34-posting-checkout)
+* [35-Email Invoice Optional](#35-email-invoice-optional)
 
 ## 1 Get Token
 
@@ -47,10 +48,8 @@ To obtain a token include the following headers:
 And the following body parameters:
 
 * Body parameters for obtaining your initial access token
-* `grant_type`. Required to be `password` or `client_credentials`
-* username. If `grant_type` is `password`, set this to your OPERA Cloud integration username. (commonly known as interface id)
-* password. If `grant_type` is password, set this to your OPERA Cloud integration user's password. (commonly known as interface key)
-* scope. If `grant_type` is client_credentials, set this to your assigned scope.
+* `grant_type`. Required to be  `client_credentials`
+* scope. `grant_type` is client_credentials, set this to your assigned scope. Check within Sandbox environment for OHIPLAB in your Partner Developer Portal
 
 ## 2 Create Guest Profile
 
