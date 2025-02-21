@@ -22,12 +22,12 @@
 |-----------|------------------------------------------|
 |08:30-09:00|Coffee                                    |
 |09:00-10:00|Async APIs                                |
-|10:00-12:30|Business Events                           |
+|10:00-11:00|Business Events                           |
 |11:00-11:10|Coffee                                    |
-|11:10-12:30|Business Events                           |
+|11:10-12:30|R&A Data API                                |
 |12:30-13:30|Lunch                                     |
-|13:30-14:00|Anti-Patterns & Troubleshooting           |
-|14:00-15:30|Distribution                              |
+|13:30-15:00|Distribution                               |
+|15:00-15:30|Best Practices                             |
 |15:30-15:40|Coffee                                    |
 |15:40-16:10|Getting to Production                     |
 |16:10-17:40|OHIP Roadmap                              |
