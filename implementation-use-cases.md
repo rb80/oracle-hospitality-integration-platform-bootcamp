@@ -65,14 +65,14 @@ Create Company Profile where by adding an AR address in the payload. This is req
 
 Kindly note that there are test scripts which take Company Profile Id and inserts it into Postman environment variable `CompanyId`
 
-1. Change `companyName`and `address` as required. Not mandatory to change. Do not change the address type 'AR ADDRESS'
+1. Change `companyName`and `address` as required. Not mandatory to change but Postman has default variables. Do not change the address type 'AR ADDRESS'
 2. Once Company Profile is created, ensure `getProfile` API is executed so that `AR address id` is inserted into environment variables `CompanyArAddressId`
 
 ## 4 Create AR Account for Company Profile OPTIONAL
 
 This API is to create an Account Receivable Number (AR Number) to the Company Profile created previously. This is required later if you want to check out the Opera Folio Window to City Ledger (Direct Billing).
 
-1. Account Receivable account types (AR Types) enable you to categorize AR accounts. The account type selected in each AR Account is used for filtering in both the application and also on reports, such as when generating an AR aging report subtotaled by account type. Account types also determine the stationery templates to use when generating statements and reminder letters for each AR account. Fetch AR types which is required to create Company AR account and set environment variable `ArAccountType`
+1. Account Receivable account types (AR Types) enable you to categorize AR accounts. The account type selected in each AR Account is used for filtering in both the application and also on reports, such as when generating an AR aging report subtotaled by account type. Account types also determine the stationery templates to use when generating statements and reminder letters for each AR account. Fetch AR types which is required to create Company AR account and set environment variable `CompanyArAccountType`
 2. Create Company AR Account. Create your own AR account number in the format `AAAA<nnn>` where `<nnn>` are three digits.  Create an environment variable `CompanyAccountNo` and set it to this value.  In the body of step 4a change the `accountNo` to be `{{CompanyAccountNo}}`. In the body of step 4a change the `accountName` name value to the value inserted in step 3
 3. Use getProfile API to check all of the above values are responded correctly
 
@@ -83,11 +83,11 @@ Create Travel Agent Profile with AR Address. This is to show that a Reservation 
 Please note that you can only attach a maximum of one Travel Agent Profile. The `TravelAgentProfileId` is auto populated in Environment variables with Test Scripts inserted into the collection.
 
 1. Change `companyName`and `address` as required. Not mandatory to change. Do not change the address type 'AR ADDRESS'. The payload contains multiple address. This is just to show that multiple addresses can be inserted with one API call.  
-2. Once Travel Agent Profile is created, ensure `getProfile` API is executed so that `TaArAddressId` is inserted into environment variables. Note that there are 2 addresses in the response. Make sure you insert correct Address into Environment variable.
+2. Once Travel Agent Profile is created, ensure `getProfile` API is executed so that `TA ArAddress Id` is inserted into environment variables `TravelAgentArAddressId`. Note that there are 2 addresses in the response. Make sure you insert correct Address into Environment variable.
 
 ## 6 Create AR Account for Travel Agent Profile OPTIONAL
 
-1. Account Receivable account types (AR Types) enable you to categorize AR accounts. The account type selected in each AR Account is used for filtering in both the application and also on reports, such as when generating an AR aging report subtotaled by account type. Account types also determine the stationery templates to use when generating statements and reminder letters for each AR account. Fetch AR types which is required to create Travel Agent AR account and set environment variable `ArAccountType`. If the value doesn't differ from Company, no changes required.
+1. Account Receivable account types (AR Types) enable you to categorize AR accounts. The account type selected in each AR Account is used for filtering in both the application and also on reports, such as when generating an AR aging report subtotaled by account type. Account types also determine the stationery templates to use when generating statements and reminder letters for each AR account. Fetch AR types which is required to create Travel Agent AR account and set environment variable `TravelAgentArAccountType`.
 2. Create Travel Agent AR Account. Create your own Travel Agent AR account number in the format `AAAA<nnn>` where `<nnn>` are three digits.  Create an environment variable `TravelAgentAccountNo` and set it to this value.  In the body of step 6a change the `accountNo` to be `{{TravelAgentAccountNo}}`. In the body of step 6a change `accountName` name value to that which was inserted with point 5.
 3. Use getProfile API to check all of the above values are responded correctly
 
