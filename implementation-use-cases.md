@@ -30,7 +30,7 @@
 * [28-Fetch Folio postings from each window](#28-fetch-folio-postings-from-each-window)
 * [29-Post Payment on each Window 1 Optional](#29-post-payment-on-each-window-1-optional)
 * [30-Post Payment on each Window 2 Optional](#30-post-payment-on-each-window-2-optional)
-[31-Post Payment on each Window 2 Optional](#31-post-payment-on-each-window-3-optional)
+* [31-Post Payment on each Window 3 Optional](#31-post-payment-on-each-window-3-optional)
 * [32-Modify Reservation status to Early Departure](#32-modify-reservation-status-to-early-departure)
 * [33-Close Folio Windows 1-3](#33-close-folio-windows-1-3)
 * [34-Posting CheckOut](#34-posting-checkout)
