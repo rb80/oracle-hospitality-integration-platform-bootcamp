@@ -292,26 +292,31 @@ Use this API to fetch Folios from each window. Remember there are 3 Windows whic
 
 1. Use this API to post payment against the folio on each Window. There should be no balance left. Window 1 should be paid against Credit Card.
 
-## 30-Post Payment on each Window 2-3 OPTIONAL
+## 30-Post Payment on each Window 2 OPTIONAL
 
 Use this API to post payment against the folio on each Window. There should be no balance left
 
 1. Window 2 should be paid against payment Method `INV` which is invoiced to Company
-2. Window 3 should be paid against payment Method `INV` which is invoiced to Travel Agent
 
-## 31-Modify Reservation status to Early Departure
+## 31-Post Payment on each Window 3 OPTIONAL
+
+Use this API to post payment against the folio on each Window. There should be no balance left
+
+1. Window 3 should be paid against payment Method `INV` which is invoiced to Travel Agent
+
+## 32-Modify Reservation status to Early Departure
 
 As we are testing and no End of Day Routine will be run, use this API to change the Reservation to be able checkout Early.
 
-## 32-Close Folio Windows 1-3
+## 33-Close Folio Windows 1-3
 
 Use this folio to settle the folio prior to checkout. *This API needs to be executed on all 3 windows separately as charges were on all these 3 windows*. Make sure that you change the `folioWindow` value for each of the API calls.
 
-## 33-Posting CheckOut
+## 34-Posting CheckOut
 
 Use this API to post a checkout.
 
-## 34-Email Invoice OPTIONAL
+## 35-Email Invoice OPTIONAL
 
 Send a copy of the invoice to email. Change the value within `emailAddress`
 
