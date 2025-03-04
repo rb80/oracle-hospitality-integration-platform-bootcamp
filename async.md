@@ -24,7 +24,7 @@ a. **POST**  request is the first step from an external system to OPERA Cloud, w
 
 Once you have sent this post request to OPERA Cloud, you should receive a 202 Accepted response.  And in the header parameter Location a summary ID is returned.  This summary ID is important and required in the next step.
 
-* Kindly note that you can do maximum of 120 requests per minute per application
+* Kindly note that you can do maximum of 150 requests per minute per application
 
 * 30 minutes interval if same dates are present in the payload
 
