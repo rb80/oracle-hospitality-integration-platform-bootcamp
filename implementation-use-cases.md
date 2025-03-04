@@ -262,9 +262,9 @@ Create a Wakeup call on the reservation. Ensure you change the dates within the 
 
 This API is required for `postBillingCharges` in which the cashier id is mandatory.
 
-1. Fetch the next available cashier number id and insert into Create Cashier Id API.
+1. Fetch the next available cashier number id and insert into `CashierId` environment variable
 2. Create Cashier  
-3. Use this API to check whether postCashier API has successfully inserted cashier id. If inserted, please insert the environment variable `CashierId`
+3. Use this API to check whether postCashier API has successfully inserted cashier id.
 
 In production, ensure you ask the customer which cashierId to use and consistently use that cashierId for that environment.
 
