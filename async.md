@@ -2,119 +2,113 @@
 
 For long-running operations such as adding, updating, or retrieving large amounts of data, there is a series of Oracle Hospitality Property APIs called asynchronous ("Async") APIs.
 
-1. [How to call Async APIs](#1-how-to-call-async-apis)
-2. [How frequently should I send HEAD?](#2-how-frequently-should-i-send-head)
-3. [When will the response be available?](#3-when-will-the-response-be-available)
-4. [Async APIs call limits](#4-async-apis-call-limits)
-5. [Async APIs](#5-async-apis)
-6. [Async APIs Size Limits](#6-async-apis-size-limits)
-7. [Creating an External System in OPERA Cloud](#7-creating-an-external-system-in-opera-cloud)
-8. [Business Use Cases](#8-business-use-case)
-9. [Upcoming Async APIs](#9-upcoming-async-apis)
-10. [Async Lab](#10-async-lab)
+1. [What are Async APIs](#1-what-are-async-apis)
+2. [Workflow](#2-workflow)
+3. [Best Practices](#3-best-practices)
+4. [Types and Usage Recommendations](#4-types-and-usage-recommendations)
+5. [Creating an External System in OPERA Cloud](#5-creating-an-external-system-in-opera-cloud)
+6. [Business Use Case](#6-business-use-case)
+7. [References](#7-references)
+8. [Upcoming Async APIs](#8-upcoming-async-apis)
+9. [Async Lab](#9-async-lab)
 
-## 1. How to call Async APIs
+## 1. What are Async APIs
 
-For Async APIs the data flow is a three step process. All 3 steps must be performed, that is, you cannot skip any step.
+The adoption of Revenue Management has become more prevalent among properties aiming to optimize the value of each room. The asynchronous Property APIs offer a means to collect and update bulk data efficiently. There are two distinct approaches to retrieve data from OPERA Cloud through asynchronous Property APIs and business event-driven Property APIs. The asynchronous Property APIs are specifically designed for revenue management systems, allowing smooth updates of bulk data like inventory, restrictions, and room rates in OPERA Cloud. These APIs are fully compatible with OPERA Cloud versions 23.1.x and above.
 
-a. **POST**  request is the first step from an external system to OPERA Cloud, which can either be to:
+## 2. Workflow
 
-* post bulk data to OPERA Cloud.  This starts a process to accept the data into OPERA Cloud. The request size maximum is 2048 KB.  Keep in mind, if posting bulk data to OPERA Cloud and it does not meet the API specifications, a validation error will be returned.
-* to fetch bulk data from OPERA Cloud.  If fetching data, there may be a date limit range.
+The Asynchronous APIs involve a three-step data flow process, and it is imperative to execute all three steps without skipping any. Please refer to the `Best Practices` section for additional guidelines. 
+a. POST request is the first step from an external system to OPERA Cloud, which can either be to
 
-Once you have sent this post request to OPERA Cloud, you should receive a 202 Accepted response.  And in the header parameter Location a summary ID is returned.  This summary ID is important and required in the next step.
+- POST Data to OPERA Cloud - This starts a process to accept the data into OPERA Cloud. 
+- Fetch Data from OPERA Cloud - This starts a process to retrieve data from OPERA Cloud.
 
-* Kindly note that you can do maximum of 150 requests per minute per application
+Once you have sent this post request to OPERA Cloud, you should receive an HTTP 202 Accepted response if the request is valid.  The response header parameter "location" provides a URL which contains a request ID. This ID is required in step 2.
+Note: Please refer to the usage recommendations to learn more about the associated API limits. If the bulk data to be posted to or retrieved from OPERA Cloud doesn't align with the API specifications, a validation error will be generated. 
 
-* 30 minutes interval if same dates are present in the payload
+b. HEAD request is the second step from an external system to OPERA Cloud to check the status of the process started with POST request in the first step. Use the header parameter "location" from the POST response in this HEAD request.  Once the process is completed, the HEAD response returns a header parameter "status" with value "COMPLETED". Similar to Step 1, the header parameter "location" will return a URL that contains a request ID required in step 3.
 
-![alt text](images/async.png "screenshot of Postman sample of the dailySummary Async API, highlighting the Location response header")
+c. GET request is the third step from an external system to OPERA Cloud to either collect the bulk data, or confirm the post of data was successful. Use the ID returned in the "location" header URL returned by the HEAD response in step 2. The GET response provides the requested data or log specifics, particularly if you've added data, and indicates any potential failures.
 
-b. **HEAD** request is the second step from an external system to OPERA Cloud to check the status of the process started with POST request in the first step. Use the header parameter Location from the POST response in this HEAD request.  Once the process is completed, the HEAD request returns status of Completed and again, a header parameter Location will contain a summary ID required in step 3.
+## 3. Best Practices
+- Asynchronous APIs allow a maximum of 150 requests per minute for each application, encompassing POST, HEAD, and GET requests. Please take this into account when deciding the polling frequency for HEAD requests.
+- After sending a POST request, please allow a waiting period of at least 1-2 minutes before initiating the HEAD request.
+- When sending a HEAD request, wait for the HTTP status 201 Created response before proceeding with the GET request. 
+- If the HEAD request gives an HTTP Status 200 OK response, please allow another 1-2 minutes before resending the HEAD request. In other words, if the HEAD response hasn't returned a 201 Created response with a header location, it is likely that the job has not finished yet. Please allow another 1-2 minutes before sending the GET request. After receiving an HTTP status 201 Created, you can proceed with the GET request.
+- Remember that multiple retries of the HEAD call might be necessary, depending on the volume of data being returned. 
 
-Consider multiple `HEAD` retries for large data before finally sending the GET request.
+## 4. Types and Usage Recommendations
 
-c. **GET** request is the third step from an external system to OPERA Cloud to either collect the bulk data, or confirm the post of data was successful. Use the Location Header returned by the HEAD response in step two. This GET response returns the requested data or log details in the case you have added data, and if advises if there is any failure.
+The currently supported Async API operations have been listed below. You can access examples of these operations in the References section. 
 
-## 2. How frequently should I send HEAD?
+The Asynchronous APIs can be classified into two types according to how they interact with OPERA Cloud:
+a. Operations that fetch Data from OPERA Cloud. This is applicable to the following operations along with the limits specified below:
+- Module: Inventory (INVASYNC)
+•	Enables you to retrieve Revenue Inventory Statistics
+•	You can use this API to fetch revenue inventory statistics for past, present, and future reservations from OPERA Cloud. You will be able to filter using stay date (with a start and end date) to fetch inventory data.
+- Module: Blocks (BLKASYNC)
+•	Enables you to retrieve Block Allocation Summary
+•	You can use this API will fetch Block allocation information for a hotel, and specified date range. The block allocated inventory, rates and room type statistics, including revenue, are returned as part of the response.
+- Module: Reservations (RSVASYNC)
+•	Enables you to retrieve Reservation Daily Summary
+•	This API allows external systems to retrieve a summary of reservations for a specified hotel and date range
+- Module: Rate Plan (RTPASYNC) (startSetDailyRatePlanSchedulesProcess) (startSetBestAvailableRatePlansProcess) (startHurdleRatesProcess)
+•	Enables you to create Daily Rate Plan Schedules
+•	You can use this API to add and/or update the rate price schedule to existing OPERA Daily Rate plans.
+•	Enables you to create Best Available Rate Plans by Length of Stay or by Day.
+•	You can use this API to post new or update existing Best Available Rate by Length Of Stay or by DAY to OPERA Cloud.
+•	Enables you to create Hurdle Rates
+•	You can use this API to create hurdle rates in OPERA Cloud by date.
+- Module: Availability (PARASYNC)
+•	Enables you to create Restrictions
+•	A user can send various restrictions to OPERA Cloud by specifying restriction details in the request. You can set restrictions for a whole year and have multiple restrictions on a given day.  However, there can be a hierarchy of restrictions.
+- Module: Inventory (INVASYNC)
+•	Enables you to create Sell Limits
+•	You can use this API to create sell limits in OPERA Cloud by date.
+- Module: Blocks (BLKASYNC)
+Provides the ability to shift block dates for a business block with rooms inventory or events or both.
+- Module: Reservation (RSVASYNC)
+Enables you to create multiple block reservations in OPERA Cloud for a specific block as well as match the associated names with existing profiles.
+- Module: Profiles (CRMASYNC)
+Allows you to import Stay Records for a profile
 
-Recommendation is to wait 1-2 minutes before sending HEAD request after Post
-
-Since OPERA Cloud 24.1 HEAD requests return a header `retry-after` containing the number of seconds we recommend waiting before calling HEAD again.
-
-## 3. When will the response be available?
-
-There is no set length of time; different requests require different amounts of processing, and operational use of OPERA Cloud will affect the speed of responding to the request.
-
-## 4. Async APIs call limits
-
-A maximum of 120 requests per minute per application can be made to the Async API. Bear this in mind when determining how frequently to poll HEAD.
-___
-
-In the operation `startReservationsDailySummaryProcess` in the OPERA Cloud Reservation Asynchronous API a request that uses the parameter `lastModifiedDate` (available from OPERA Cloud 23.1) can be called only once every 3 hours.
-A given request body can be called only once every 30 minutes when starting an Asynchronous API request.
-
-![alt text](images/async_with_modified_date.png "screenshot of Postman sample of the dailySummary Async API, this time specifying a lastModifiedDate in the request body")
-___
-
-If partner requests data with `startDate` and `endDate` and a duplicate request (having same criteria) is sent within 30 minutes the following response is received:
-```Identical request was received 0 minutes ago. Please allow at least 30 minutes between asynchronous requests.```
-___
-
-If partner requests data with `startLastModifiedDate` & `endLastModifiedDate`; irrespective of whether the subsequent request is duplicate or new, the partner will not be able to request the data again for the next 3 hours. This is intended behavior. The thought process is no one should use `LastModifiedDate` criteria more frequently than 3 hrs because it is very heavy on database.
-___
-
-Since OPERA Cloud 24.1 HEAD requests return a header `retry-after` containing the number of seconds we recommend waiting before calling HEAD again.
-___
-
-Messages are available for 6 hours in the queue.
-___
-
-## 5. Async APIs
-
-* ReservationDailySummary
-* BlockAllocationSummary
-* RevenueInventoryStatistics
-* SellLimits
-* RestrictionProcess
-* BestAvailableRatePlans
-* DailyRatePlanSchedules
-* HurdleRates
-* RatePlanHeaders
-
-Fetch Data from OPERA Cloud:
-
-* getReservationDailySummary
-* getBlockAllocationSummary
-* getRevenueInventoryStatistics
-
-Others are for Posting Data to OPERA Cloud
-
-## 6. Async APIs Size Limits
-
-Each API has 2 MB size limit.
-
-For example if you want to update Daily Rates using `DailyRatePlanSchedules` the maximum content in the body should be size of 2MB.
-
-## 7. Creating an External System in OPERA Cloud
+## 5. Creating an External System in OPERA Cloud
 
 Please follow [this guide](https://docs.oracle.com/en/industries/hospitality/integration-platform/ohipu/t_polling_api.htm#PollingAPIpull-170089A2) to see how an External System is created in OPERA Cloud which is required for Async APIs.
 
 If your application is subscribed to the Streaming API you can also fetch Async APIs using the external system code displayed on the Application > Events > Subscribed tab in the Developer Portal.
 
-## 8. Business Use Case
+## 6. Business Use Case
 
 To find more information on Async APIs, please navigate to your developer portal and under the tab `Business Use Cases` you will find more information.
 
 ![alt text](images/business_use_case.png "screenshot of the OHIP Developer Portal Business Use Cases feature, highlighting the RMS - Revenue Management Systems business use case")
 
-## 9. Upcoming Async APIs
+## 7. References
 
-* Mass Update Reservations - Target OPERA Cloud 24.1
-* Stay records - Target OPERA Cloud 24.2
-* Tax breakdown n Reservation Daily Summary Response - Target OPERA Cloud 24.5
+1. Async User Guide [this guide] (https://docs.oracle.com/search/?q=Oracle+Hospitality+Asynchronous+APIs&lang=en&book=OHIPU&library=en%2Findustries%2Fhospitality%2Fintegration-platform)
+2. RMS Implementation Guide [this guide] (https://docs.oracle.com/search/?q=Revenue%20Management%20Systems%20(RMS)%20Implementation%20Guide&pg=1&size=10&showfirstpage=true&lang=en)
 
-## 10. Async Lab
+## 8. Upcoming Async APIs
+
+* Inventory Asynchronous (INVASYNC) – Added a new operation getInventoryStatisticsAsync 
+A new getInventoryStatisticsAsync operation will be introduced in the Inventory Asynchronous (INV Async) API with OPERA Cloud version 24.5 and higher. This allows you to retrieve hotel inventory statistics for a specified date range (up to 365 days) provided in the request.
+
+* Blocks Asynchronous (BLKASYNC) – updated operation getBlockAllocationSummary 
+The getBlockAllocationSummary operation for the Block Async API (BLK Async API) is updated to include the currency element at the block level. When you send the request for the allocationSummary, and the currency information is available, it is returned in the response at the block level. 
+
+* Blocks Asynchronous (BLKASYNC) - Added a new operation recalculateRoomForecast 
+A new asynchronous operation, recalculateRoomForecast will be introduced in the Block Async (BLKASYNC) API with the OPERA Cloud version 25.1 and higher. This will enable you to recalculate the room forecast on the room and rate grid every time there is a change that impacts the forecasted revenue. The changes that impact the forecasted revenue include adding or changing a rate code to the block header, shifting the block to a new date where the rate code has a different schedule, adding or changing a rate code transaction to the existing rate, and adding or changing packages on the block header.  
+
+* Cashiering Asynchronous (CSHASYNC)  – Added a new operation getFinancialPostingsNetVat 
+A new asynchronous operation getFinancialPostingsNetVat will be introduced in the Cashiering  Async (CSHASYNC) API with the OPERA Cloud version 25.1 and higher. This will enable you to retrieve financial postings along with their net VAT breakdown. 
+
+* Blocks Asynchronous (BLKASYNC) – Updated the operation getBlockAllocationSummary
+A new criteria includeNetRates will be introduced in the getBlockAllocationSummary operation for the Block Asynchronous (BLK Async) API in the OPERA Cloud version 25.2 and higher. This enables to display the net rates information in the response after the rates section. 
+
+
+## 9. Async Lab
 
 1. Ensure the environment selected is "Bootcamp Reseller".
 2. Set the `ExtSystemCode` parameter to the external system code provided to you by the Oracle team.
