@@ -25,13 +25,11 @@ Polling means sending repeated requests to ask "are there any events for my exte
 2. Assign the following tasks to the user.  See [Assigning Tasks to a Role](https://docs.oracle.com/search/?q=Assigning+Tasks+to+a+Role&category=industries&product=en%2Findustries%2Fhospitality):
 
 * Under Interfaces Admin - Property Interfaces - External Systems: _New/Edit External Systems_
-* Under Toolbox: _External Databases_
 * Under Interfaces Admin - Property Interfaces - Business Events: _New/Edit Business Events_
 
 #### 1.2 Creating an external system
 
-1. Create an external system in OPERA Cloud following [these steps](https://docs.oracle.com/search/?q=Configuring%20External%20Systems&pg=1&size=10&product=en%2Findustries%2Fhospitality&category=en%2Findustries&showfirstpage=true&lang=en). For environments on 23.4.x+ tick the `Auto Configure External Databases` checkbox. Note down the external system code.
-2. _For environments below OPERA Cloud 23.4.x:_ Create an external database in OPERA Cloud for the external system you created following [these steps](https://docs.oracle.com/search/?q=Configuring%20External%20Databases&pg=1&size=10&product=en%2Findustries%2Fhospitality&category=en%2Findustries&showfirstpage=true&lang=en)
+1. Create an external system in OPERA Cloud following [these steps](https://docs.oracle.com/search/?q=Configuring%20External%20Systems&pg=1&size=10&product=en%2Findustries%2Fhospitality&category=en%2Findustries&showfirstpage=true&lang=en). Tick the `Auto Configure External Databases` checkbox. Note down the external system code.
 
 ### 2. Configuring the External System for Events
 
