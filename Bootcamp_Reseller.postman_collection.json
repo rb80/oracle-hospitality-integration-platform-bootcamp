@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "ca8f10e8-89c1-47bc-bd38-f787c9f526a3",
-		"name": "Bootcamp",
+		"_postman_id": "11062da9-f745-41c3-9f82-893f91ae958a",
+		"name": "Bootcamp Reseller",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "15729853",
-		"_collection_link": "https://hospitalityapis.postman.co/workspace/Team-Workspace~f6e529a2-8cdb-43d1-8526-1aa5d61f48e4/collection/15729853-ca8f10e8-89c1-47bc-bd38-f787c9f526a3?action=share&source=collection_link&creator=15729853"
+		"_exporter_id": "809897"
 	},
 	"item": [
 		{
@@ -28,6 +27,14 @@
 									"pm.environment.set('Currentdateplus4', moment().add(4, 'days').format((\"YYYY-MM-DD\")))\r",
 									"pm.environment.set('Currentdateplus5', moment().add(5, 'days').format((\"YYYY-MM-DD\")))"
 								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
 								"type": "text/javascript"
 							}
 						}
@@ -62,32 +69,31 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/x-www-form-urlencoded"
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
+							},
+							{
+								"key": "Enterpriseid",
+								"value": "{{EnterpriseId}}",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "username",
-									"value": "{{Username}}",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "{{Password}}",
-									"type": "text"
-								},
-								{
 									"key": "grant_type",
-									"value": "password",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "urn:opc:hgbu:ws:__myscopes__",
 									"type": "text"
 								}
 							]
@@ -135,19 +141,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-externalSystem",
@@ -189,7 +195,18 @@
 									"var data = pm.response.headers.get(\"Location\").split(\"/\").pop();\r",
 									"postman.setEnvironmentVariable(\"CompanyId\", data);"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -208,19 +225,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-externalSystem",
@@ -231,7 +248,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"companyDetails\": {\n    \"company\": {\n      \"companyName\": \"Bootcamp Company 26\"\n    },\n    \"addresses\": {\n      \"addressInfo\": [\n        {\n          \"address\": {\n            \"addressLine\": [\n              \"Europadamm 40\"\n            ],\n            \"cityName\": \"Neuss\",\n            \"postalCode\": \"41460\",\n            \"country\": {\n              \"code\": \"DE\"\n            },\n            \"language\": \"E\",\n            \"type\": \"AR ADDRESS\",\n            \"primaryInd\": false\n          }\n        }\n      ]\n    },\n    \"profileType\": \"Company\",\n    \"statusCode\": \"Active\",\n    \"registeredProperty\": \"{{HotelId}}\",\n    \"markForHistory\": false\n  }\n}",
+							"raw": "{\n  \"companyDetails\": {\n    \"company\": {\n      \"companyName\": \"Bootcamp Company 25022025\"\n    },\n    \"addresses\": {\n      \"addressInfo\": [\n        {\n          \"address\": {\n            \"addressLine\": [\n              \"Europadamm 40\"\n            ],\n            \"cityName\": \"Neuss\",\n            \"postalCode\": \"41460\",\n            \"country\": {\n              \"code\": \"DE\"\n            },\n            \"language\": \"E\",\n            \"type\": \"AR ADDRESS\",\n            \"primaryInd\": false\n          }\n        }\n      ]\n    },\n    \"profileType\": \"Company\",\n    \"statusCode\": \"Active\",\n    \"registeredProperty\": \"{{HotelId}}\",\n    \"markForHistory\": false\n  }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -283,19 +300,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-externalSystem",
@@ -404,19 +421,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-externalSystem",
@@ -464,9 +481,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"var data = pm.response.headers.get(\"Location\").split(\"/\").pop();",
+									"postman.setEnvironmentVariable(\"CompanyAccountNo\", data);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -485,19 +514,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-externalSystem",
@@ -508,7 +537,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"criteria\": {\n        \"hotelId\": \"{{HotelId}}\",\n        \"accountName\": \"Bootcamp Company 26\",\n        \"accountNo\": \"BOOT026\",\n        \"profileId\": {\n            \"id\": \"{{CompanyId}}\",\n            \"idContext\": \"OPERA\",\n            \"type\": \"Profile\"\n        },\n        \"creditLimit\": {\n            \"amount\": \"100000\"\n        },\n        \"monthEndCalcYN\": false,\n        \"address\": {\n            \"type\": \"Address\",\n            \"id\": \"{{CompanyArAddressId}}\"\n        },\n        \"status\": {\n            \"restricted\": false\n        },\n        \"batchStatement\": true,\n        \"emailStatementsReminders\": false,\n        \"primary\": true,\n        \"type\": \"{{ArAccountType}}\",\n        \"permanent\": true\n    }\n}",
+							"raw": "{\n    \"criteria\": {\n        \"hotelId\": \"{{HotelId}}\",\n        \"accountName\": \"{{CompanyName}}\",\n        \"accountNo\": \"BOOT252\",\n        \"profileId\": {\n            \"id\": \"{{CompanyId}}\",\n            \"idContext\": \"OPERA\",\n            \"type\": \"Profile\"\n        },\n        \"creditLimit\": {\n            \"amount\": \"100000\"\n        },\n        \"monthEndCalcYN\": false,\n        \"address\": {\n            \"type\": \"Address\",\n            \"id\": \"{{CompanyArAddressId}}\"\n        },\n        \"status\": {\n            \"restricted\": false\n        },\n        \"batchStatement\": true,\n        \"emailStatementsReminders\": false,\n        \"primary\": true,\n        \"type\": \"{{CompanyArAccountType}}\",\n        \"permanent\": true\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -548,17 +577,17 @@
 						"header": [
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{HostName}}/ars/v1/accounts?hotelIds={{HotelId}}&limit=20&profileIdContext=OPERA&accountNo={{CompanyAccountNo}}&profileType=Company",
+							"raw": "{{HostName}}/ars/v1/accounts?hotelIds={{HotelId}}&limit=20&profileIdContext=OPERA&accountNo=BOOT252&profileType=Company",
 							"host": [
 								"{{HostName}}"
 							],
@@ -582,7 +611,7 @@
 								},
 								{
 									"key": "accountNo",
-									"value": "{{CompanyAccountNo}}"
+									"value": "BOOT252"
 								},
 								{
 									"key": "profileType",
@@ -603,7 +632,18 @@
 									"var data = pm.response.headers.get(\"Location\").split(\"/\").pop();\r",
 									"postman.setEnvironmentVariable(\"TravelAgentProfileId\", data);"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -622,19 +662,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-externalSystem",
@@ -645,7 +685,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"profileDetails\": {\n    \"company\": {\n      \"companyName\": \"American Express Bootcamp 26\",\n      \"companyName2\": \"Asian travel Section\",\n      \"companyName3\": \"Far East\"\n    },\n    \"addresses\": {\n      \"addressInfo\": [\n        {\n          \"address\": {\n            \"addressLine\": [\n              \"Street 1\",\n              \"Street 2\",\n              \"Street 3\",\n              \"Street 4\"\n            ],\n            \"postalCode\": \"50887\",\n            \"country\": {\n              \"value\": \"DE\"\n            },\n            \"language\": \"E\",\n            \"type\": \"BUSINESS\",\n            \"primaryInd\":\"true\",\n            \"updateReservations\": false\n          }\n        },\n                {\n          \"address\": {\n            \"addressLine\": [\n              \"Europadamm 40\"\n            ],\n            \"cityName\": \"Neuss\",\n            \"postalCode\": \"41460\",\n            \"country\": {\n              \"code\": \"DE\"\n            },\n            \"language\": \"E\",\n            \"type\": \"AR ADDRESS\",\n            \"primaryInd\": false\n          }\n        }\n      ]\n    },\n    \"ownerCode\": \"ALL\",\n    \"telephones\": {\n      \"telephoneInfo\": [\n        {\n          \"telephone\": {\n            \"phoneTechType\": \"PHONE\",\n            \"phoneUseType\": \"BUSINESS\",\n            \"phoneNumber\": \"009654444455666\",\n            \"orderSequence\": \"1\",\n            \"primaryInd\": true\n          }\n        }\n      ]\n    },\n    \"emails\": {\n      \"emailInfo\": [\n        {\n          \"email\": {\n            \"emailAddress\": \"fake@api.com\",\n            \"type\": \"EMAIL\",\n            \"emailFormat\": \"HTML\",\n            \"primaryInd\": true,\n            \"orderSequence\": \"2\"\n          }\n        }\n      ]\n    },\n    \"profileRestrictions\": {\n      \"restricted\": false\n    },\n    \"mailingActions\": {\n      \"active\": true\n    },\n    \"privacyInfo\": {\n      \"marketResearchParticipation\": true,\n      \"infoFromThirdParty\": true,\n      \"autoEnrollLoyaltyProgram\": true,\n      \"allowPhone\": true,\n      \"allowSMS\": true,\n      \"allowEmail\": true\n    },\n    \"cashiering\": {\n      \"vATOffsetYN\": \"N\"\n    },\n    \"statusCode\": \"Active\",\n    \"requestForHotel\": \"{{HotelId}}\",\n    \"protectedBy\": \"NONE\",\n    \"profileType\": \"Agent\"\n  }\n}",
+							"raw": "{\n  \"profileDetails\": {\n    \"company\": {\n      \"companyName\": \"American Express Bootcamp 250225\",\n      \"companyName2\": \"Asian travel Section\",\n      \"companyName3\": \"Far East\"\n    },\n    \"addresses\": {\n      \"addressInfo\": [\n        {\n          \"address\": {\n            \"addressLine\": [\n              \"Street 1\",\n              \"Street 2\",\n              \"Street 3\",\n              \"Street 4\"\n            ],\n            \"postalCode\": \"50887\",\n            \"country\": {\n              \"value\": \"DE\"\n            },\n            \"language\": \"E\",\n            \"type\": \"BUSINESS\",\n            \"primaryInd\":\"true\",\n            \"updateReservations\": false\n          }\n        },\n                {\n          \"address\": {\n            \"addressLine\": [\n              \"Europadamm 40\"\n            ],\n            \"cityName\": \"Neuss\",\n            \"postalCode\": \"41460\",\n            \"country\": {\n              \"code\": \"DE\"\n            },\n            \"language\": \"E\",\n            \"type\": \"AR ADDRESS\",\n            \"primaryInd\": false\n          }\n        }\n      ]\n    },\n    \"ownerCode\": \"ALL\",\n    \"telephones\": {\n      \"telephoneInfo\": [\n        {\n          \"telephone\": {\n            \"phoneTechType\": \"PHONE\",\n            \"phoneUseType\": \"BUSINESS\",\n            \"phoneNumber\": \"009654444455666\",\n            \"orderSequence\": \"1\",\n            \"primaryInd\": true\n          }\n        }\n      ]\n    },\n    \"emails\": {\n      \"emailInfo\": [\n        {\n          \"email\": {\n            \"emailAddress\": \"fake@api.com\",\n            \"type\": \"EMAIL\",\n            \"emailFormat\": \"HTML\",\n            \"primaryInd\": true,\n            \"orderSequence\": \"2\"\n          }\n        }\n      ]\n    },\n    \"profileRestrictions\": {\n      \"restricted\": false\n    },\n    \"mailingActions\": {\n      \"active\": true\n    },\n    \"privacyInfo\": {\n      \"marketResearchParticipation\": true,\n      \"infoFromThirdParty\": true,\n      \"autoEnrollLoyaltyProgram\": true,\n      \"allowPhone\": true,\n      \"allowSMS\": true,\n      \"allowEmail\": true\n    },\n    \"cashiering\": {\n      \"vATOffsetYN\": \"N\"\n    },\n    \"statusCode\": \"Active\",\n    \"requestForHotel\": \"{{HotelId}}\",\n    \"protectedBy\": \"NONE\",\n    \"profileType\": \"Agent\"\n  }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -697,19 +737,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-externalSystem",
@@ -818,19 +858,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-externalSystem",
@@ -878,9 +918,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"var data = pm.response.headers.get(\"Location\").split(\"/\").pop();",
+									"postman.setEnvironmentVariable(\"TravelAgentAccountId\", data);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -899,19 +951,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-externalSystem",
@@ -922,7 +974,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"criteria\": {\n        \"hotelId\": \"{{HotelId}}\",\n        \"accountName\": \"American Express Bootcamp 26\",\n        \"accountNo\": \"AMEX026\",\n        \"profileId\": {\n            \"id\": \"{{TravelAgentProfileId}}\",\n            \"idContext\": \"OPERA\",\n            \"type\": \"Profile\"\n        },\n        \"creditLimit\": {\n            \"amount\": \"100000\"\n        },\n        \"monthEndCalcYN\": false,\n        \"address\": {\n            \"type\": \"Address\",\n            \"id\": \"{{TaArAddressId}}\"\n        },\n        \"status\": {\n            \"restricted\": false\n        },\n        \"batchStatement\": true,\n        \"emailStatementsReminders\": false,\n        \"primary\": true,\n        \"type\": \"{{ArAccountType}}\",\n        \"permanent\": true\n    }\n}",
+							"raw": "{\n    \"criteria\": {\n        \"hotelId\": \"{{HotelId}}\",\n        \"accountName\": \"{{TravelAgentName}}\",\n        \"accountNo\": \"BOTA252\",\n        \"profileId\": {\n            \"id\": \"{{TravelAgentProfileId}}\",\n            \"idContext\": \"OPERA\",\n            \"type\": \"Profile\"\n        },\n        \"creditLimit\": {\n            \"amount\": \"100000\"\n        },\n        \"monthEndCalcYN\": false,\n        \"address\": {\n            \"type\": \"Address\",\n            \"id\": \"{{TravelAgentArAddressId}}\"\n        },\n        \"status\": {\n            \"restricted\": false\n        },\n        \"batchStatement\": true,\n        \"emailStatementsReminders\": false,\n        \"primary\": true,\n        \"type\": \"{{TravelAgentArAccountType}}\",\n        \"permanent\": true\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -962,17 +1014,17 @@
 						"header": [
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{HostName}}/ars/v1/accounts?hotelIds={{HotelId}}&limit=20&profileIdContext=OPERA&accountNo={{TravelAgentAccountNo}}&profileType=Travel",
+							"raw": "{{HostName}}/ars/v1/accounts?hotelIds={{HotelId}}&limit=20&profileIdContext=OPERA&accountNo=BOTA252&profileType=Travel",
 							"host": [
 								"{{HostName}}"
 							],
@@ -996,7 +1048,7 @@
 								},
 								{
 									"key": "accountNo",
-									"value": "{{TravelAgentAccountNo}}"
+									"value": "BOTA252"
 								},
 								{
 									"key": "profileType",
@@ -1020,7 +1072,18 @@
 									"var moment = require('moment');\r",
 									"pm.environment.set('currentdateplus1', moment().add(1,'days').format((\"YYYY-MM-DD\")));"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -1042,19 +1105,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -1067,7 +1130,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{HostName}}/par/v1/hotels/{{HotelId}}/availability?adults=1&children=0&roomStayQuantity=1&limit=10&offset=0&roomStayStartDate={{Currentdate}}&roomStayEndDate={{Currentdateplus1}}",
+							"raw": "{{HostName}}/par/v1/hotels/{{HotelId}}/availability?adults=1&children=0&roomStayQuantity=1&limit=10&offset=0&ratePlanCode={{RatePlanCode}}&roomStayStartDate={{Currentdate}}&roomStayEndDate={{Currentdateplus1}}&roomType={{RoomType}}",
 							"host": [
 								"{{HostName}}"
 							],
@@ -1101,8 +1164,7 @@
 								},
 								{
 									"key": "ratePlanCode",
-									"value": "{{RatePlanCode}}",
-									"disabled": true
+									"value": "{{RatePlanCode}}"
 								},
 								{
 									"key": "roomStayStartDate",
@@ -1114,8 +1176,7 @@
 								},
 								{
 									"key": "roomType",
-									"value": "{{RoomType}}",
-									"disabled": true
+									"value": "{{RoomType}}"
 								}
 							]
 						}
@@ -1153,19 +1214,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -1237,19 +1298,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -1320,19 +1381,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -1396,19 +1457,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -1480,19 +1541,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -1562,19 +1623,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -1634,19 +1695,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -1707,6 +1768,14 @@
 									"var data = pm.response.headers.get(\"Location\").split(\"/\").pop();\r",
 									"postman.setEnvironmentVariable(\"ReservationId2\", data);"
 								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
 								"type": "text/javascript"
 							}
 						}
@@ -1726,24 +1795,24 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"reservations\": {\r\n        \"reservation\": [\r\n            {\r\n                \"reservationIdList\": [\r\n                    {\r\n                        \"id\": \"{{ConfirmationId}}\",\r\n                        \"type\": \"Confirmation\"\r\n                    }\r\n                ],\r\n                \"externalReferences\": [\r\n                    {\r\n                        \"id\": \"{{ExternalReferences}}\",\r\n                        \"idExtension\": 2,\r\n                        \"idContext\": \"Expedia\"\r\n                    }\r\n                ],\r\n                \"sourceOfSale\": {\r\n                    \"sourceType\": \"PMS\",\r\n                    \"sourceCode\": \"{{HotelId}}\"\r\n                },\r\n                \"roomStay\": {\r\n                    \"roomRates\": [\r\n                        {\r\n                            \"total\": {\r\n                                \"amountBeforeTax\": \"200\"\r\n                            },\r\n                            \"rates\": {\r\n                                \"rate\": [\r\n                                    {\r\n                                        \"base\": {\r\n                                            \"amountBeforeTax\": \"200\",\r\n                                            \"currencyCode\": \"{{CurrencyCode}}\"\r\n                                        },\r\n                                        \"shareDistributionInstruction\": \"Full\",\r\n                                        \"total\": {\r\n                                            \"amountBeforeTax\": \"200\"\r\n                                        },\r\n                                        \"start\": \"{{Currentdate}}\",\r\n                                        \"end\": \"{{Currentdateplus1}}\"\r\n                                    }\r\n                                ]\r\n                            },\r\n                            \"guestCounts\": {\r\n                                \"adults\": \"1\",\r\n                                \"children\": \"0\"\r\n                            },\r\n                            \"roomType\": \"{{RoomType}}\",\r\n                            \"ratePlanCode\": \"{{RatePlanCode}}\",\r\n                            \"start\": \"{{Currentdate}}\",\r\n                            \"end\": \"{{Currentdateplus1}}\",\r\n                            \"marketCode\": \"{{MarketCode}}\",\r\n                            \"sourceCode\": \"{{SourceCode}}\",\r\n                            \"numberOfUnits\": \"1\",\r\n                            \"roomTypeCharged\": \"{{RoomType}}\",\r\n                            \"fixedRate\": true\r\n                        }\r\n                    ],\r\n                    \"guestCounts\": {\r\n                        \"adults\": \"1\",\r\n                        \"children\": \"0\"\r\n                    },\r\n                    \"arrivalDate\": \"{{Currentdate}}\",\r\n                    \"departureDate\": \"{{Currentdateplus1}}\",\r\n                    \"guarantee\": {\r\n                        \"onHold\": false,\r\n                        \"guaranteeCode\": \"{{GuaranteeCode}}\"\r\n                    },\r\n                    \"bookingMedium\": \"{{BookingMedium}}\"\r\n                },\r\n                \"reservationGuests\": [\r\n                    {\r\n                        \"profileInfo\": {\r\n                            \"profileIdList\": {\r\n                                \"id\": \"{{ProfileId}}\",\r\n                                \"type\": \"Profile\"\r\n                            }\r\n                        }\r\n                    }\r\n                ],\r\n                \"reservationProfiles\": {\r\n                    \"reservationProfile\": [\r\n                        {\r\n                            \"profileIdList\": [\r\n                                {\r\n                                    \"id\": \"{{CompanyId}}\",\r\n                                    \"type\": \"Profile\"\r\n                                }\r\n                            ],\r\n                            \"profile\": {\r\n                                \"company\": {\r\n                                    \"companyName\": \"Huel - Schaefer\"\r\n                                }\r\n                            },\r\n                            \"reservationProfileType\": \"Company\"\r\n                        },\r\n                        {\r\n                            \"profileIdList\": [\r\n                                {\r\n                                    \"id\": \"{{TravelAgentProfileId}}\",\r\n                                    \"type\": \"Profile\"\r\n                                }\r\n                            ],\r\n                            \"profile\": {\r\n                                \"company\": {\r\n                                    \"companyName\": \"American Express Duesseldorf\"\r\n                                }\r\n                            },\r\n                            \"reservationProfileType\": \"TravelAgent\"\r\n                        }\r\n                    ],\r\n                    \"commissionPayoutTo\": \"TravelAgent\"\r\n                },\r\n                \"reservationPaymentMethods\": [\r\n                    {\r\n                        \"paymentMethod\": \"{{PaymentMethod}}\",\r\n                        \"folioView\": \"1\"\r\n                    }\r\n                ],\r\n                \"hotelId\": \"{{HotelId}}\",\r\n                \"reservationStatus\": \"Reserved\"\r\n            }\r\n        ]\r\n    }\r\n}",
+							"raw": "{\r\n    \"reservations\": {\r\n        \"reservation\": [\r\n            {\r\n                \"reservationIdList\": [\r\n                    {\r\n                        \"id\": \"{{ConfirmationId}}\",\r\n                        \"type\": \"Confirmation\"\r\n                    }\r\n                ],\r\n                \"externalReferences\": [\r\n                    {\r\n                        \"id\": \"{{ExternalReferences}}\",\r\n                        \"idExtension\": 2,\r\n                        \"idContext\": \"Expedia\"\r\n                    }\r\n                ],\r\n                \"sourceOfSale\": {\r\n                    \"sourceType\": \"PMS\",\r\n                    \"sourceCode\": \"{{HotelId}}\"\r\n                },\r\n                \"roomStay\": {\r\n                    \"roomRates\": [\r\n                        {\r\n                            \"total\": {\r\n                                \"amountBeforeTax\": \"200\"\r\n                            },\r\n                            \"rates\": {\r\n                                \"rate\": [\r\n                                    {\r\n                                        \"base\": {\r\n                                            \"amountBeforeTax\": \"200\",\r\n                                            \"currencyCode\": \"{{CurrencyCode}}\"\r\n                                        },\r\n                                        \"shareDistributionInstruction\": \"Full\",\r\n                                        \"total\": {\r\n                                            \"amountBeforeTax\": \"200\"\r\n                                        },\r\n                                        \"start\": \"{{Currentdate}}\",\r\n                                        \"end\": \"{{Currentdateplus1}}\"\r\n                                    }\r\n                                ]\r\n                            },\r\n                            \"guestCounts\": {\r\n                                \"adults\": \"1\",\r\n                                \"children\": \"0\"\r\n                            },\r\n                            \"roomType\": \"{{RoomType}}\",\r\n                            \"ratePlanCode\": \"{{RatePlanCode}}\",\r\n                            \"start\": \"{{Currentdate}}\",\r\n                            \"end\": \"{{Currentdateplus1}}\",\r\n                            \"marketCode\": \"{{MarketCode}}\",\r\n                            \"sourceCode\": \"{{SourceCode}}\",\r\n                            \"numberOfUnits\": \"1\",\r\n                            \"roomTypeCharged\": \"{{RoomType}}\",\r\n                            \"fixedRate\": true\r\n                        }\r\n                    ],\r\n                    \"guestCounts\": {\r\n                        \"adults\": \"1\",\r\n                        \"children\": \"0\"\r\n                    },\r\n                    \"arrivalDate\": \"{{Currentdate}}\",\r\n                    \"departureDate\": \"{{Currentdateplus1}}\",\r\n                    \"guarantee\": {\r\n                        \"onHold\": false,\r\n                        \"guaranteeCode\": \"{{GuaranteeCode}}\"\r\n                    },\r\n                    \"bookingMedium\": \"{{BookingMedium}}\"\r\n                },\r\n                \"reservationGuests\": [\r\n                    {\r\n                        \"profileInfo\": {\r\n                            \"profileIdList\": {\r\n                                \"id\": \"{{ProfileId}}\",\r\n                                \"type\": \"Profile\"\r\n                            }\r\n                        }\r\n                    }\r\n                ],\r\n                \"reservationProfiles\": {\r\n                    \"reservationProfile\": [\r\n                        {\r\n                            \"profileIdList\": [\r\n                                {\r\n                                    \"id\": \"{{CompanyId}}\",\r\n                                    \"type\": \"Profile\"\r\n                                }\r\n                            ],\r\n                            \"profile\": {\r\n                                \"company\": {\r\n                                    \"companyName\": \"{{CompanyName}}\"\r\n                                }\r\n                            },\r\n                            \"reservationProfileType\": \"Company\"\r\n                        },\r\n                        {\r\n                            \"profileIdList\": [\r\n                                {\r\n                                    \"id\": \"{{TravelAgentProfileId}}\",\r\n                                    \"type\": \"Profile\"\r\n                                }\r\n                            ],\r\n                            \"profile\": {\r\n                                \"company\": {\r\n                                    \"companyName\": \"{{TravelAgentName}}\"\r\n                                }\r\n                            },\r\n                            \"reservationProfileType\": \"TravelAgent\"\r\n                        }\r\n                    ],\r\n                    \"commissionPayoutTo\": \"TravelAgent\"\r\n                },\r\n                \"reservationPaymentMethods\": [\r\n                    {\r\n                        \"paymentMethod\": \"{{PaymentMethod}}\",\r\n                        \"folioView\": \"1\"\r\n                    }\r\n                ],\r\n                \"hotelId\": \"{{HotelId}}\",\r\n                \"reservationStatus\": \"Reserved\"\r\n            }\r\n        ]\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1798,19 +1867,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -1866,6 +1935,9 @@
 				},
 				{
 					"name": "10.Pre-Arrival getPreference",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1881,9 +1953,9 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
@@ -1896,6 +1968,15 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{HostName}}/crm/config/v1/hotels/{{HotelId}}/preferences?preferenceGroupsCodes=ROOM FEATURES",
 							"host": [
@@ -1937,9 +2018,9 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
@@ -1981,6 +2062,9 @@
 				},
 				{
 					"name": "10b.Pre-Arrival getReservation check Preference",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1996,9 +2080,9 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
@@ -2011,6 +2095,15 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}?fetchInstructions=Preferences",
 							"host": [
@@ -2037,6 +2130,9 @@
 				},
 				{
 					"name": "11. Pre-Arrival getRoutingCodes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2052,9 +2148,9 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
@@ -2067,6 +2163,15 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{HostName}}/fof/config/v1/routingInstructions?hotelId={{HotelId}}",
 							"host": [
@@ -2106,9 +2211,9 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
@@ -2152,6 +2257,9 @@
 				},
 				{
 					"name": "11b.Pre-Arrival getReservation Routing",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2167,9 +2275,9 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
@@ -2182,6 +2290,15 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}?fetchInstructions=RoutingInstructions",
 							"host": [
@@ -2208,6 +2325,9 @@
 				},
 				{
 					"name": "12. Pre-Arrival getPaymentMethod",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2223,9 +2343,9 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
@@ -2238,6 +2358,15 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{HostName}}/lov/v1/listOfValues/hotels/{{HotelId}}/paymentMethods?includeInactiveFlag=false",
 							"host": [
@@ -2279,9 +2408,9 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
@@ -2296,7 +2425,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"reservations\": [\n    {\n      \"reservationIdList\": [\n        {\n          \"type\": \"Reservation\",\n          \"id\": \"{{ReservationId}}\"\n        }\n      ],\n      \"reservationPaymentMethods\": [\n        {\n          \"paymentMethod\": \"INV\",\n          \"folioView\": \"2\"\n        }\n      ],\n      \"hotelId\": \"{{HotelId}}\",\n      \"preRegistered\": false,\n      \"allowMobileCheckout\": false\n    }\n  ]\n}",
+							"raw": "{\n  \"reservations\": [\n    {\n      \"reservationIdList\": [\n        {\n          \"type\": \"Reservation\",\n          \"id\": \"{{ReservationId}}\"\n        }\n      ],\n      \"reservationPaymentMethods\": [\n        {\n          \"paymentMethod\": \"{{CompanyPaymentMethod}}\",\n          \"folioView\": \"2\"\n        }\n      ],\n      \"hotelId\": \"{{HotelId}}\",\n      \"preRegistered\": false,\n      \"allowMobileCheckout\": false\n    }\n  ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2323,6 +2452,9 @@
 				},
 				{
 					"name": "12b.Pre-Arrival getReservation Payment",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2338,9 +2470,9 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
@@ -2353,6 +2485,15 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}?fetchInstructions=ReservationPaymentMethods",
 							"host": [
@@ -2379,6 +2520,9 @@
 				},
 				{
 					"name": "13. Pre-Arrival getRoutingCodes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2394,9 +2538,9 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
@@ -2409,6 +2553,15 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{HostName}}/fof/config/v1/routingInstructions?hotelId={{HotelId}}",
 							"host": [
@@ -2448,9 +2601,9 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
@@ -2494,6 +2647,9 @@
 				},
 				{
 					"name": "13b.Pre-Arrival getReservation Routing",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2509,9 +2665,9 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
@@ -2524,6 +2680,15 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}?fetchInstructions=RoutingInstructions",
 							"host": [
@@ -2550,6 +2715,9 @@
 				},
 				{
 					"name": "14. Pre-Arrival getPaymentMethod",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2565,9 +2733,9 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
@@ -2580,6 +2748,15 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{HostName}}/lov/v1/listOfValues/hotels/{{HotelId}}/paymentMethods?includeInactiveFlag=false",
 							"host": [
@@ -2605,7 +2782,7 @@
 					"response": []
 				},
 				{
-					"name": "14a. Pre Arrival - Modify Reservation to update Payment Method on Window 3",
+					"name": "14a. Pre Arrival - Modify Reservation to update Payment Method on Window 3 Copy",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2621,9 +2798,9 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
@@ -2638,7 +2815,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"reservations\": [\n    {\n      \"reservationIdList\": [\n        {\n          \"type\": \"Reservation\",\n          \"id\": \"{{ReservationId}}\"\n        }\n      ],\n      \"reservationPaymentMethods\": [\n        {\n          \"paymentMethod\": \"INV\",\n          \"folioView\": \"3\"\n        }\n      ],\n      \"hotelId\": \"{{HotelId}}\",\n      \"preRegistered\": false,\n      \"allowMobileCheckout\": false\n    }\n  ]\n}",
+							"raw": "{\n  \"reservations\": [\n    {\n      \"reservationIdList\": [\n        {\n          \"type\": \"Reservation\",\n          \"id\": \"{{ReservationId}}\"\n        }\n      ],\n      \"reservationPaymentMethods\": [\n        {\n          \"paymentMethod\": \"{{TravelAgentPaymentMethod}}\",\n          \"folioView\": \"3\"\n        }\n      ],\n      \"hotelId\": \"{{HotelId}}\",\n      \"preRegistered\": false,\n      \"allowMobileCheckout\": false\n    }\n  ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2665,6 +2842,9 @@
 				},
 				{
 					"name": "14b.Pre-Arrival getReservation Payment",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2680,9 +2860,9 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
@@ -2695,6 +2875,15 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{HostName}}/rsv/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}?fetchInstructions=ReservationPaymentMethods",
 							"host": [
@@ -2721,6 +2910,9 @@
 				},
 				{
 					"name": "15. Check OPI Cloud Active",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2736,21 +2928,30 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{HostName}}/ent/config/v1/settings?hotelId={{HotelId}}&parameterNameWildCard=OPI Cloud Credit Card Processing",
 							"host": [
@@ -2794,19 +2995,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -2852,24 +3053,24 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"reservationId\": {\n        \"type\": \"Reservation\",\n        \"id\": \"{{ReservationId}}\"\n    },\n    \"reservationPaymentMethods\": [\n        {\n            \"paymentCard\": {\n                \"cardType\": \"Va\",\n                \"cardNumber\": \"4012188141402878\",\n                \"cardNumberMasked\": \"XXXXXXXXXXXX1881\",\n                \"expirationDate\": \"2026-12-31\",\n                \"expirationDateExpired\": false,\n                \"cardHolderName\": \"Charlie\",\n                \"cardOrToken\": \"Token\",\n                \"citId\": \"654321ABC1234581\"\n            },\n            \"emailFolioInfo\": {\n                \"email\": {\n                    \"emailAddress\": \"name@example.com\"\n                },\n                \"emailFolio\": true\n            },\n            \"authorizationRule\": {\n                \"code\": \"2\",\n                \"amount\": {\n                    \"amount\": \"50\",\n                    \"currencyCode\": \"USD\"\n                }\n            },\n            \"paymentMethod\": \"VA\",\n            \"folioView\": 1\n        }\n    ],\n    \"hotelId\": \"{{HotelId}}\"\n}",
+							"raw": "{\n    \"reservationId\": {\n        \"type\": \"Reservation\",\n        \"id\": \"{{ReservationId}}\"\n    },\n    \"reservationPaymentMethods\": [\n        {\n            \"paymentCard\": {\n                \"cardType\": \"Va\",\n                \"cardNumber\": \"4012188119853892\",\n                \"cardNumberMasked\": \"XXXXXXXXXXXX1881\",\n                \"expirationDate\": \"2026-12-31\",\n                \"expirationDateExpired\": false,\n                \"cardHolderName\": \"Charlie\",\n                \"cardOrToken\": \"Token\",\n                \"citId\": \"654321ABC1234581\"\n            },\n            \"emailFolioInfo\": {\n                \"email\": {\n                    \"emailAddress\": \"name@example.com\"\n                },\n                \"emailFolio\": true\n            },\n            \"authorizationRule\": {\n                \"code\": \"2\",\n                \"amount\": {\n                    \"amount\": \"50\",\n                    \"currencyCode\": \"USD\"\n                }\n            },\n            \"paymentMethod\": \"VA\",\n            \"folioView\": 1\n        }\n    ],\n    \"hotelId\": \"{{HotelId}}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2915,13 +3116,13 @@
 						"header": [
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "logLevel",
@@ -2997,13 +3198,13 @@
 						"header": [
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "logLevel",
@@ -3062,13 +3263,13 @@
 						"header": [
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "logLevel",
@@ -3166,19 +3367,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -3258,19 +3459,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -3318,8 +3519,8 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"name": "Content-Type",
 								"value": "application/json",
+								"name": "Content-Type",
 								"type": "text"
 							},
 							{
@@ -3335,7 +3536,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"reservation\": {\r\n        \"reservationId\": {\r\n            \"type\": \"Reservation\"\r\n        },\r\n        \"preCheckInDetails\": {\r\n            \"arrival\": {\r\n                \"arrivalTime\": \"2024-02-21T17:00:00\"\r\n            }\r\n        }\r\n    }\r\n}",
+							"raw": "{\r\n    \"reservation\": {\r\n        \"reservationId\": {\r\n            \"type\": \"Reservation\"\r\n        },\r\n        \"preCheckInDetails\": {\r\n            \"arrival\": {\r\n                \"arrivalTime\": \"2025-02-24T17:00:00\"\r\n            }\r\n        }\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3378,8 +3579,8 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"name": "Content-Type",
 								"value": "application/json",
+								"name": "Content-Type",
 								"type": "text"
 							},
 							{
@@ -3395,7 +3596,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"reservation\": {\r\n    \"eTRComments\": \"Guest going out for Dinner. Please email when room is ready\",\r\n    \"expectedReturnTime\": \"2024-02-21T19:15:00\",\r\n    \"hotelId\": \"{{HotelId}}\",\r\n    \"optedForCommunication\": true,\r\n    \"reservationCommunication\": {\r\n      \"emails\": {\r\n        \"emailInfo\": [\r\n          {\r\n            \"email\": {\r\n              \"emailAddress\": \"example@example.com\",\r\n              \"orderSequence\": 1,\r\n              \"primaryInd\": true,\r\n              \"type\": \"EMAIL\"\r\n            }\r\n          }\r\n        ]\r\n      }\r\n    },\r\n    \"reservationId\": {\r\n      \"id\": \"{{Reservationid}}\",\r\n      \"type\": \"Reservation\"\r\n    }\r\n  }\r\n}",
+							"raw": "{\r\n  \"reservation\": {\r\n    \"eTRComments\": \"Guest going out for Dinner. Please email when room is ready\",\r\n    \"expectedReturnTime\": \"2025-02-24T19:15:00\",\r\n    \"hotelId\": \"{{HotelId}}\",\r\n    \"optedForCommunication\": true,\r\n    \"reservationCommunication\": {\r\n      \"emails\": {\r\n        \"emailInfo\": [\r\n          {\r\n            \"email\": {\r\n              \"emailAddress\": \"example@example.com\",\r\n              \"orderSequence\": 1,\r\n              \"primaryInd\": true,\r\n              \"type\": \"EMAIL\"\r\n            }\r\n          }\r\n        ]\r\n      }\r\n    },\r\n    \"reservationId\": {\r\n      \"id\": \"{{ReservationId}}\",\r\n      \"type\": \"Reservation\"\r\n    }\r\n  }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3438,19 +3639,19 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -3632,7 +3833,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"reservationIdList\": [\n        {\n            \"type\": \"Reservation\",\n            \"id\": \"{{ReservationId}}\"\n        }\n    ],\n    \"keyOptions\": \"GAR,POOL\",\n    \"keyValidityStart\": \"2023-12-20 12:00:00.0\",\n    \"noOfKeys\": \"1\",\n    \"encoderTerminal\": \"IFC8DLSNEW\",\n    \"encoderId\": {\n        \"id\": \"0\"\n    },\n    \"resort\": \"{{HotelId}}\",\n    \"keyType\": \"New\",\n    \"keyValidityEnd\": \"2023-12-21 13:00:00.0\"\n}",
+							"raw": "{\n    \"reservationIdList\": [\n        {\n            \"type\": \"Reservation\",\n            \"id\": \"{{ReservationId}}\"\n        }\n    ],\n    \"keyOptions\": \"GAR,POOL\",\n    \"keyValidityStart\": \"2023-12-24 12:00:00.0\",\n    \"noOfKeys\": \"1\",\n    \"encoderTerminal\": \"IFC8DLSNEW\",\n    \"encoderId\": {\n        \"id\": \"0\"\n    },\n    \"resort\": \"{{HotelId}}\",\n    \"keyType\": \"New\",\n    \"keyValidityEnd\": \"2025-02-25 22:00:00.0\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3678,14 +3879,14 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
@@ -3743,14 +3944,14 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
@@ -3760,7 +3961,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"serviceRequestsDetails\": [\r\n        {\r\n            \"hotelId\": \"{{HotelId}}\",\r\n            \"code\": \"{{ServiceRequestCodes}}\",\r\n            \"status\": \"Open\",\r\n            \"priority\": \"ASAP\",\r\n            \"department\": {\r\n                \"code\": \"{{DeptCode}}\"\r\n            },\r\n            \"reservationIdList\": [\r\n                {\r\n                    \"type\": \"Reservation\",\r\n                    \"id\": \"{{ReservationId}}\"\r\n                }\r\n            ],\r\n            \"room\": \"{{RoomNumber}}\",\r\n            \"openDate\": \"2024-02-21 16:00:00.0\",\r\n            \"comment\": \"3 Fresh Towels Please\"\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"serviceRequestsDetails\": [\r\n        {\r\n            \"hotelId\": \"{{HotelId}}\",\r\n            \"code\": \"{{ServiceRequestCodes}}\",\r\n            \"status\": \"Open\",\r\n            \"priority\": \"ASAP\",\r\n            \"department\": {\r\n                \"code\": \"{{DeptCode}}\"\r\n            },\r\n            \"reservationIdList\": [\r\n                {\r\n                    \"type\": \"Reservation\",\r\n                    \"id\": \"{{ReservationId}}\"\r\n                }\r\n            ],\r\n            \"room\": \"{{RoomNumber}}\",\r\n            \"openDate\": \"2024-02-24 16:00:00.0\",\r\n            \"comment\": \"3 Fresh Towels Please\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3804,14 +4005,14 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
@@ -3867,6 +4068,9 @@
 				},
 				{
 					"name": "24. Stay - check Wakeup function active",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -3882,14 +4086,14 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
@@ -3897,6 +4101,15 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{HostName}}/ent/config/v1/settings?hotelId={{HotelId}}&parameterNameWildCard=Wake Up Calls",
 							"host": [
@@ -3940,14 +4153,14 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
@@ -3985,6 +4198,9 @@
 				},
 				{
 					"name": "24b. Stay - getWakeup",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -4000,14 +4216,14 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
@@ -4015,6 +4231,15 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{HostName}}/fof/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/wakeUpCalls?fetchCancelled=true&fetchCompleted=true&fetchPending=true&fetchNoAnswer=true&reservationIdContext=OPERA&reservationIdType=Reservation",
 							"host": [
@@ -4080,13 +4305,13 @@
 						"header": [
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -4099,7 +4324,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{HostName}}/fof/config/v1/cashierDetails/cashiers?offset=0&limit=100",
+							"raw": "{{HostName}}/fof/config/v1/cashiers/nextAvailable",
 							"host": [
 								"{{HostName}}"
 							],
@@ -4107,18 +4332,8 @@
 								"fof",
 								"config",
 								"v1",
-								"cashierDetails",
-								"cashiers"
-							],
-							"query": [
-								{
-									"key": "offset",
-									"value": "0"
-								},
-								{
-									"key": "limit",
-									"value": "100"
-								}
+								"cashiers",
+								"nextAvailable"
 							]
 						}
 					},
@@ -4141,18 +4356,18 @@
 						"header": [
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"cashiers\": [\r\n    {\r\n      \"usageInfo\": {\r\n        \"maximumDailyUses\": 9999\r\n      },\r\n      \"inactive\": false,\r\n      \"name\": \"Partner 8 Cashier\",\r\n      \"floatOverShort\": true,\r\n      \"cashierId\": 8,\r\n      \"attachedUser\": \"\",\r\n      \"startingAmount\": 1000,\r\n      \"kiosk\": false,\r\n      \"currencyCode\": \"USD\",\r\n      \"cashierType\": \"InterfaceCashier\",\r\n      \"open\": false\r\n    }\r\n  ]\r\n}",
+							"raw": "{\r\n  \"cashiers\": [\r\n    {\r\n      \"usageInfo\": {\r\n        \"maximumDailyUses\": 9999\r\n      },\r\n      \"inactive\": false,\r\n      \"name\": \"Bootcamp Cashier Next Available\",\r\n      \"floatOverShort\": true,\r\n      \"cashierId\": {{CashierId}},\r\n      \"attachedUser\": \"\",\r\n      \"startingAmount\": 1000,\r\n      \"kiosk\": false,\r\n      \"currencyCode\": \"USD\",\r\n      \"cashierType\": \"InterfaceCashier\",\r\n      \"open\": false\r\n    }\r\n  ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4175,7 +4390,7 @@
 					"response": []
 				},
 				{
-					"name": "25a. Stay getCashiers",
+					"name": "25b. Stay getCashiers",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -4194,13 +4409,13 @@
 						"header": [
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -4213,7 +4428,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{HostName}}/fof/config/v1/cashierDetails/cashiers?offset=0&limit=100",
+							"raw": "{{HostName}}/fof/config/v1/cashierDetails/cashiers?cashierIDs={{CashierId}}&includeInactive=false",
 							"host": [
 								"{{HostName}}"
 							],
@@ -4227,11 +4442,26 @@
 							"query": [
 								{
 									"key": "offset",
-									"value": "0"
+									"value": "25",
+									"disabled": true
 								},
 								{
 									"key": "limit",
-									"value": "100"
+									"value": "20",
+									"disabled": true
+								},
+								{
+									"key": "cashierIDs",
+									"value": "{{CashierId}}"
+								},
+								{
+									"key": "includeInactive",
+									"value": "false"
+								},
+								{
+									"key": "name",
+									"value": null,
+									"disabled": true
 								}
 							]
 						}
@@ -4258,13 +4488,13 @@
 						"header": [
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -4277,7 +4507,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{HostName}}/fof/config/v1/transactionCodes?hotelIds={{HotelId}}&includeInactive=false&transactionSubgroupsCodes=FOD&transactionSubgroupsCodes=COM",
+							"raw": "{{HostName}}/fof/config/v1/transactionCodes?hotelIds={{HotelId}}&includeInactive=false&transactionSubgroupsCodes=FOD",
 							"host": [
 								"{{HostName}}"
 							],
@@ -4299,10 +4529,6 @@
 								{
 									"key": "transactionSubgroupsCodes",
 									"value": "FOD"
-								},
-								{
-									"key": "transactionSubgroupsCodes",
-									"value": "COM"
 								}
 							]
 						}
@@ -4326,14 +4552,14 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
@@ -4389,13 +4615,13 @@
 						"header": [
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -4453,14 +4679,14 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
@@ -4513,14 +4739,14 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
@@ -4530,7 +4756,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"criteria\": {\r\n        \"reservationIdList\": [\r\n            {\r\n                \"id\": \"{{Reservationid}}\",\r\n                \"type\": \"Reservation\"\r\n            }\r\n        ],\r\n        \"postForEntireStay\": \"true\",\r\n        \"endDateToCharge\": \"{{Currentdate}}\",\r\n        \"cashierId\": \"{{CashierId}}\",\r\n        \"hotelId\": \"{{HotelId}}\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"criteria\": {\r\n        \"reservationIdList\": [\r\n            {\r\n                \"id\": \"{{ReservationId}}\",\r\n                \"type\": \"Reservation\"\r\n            }\r\n        ],\r\n        \"postForEntireStay\": \"true\",\r\n        \"endDateToCharge\": \"{{Currentdate}}\",\r\n        \"cashierId\": \"{{CashierId}}\",\r\n        \"hotelId\": \"{{HotelId}}\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4576,9 +4802,9 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
@@ -4685,14 +4911,14 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
@@ -4702,7 +4928,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"criteria\": {\r\n    \"action\": \"Billing\",\r\n    \"overrideInsufficientCC\": false,\r\n    \"applyCCSurcharge\": false,\r\n    \"vATOffset\": false,\r\n    \"reservationId\": {\r\n      \"idContext\": \"OPERA\",\r\n      \"id\": \"{{ReservationId}}\",\r\n      \"type\": \"Reservation\"\r\n    },\r\n    \"paymentMethod\": {\r\n      \"authorizationApproval\": {\r\n        \"approvalAmount\": {\r\n          \"amount\": 250\r\n        },\r\n        \"approvalCode\": \"{{ApprovalCode}}\",\r\n        \"vendorTranId\": \"{{VendorTranId}}\"\r\n      },\r\n      \"paymentCard\": {\r\n        \"cardType\": \"Va\",\r\n        \"cardNumberMasked\": \"\",\r\n        \"expirationDate\": \"2029-12-01\",\r\n        \"cardId\": {\r\n          \"id\": \"{{CardId}}\",\r\n          \"type\": \"CreditCard\"\r\n        }\r\n      },\r\n      \"paymentMethod\": \"VA\",\r\n      \"folioView\": \"1\"\r\n    },\r\n    \"postingReference\": \"Paid by Guest\",\r\n    \"postingAmount\": {\r\n      \"amount\": \"12.00\",\r\n      \"currencyCode\": \"USD\"\r\n    },\r\n    \"cashierId\": \"{{CashierId}}\",\r\n    \"hotelId\": \"{{HotelId}}\",\r\n    \"folioWindowNo\": \"1\",\r\n    \"overrideARCreditLimit\": false\r\n  }\r\n}",
+							"raw": "{\r\n    \"criteria\": {\r\n        \"action\": \"Billing\",\r\n        \"overrideInsufficientCC\": false,\r\n        \"applyCCSurcharge\": false,\r\n        \"vATOffset\": false,\r\n        \"reservationId\": {\r\n            \"idContext\": \"OPERA\",\r\n            \"id\": \"{{ReservationId}}\",\r\n            \"type\": \"Reservation\"\r\n        },\r\n        \"paymentMethod\": {\r\n            \"paymentCard\": {\r\n                \"cardType\": \"Va\",\r\n                \"cardNumberMasked\": \"\",\r\n                \"expirationDate\": \"2029-12-01\",\r\n                \"cardId\": {\r\n                    \"id\": \"{{CardId}}\",\r\n                    \"type\": \"CreditCard\"\r\n                }\r\n            },\r\n            \"paymentMethod\": \"VA\",\r\n            \"folioView\": \"1\"\r\n        },\r\n        \"postingReference\": \"Paid by Guest\",\r\n        \"postingAmount\": {\r\n            \"amount\": \"12.00\",\r\n            \"currencyCode\": \"USD\"\r\n        },\r\n        \"cashierId\": \"{{CashierId}}\",\r\n        \"hotelId\": \"{{HotelId}}\",\r\n        \"folioWindowNo\": \"1\",\r\n        \"overrideARCreditLimit\": false\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4728,7 +4954,7 @@
 					"response": []
 				},
 				{
-					"name": "30. Checkout - Post Payment on each Window 2-3",
+					"name": "30. Checkout - Post Payment on each Window 2",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -4744,14 +4970,14 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
@@ -4761,7 +4987,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"criteria\": {\r\n    \"overrideInsufficientCC\": false,\r\n    \"applyCCSurcharge\": false,\r\n    \"vATOffset\": false,\r\n    \"reservationId\": {\r\n      \"idContext\": \"OPERA\",\r\n      \"id\": {{ReservationId}},\r\n      \"type\": \"Reservation\"\r\n    },\r\n    \"paymentMethod\": {\r\n      \"paymentMethod\": \"INV\"\r\n    },\r\n    \"postingReference\": \"Paid by Company\",\r\n    \"postingAmount\": {\r\n      \"amount\": \"50\",\r\n      \"currencyCode\": \"USD\"\r\n    },\r\n    \"cashierId\": \"{{CashierId}}\",\r\n    \"hotelId\": \"{{HotelId}}\",\r\n    \"folioWindowNo\": \"2\",\r\n    \"overrideARCreditLimit\": false\r\n  }\r\n}",
+							"raw": "{\r\n  \"criteria\": {\r\n    \"overrideInsufficientCC\": false,\r\n    \"applyCCSurcharge\": false,\r\n    \"vATOffset\": false,\r\n    \"reservationId\": {\r\n      \"idContext\": \"OPERA\",\r\n      \"id\": {{ReservationId}},\r\n      \"type\": \"Reservation\"\r\n    },\r\n    \"paymentMethod\": {\r\n      \"paymentMethod\": \"{{CompanyPaymentMethod}}\"\r\n    },\r\n    \"postingReference\": \"Paid by Company\",\r\n    \"postingAmount\": {\r\n      \"amount\": \"50\",\r\n      \"currencyCode\": \"USD\"\r\n    },\r\n    \"cashierId\": \"{{CashierId}}\",\r\n    \"hotelId\": \"{{HotelId}}\",\r\n    \"folioWindowNo\": \"2\",\r\n    \"overrideARCreditLimit\": false\r\n  }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4787,7 +5013,66 @@
 					"response": []
 				},
 				{
-					"name": "31. Checkout - Modify Reservation status to Early Departure",
+					"name": "31. Checkout - Post Payment on each Window 3",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"name": "Content-Type",
+								"type": "text"
+							},
+							{
+								"key": "x-hotelid",
+								"value": "{{HotelId}}",
+								"type": "text"
+							},
+							{
+								"key": "x-app-key",
+								"value": "{{AppKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"criteria\": {\r\n    \"overrideInsufficientCC\": false,\r\n    \"applyCCSurcharge\": false,\r\n    \"vATOffset\": false,\r\n    \"reservationId\": {\r\n      \"idContext\": \"OPERA\",\r\n      \"id\": {{ReservationId}},\r\n      \"type\": \"Reservation\"\r\n    },\r\n    \"paymentMethod\": {\r\n      \"paymentMethod\": \"{{TravelAgentPaymentMethod}}\"\r\n    },\r\n    \"postingReference\": \"Paid by Travel Agent\",\r\n    \"postingAmount\": {\r\n      \"amount\": \"250\",\r\n      \"currencyCode\": \"USD\"\r\n    },\r\n    \"cashierId\": \"{{CashierId}}\",\r\n    \"hotelId\": \"{{HotelId}}\",\r\n    \"folioWindowNo\": \"3\",\r\n    \"overrideARCreditLimit\": false\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostName}}/csh/v1/hotels/{{HotelId}}/reservations/{{ReservationId}}/payments",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"csh",
+								"v1",
+								"hotels",
+								"{{HotelId}}",
+								"reservations",
+								"{{ReservationId}}",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "32. Checkout - Modify Reservation status to Early Departure",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -4803,14 +5088,14 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
@@ -4846,7 +5131,7 @@
 					"response": []
 				},
 				{
-					"name": "32. Checkout- Close Folios",
+					"name": "33. Checkout- Close Folios 1-3 windows",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -4862,14 +5147,14 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
@@ -4912,7 +5197,7 @@
 					"response": []
 				},
 				{
-					"name": "33. Checkout - Posting Checkout",
+					"name": "34. Checkout - Posting Checkout",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -4928,14 +5213,14 @@
 						"header": [
 							{
 								"key": "Content-Type",
+								"value": "application/json",
 								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "x-app-key",
@@ -4971,7 +5256,7 @@
 					"response": []
 				},
 				{
-					"name": "34. getFolioTypes",
+					"name": "35. getFolioTypes",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -4990,13 +5275,13 @@
 						"header": [
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "logLevel",
@@ -5033,7 +5318,7 @@
 					"response": []
 				},
 				{
-					"name": "34a. Checkout - Email copy of Invoice",
+					"name": "35a. Checkout - Email copy of Invoice",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -5049,13 +5334,13 @@
 						"header": [
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "logLevel",
@@ -5066,7 +5351,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"folioInfo\": {\r\n        \"hotelId\": \"{{HotelId}}\",\r\n        \"reservationId\": {\r\n            \"id\": \"{{ReservationId}}\",\r\n            \"type\": \"Reservation\"\r\n        },\r\n        \"folioWindowNo\": \"1\",\r\n        \"folioType\": \"{{FolioType}}\",\r\n        \"folioDate\": \"{{Currentdate}}\"\r\n    },\r\n    \"emailRecipients\": [\r\n        {\r\n            \"emailAddress\": \"test@example.com\"\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"folioInfo\": {\r\n        \"hotelId\": \"{{HotelId}}\",\r\n        \"reservationId\": {\r\n            \"id\": \"{{ReservationId}}\",\r\n            \"type\": \"Reservation\"\r\n        },\r\n        \"folioWindowNo\": \"1\",\r\n        \"folioType\": \"{{FolioType}}\",\r\n        \"folioDate\": \"{{Currentdate}}\"\r\n    },\r\n    \"emailRecipients\": [\r\n        {\r\n            \"emailAddress\": \"sobin.mathew@oracle.com\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -5091,7 +5376,7 @@
 					"response": []
 				},
 				{
-					"name": "34b. Checkout - Get Copy of Invoice",
+					"name": "35b. Checkout - Get Copy of Invoice",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -5110,13 +5395,13 @@
 						"header": [
 							{
 								"key": "x-app-key",
-								"type": "text",
-								"value": "{{AppKey}}"
+								"value": "{{AppKey}}",
+								"type": "text"
 							},
 							{
 								"key": "x-hotelid",
-								"type": "text",
-								"value": "{{HotelId}}"
+								"value": "{{HotelId}}",
+								"type": "text"
 							},
 							{
 								"key": "logLevel",
