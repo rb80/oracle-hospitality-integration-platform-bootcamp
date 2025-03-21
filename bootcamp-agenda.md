@@ -15,7 +15,6 @@
 |15:00-16:30|OCIM Portal - Manage Users, Administrators & Groups (Lab)  |
 |16:30-16:40|Coffee                                                     |
 |16:40-18:00|OCIM - Auditing, Reporting & Diagnostics (Lab)             |
-|18:00-20:00|Happy Hour (finger food & drinks)                          |
 
 ## Day 2 - Reporting & Analytics I
 
@@ -32,7 +31,6 @@
 |15:00-16:30|Data Model / BI Publisher Reports (Labs)                                       |
 |16:30-16:40|Coffee                                                                         |
 |16:40-18:00|Analytics / BI Publisher Reports (Labs)                                        |
-|18:30-20:00|Happy Hour (finger food & drinks)                                              |
 
 ## Day 3 - Reporting & Analytics II
 
