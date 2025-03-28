@@ -47,6 +47,7 @@
 |15:30-15:40|Coffee                                                                         |
 |15:40-16:10|R&A Roadmap                                                                    |
 |16:10-17:00|R&A Q&A                                                                        |
+|17:00-18:00|Happy Hour (finger food & drinks)|
 
 ## Day 4 OHIP I
 
@@ -62,7 +63,7 @@
 |14:30-16:30|Implementation Use Cases 15-34   |
 |16:30-16:40|Coffee                           |
 |16:40-17:00|Integration Patterns             |
-|18:00-20:00|Happy Hour (finger food & drinks)|
+
 
 ## Day 5 OHIP II
 
@@ -74,8 +75,8 @@
 |11:00-11:10|Coffee                                    |
 |11:10-12:30|Data Extract GraphQL API                  |
 |12:30-13:30|Lunch                                     |
-|13:30-14:00|Best Practices & Troubleshooting          |
-|14:00-15:00|Distribution                              |
+|13:30-15:00|Distribution                              |
+|15:00-15:30|Best Practices & Troubleshooting          |
 |15:30-15:40|Coffee                                    |
 |15:40-16:10|Getting to Production                     |
 |16:10-17:00|OHIP Roadmap                              |
