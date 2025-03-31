@@ -36,23 +36,18 @@ These steps are *optional* but familiarize you with finding APIs in the Develope
 
 ## 3. Obtaining credentials
 
-### 3a. Creating Integration User (completed before the lab)
-
-In this lab, we are using an environment on the Resource Owner grant.
-
-You should already have completed the below steps ahead of the lab:
-
-1. Create an integration user via the Shared Security Domain vendor self-registration portal.  Use the `Tenant` code supplied by the Oracle team.  Enter your company name in the `Vendor` field, without spaces and to a maximum of 10 characters.  Fill in the contact details and security questions.  Note down the `Interface ID` and `Interface Key`; these are your username and password.  See [Authenticating to Oracle Hospitality Property APIs](https://docs.oracle.com/en/industries/hospitality/integration-platform/ohipu/c_oracle_hospitality_property_apis.htm#OHIPU-AuthenticatingToOracleHospitalityPr-1BD54F80)
-2. Let the Oracle team know your your `Interface ID` and email address so they can approve access.  In production, this would be approved by the hoteliers.
+In this lab, we are using an environment on the Client Credentials grant as the environment is on OCIM (OPERA Cloud Identity Manager). Every partner already has access to this sandbox.  If you don't already have the environment follow these instructions:
 
 ### 3b. Adding environment
 
-1. On the Environments page add an environment, specifying your Integration Username (`Interface ID`), choosing the region and environment type listed by the Oracle team.  See [Adding an Environment](https://docs.oracle.com/en/industries/hospitality/integration-platform/ohipu/t_adding_an_environment.htm) ![alt text](images/getting_started_3_3.png "Add environment dialog on the Environments page of the Oracle Hospitality Integration Platform developer portal")
-2. View and note down the gateway URL, clientId and clientSecret
+1. On the Environments page click `Add Environment`, choosing the `Enterprise ID` tab and entering the Enterprise Id and chain code supplied to you by Oracle. The region is Ashburn and the environment type is Non Production.
+2. Inform the Oracle team who will approve the connection.
+3. Once the environment shows `Approved` click `View Details` and note down the gateway URL and clientId.
+4. Click `Reissue` to create the clientSecret and jot this down.
 
 ## 4. Authentication Flows (background)
 
-Oracle Hospitality APIs are protected by oAuth2.  There are two "flows" used in Oracle Hospitality APIs: Client Credentials, and Resource Owner.  These flows refer to which credentials are needed to obtain an oAuth token.  In this lab we're using an environment on the Resource Owner grant.
+Oracle Hospitality APIs are protected by oAuth2.  There are two "flows" used in Oracle Hospitality APIs: Client Credentials, and Resource Owner.  These flows refer to which credentials are needed to obtain an oAuth token.  In this lab we're using an environment on the Client Credentials grant.
 
 ## 5. Setting up Postman
 
@@ -69,8 +64,7 @@ Oracle Hospitality APIs are protected by oAuth2.  There are two "flows" used in 
 | CLIENT_SECRET | ClientSecret obtained from the Environment card in [Obtaining Credentials](#3-obtaining-credentials) |
 | HostName | Gateway URL obtained from the Environment card in [Obtaining Credentials](#3-obtaining-credentials) |
 | HotelId | Value supplied by the Oracle team.  This is already filled in for the Bootcamp environment |
-| Password | `Interface Key` from the Vendor Self-Registration Portal in [Credentials](#3-obtaining-credentials) |
-| Username | `Interface ID` from the Vendor Self-Registration Portal in [Credentials](#3-obtaining-credentials) |
+| EnterpriseId | `EnterpriseId` used to Add Environment in [Credentials](#3-obtaining-credentials) |
 
 ## 6. Obtaining an oAuth token
 
