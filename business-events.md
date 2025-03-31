@@ -10,7 +10,7 @@
 
 1. [Configure Streaming in the Developer Portal](#1-configure-streaming-in-the-developer-portal)
 2. [Use Postman to stream events](#2-use-postman-to-stream-events)
-3. [Use GraphiQL to stream events - Optional](#3-use-graphiql-to-stream-events-optional)
+3. [Use GraphiQL to stream events - Optional](#3-use-graphiql-to-stream-events---optional)
 4. [Use the NodeJS reference implementation to stream events - Optional](#4-use-the-nodejs-reference-implementation-to-stream-events-optional)
 
 ## Polling
@@ -40,7 +40,10 @@ Polling means sending repeated requests to ask "are there any events for my exte
 
 1. Verify the details in the Postman Environment file (see the "Basic Setup" workshop)
 2. Obtain an oAuth token (see the "Basic Setup" workshop)
-3. In the Postman collection find the operation `get Business Events` ![alt text](images/business_events_polling_3_3.png "Searching for get business events in the Postman collections")
+3. In the Postman collection find the operation `get Business Events`
+
+![alt text](images/business_events_polling_3_3.png "Searching for get business events in the Postman collections")
+
 4. Click Send and observe that up to 20 events are received
 5. Generate some events by calling the `post Profile` operation
 6. Call the `get Business Events` operation again to observe the event arrive for the new profile created
@@ -54,7 +57,10 @@ Streaming means opening a WebSocket connection, then Oracle Hospitality pushing 
 1. On the developer portal Environments tab, add the environment provided by the Oracle team (see the "Basic Setup" workshop)
 2. Verify that the environment shows the `Streaming Enabled` label
 3. Open an application from the Applications tab
-4. Add the events `Create Profile`, `Update Profile`, and `Update Reservation` to the template.  See [Working with Events in the Developer Portal](https://docs.oracle.com/en/industries/hospitality/integration-platform/ohipu/c_streaming_api.htm#OHIPU-WorkingWithEventsInTheDeveloperPort-0BDD2493) ![alt text](images/business_events_streaming_1_4.png "Adding events to the template on an application in the Oracle Hospitality Integration Platform developer portal")
+4. Add the events `Create Profile`, `Update Profile`, and `Update Reservation` to the template.  See [Working with Events in the Developer Portal](https://docs.oracle.com/en/industries/hospitality/integration-platform/ohipu/c_streaming_api.htm#OHIPU-WorkingWithEventsInTheDeveloperPort-0BDD2493)
+
+![alt text](images/business_events_streaming_1_4.png "Adding events to the template on an application in the Oracle Hospitality Integration Platform developer portal")
+
 5. Go to the Application > Events > Subscribed tab and subscribe to consume events from the environment provided by the Oracle team
 6. Verify that the events listed are the same as those on the template
 7. Notify the Oracle team to approve the subscription.  In production, this would be approved by the hoteliers.
@@ -67,7 +73,10 @@ Streaming means opening a WebSocket connection, then Oracle Hospitality pushing 
 4. Obtain an oAuth token (see the "Basic Setup" workshop)
 5. Edit the `subscribe` message to have the `chainCode` given to you by the Oracle team
 6. Open the "Saved Messages" on the right of the request
-7. Send the `init` message ![alt text](images/business_events_streaming_3_7.png "Screenshot of Postman sample for Streaming Business Events")
+7. Send the `init` message
+
+![alt text](images/business_events_streaming_3_7.png "Screenshot of Postman sample for Streaming Business Events")
+
 8. Send the `subscribe` message within 5 seconds of sending the `init` message
 9. Observe events flowing through
 10. In the `1. Property REST APIs By Module` collection expand the `OPERA Cloud REST APIs By Module` folder, then the `Profiles (CRM)` folder, then the `Post Profile (create)` folder, open the `Post Profile` request and click Send a few times.
@@ -78,13 +87,19 @@ Streaming means opening a WebSocket connection, then Oracle Hospitality pushing 
 ### 3. Use GraphiQL to stream events - Optional
 
 1. Download the [GraphiQL page from the Oracle Hospitality Github repository](https://github.com/oracle/hospitality-api-docs/blob/main/graphql/graphiql.html)
-2. Open the GraphiQL HTML page ![alt text](images/business_events_streaming_2_2.png "Screenshot of the GraphiQL page")
+2. Open the GraphiQL HTML page
+
+![alt text](images/business_events_streaming_2_2.png "Screenshot of the GraphiQL page")
+
 3. Obtain an oAuth token (see the "Basic Setup" workshop) using the clientId, clientSecret, and gateway URL of the environment given by the Oracle team
 4. Paste the value of the `access_token` to the `Auth Token` field
 5. Enter the Gateway URL in the `URL` field, but change the scheme from `https://` to `wss://`  (see the "Basic Setup" workshop for obtaining the Gateway URL)
 6. Enter the application key in the `Application Key` field  (see the "Basic Setup" workshop for obtaining the application key).  Use the application subscribed to consume events from the environment supplied by the Oracle team - see [Configure Streaming in the Developer Portal](#1-configure-streaming-in-the-developer-portal)
 7. Click Start
-8. In the request payload ensure the `chainCode` reflects the tenant code given to you by the Oracle team ![alt text](images/business_events_streaming_2_8.png "Screenshot of the GraphiQL page after authentication showing the subscribe message")
+8. In the request payload ensure the `chainCode` reflects the tenant code given to you by the Oracle team
+
+![alt text](images/business_events_streaming_2_8.png "Screenshot of the GraphiQL page after authentication showing the subscribe message")
+
 9. _Optional_ Open developer tools in the browser and go to the "Network" tab, filtering this for `WS` (WebSocket traffic) and clicking the "Response" tab
 10. Click Play.  Observe the `subscribe` event being sent, followed by events flowing through
 11. In the `1. Property REST APIs By Module` collection expand the `OPERA Cloud REST APIs By Module` folder, then the `Profiles (CRM)` folder, then the `Post Profile (create)` folder, open the `Post Profile` request and click Send a few times.
