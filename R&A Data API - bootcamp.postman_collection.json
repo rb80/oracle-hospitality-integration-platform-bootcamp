@@ -1,0 +1,688 @@
+{
+	"info": {
+		"_postman_id": "173b9dc2-b9f6-4919-90a1-3ab1efa0196b",
+		"name": "R&A Data API - bootcamp",
+		"description": "For every request in this collection, there is a post-response script applied, which will parse the HTTP multipart response of graphQL stream and will consolidate everything into a single json.\n\n**NOTE**: this script is not robust and is for demonstration purpose only\n\nThis can be viewed by clicking on the \"Visualize\" in the response as shown below:\n\n<img src=\"https://content.pstmn.io/8e4c8b2c-f706-4125-a677-76e25e80ddd8/aW1hZ2UucG5n\" alt=\"Raw%20Response\" width=\"1198\" height=\"704\">\n\n<img src=\"https://content.pstmn.io/62b04ea3-f922-48a0-9f66-646a6b9f29e3/aW1hZ2UucG5n\" alt=\"Visualization%20by%20post-response%20script\" height=\"718\" width=\"972\">",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15207558"
+	},
+	"item": [
+		{
+			"name": "Get OAuth Token",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"",
+							"pm.environment.set(\"oAuthTokenRQ\", JSON.stringify(request));",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let token = JSON.parse(responseBody).access_token;",
+							"pm.environment.set(\"token\", token);",
+							"",
+							"if (token) {",
+							"    try {",
+							"        var tokenParts = token.split('.');",
+							"        ",
+							"        if (tokenParts.length === 3) {",
+							"            var payload = JSON.parse(base64UrlDecode(tokenParts[1]));",
+							"            ",
+							"            // Get expiry time (exp) in seconds",
+							"            var expTime = payload.exp;",
+							"            var iatTime = payload.iat;",
+							"            let dt = new Date();",
+							"            dt.setSeconds(dt.getSeconds() + expTime-iatTime)",
+							"            pm.environment.set(\"oAuthTokenValidity\", dt.toString())",
+							"            ",
+							"        } else {",
+							"            console.log(\"Invalid JWT format.\");",
+							"        }",
+							"    } catch (err) {",
+							"        console.log(\"Error decoding JWT:\", err);",
+							"    }",
+							"}",
+							"",
+							"// Function to decode base64 URL",
+							"function base64UrlDecode(str) {",
+							"    str = str.replace(/-/g, '+').replace(/_/g, '/');",
+							"    while (str.length % 4) {",
+							"        str += '=';",
+							"    }",
+							"    return atob(str);",
+							"}",
+							"",
+							"",
+							"let template = `",
+							"<html>",
+							"<head>",
+							"    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js\"></script>",
+							"    <script src=\"https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js\"></script>",
+							"    <style>",
+							"        body {",
+							"            background: #ffffff !important;",
+							"        }",
+							"    </style>",
+							"</head>",
+							"<body>",
+							"    <div>",
+							"    <button class=\"copyButton\" type=\"button\" data-clipboard-action=\"copy\" data-clipboard-target=\"#copyText\" style=\"background:green;color:white;\">Copy to Clipboard</button>",
+							"",
+							"    <div>",
+							"        <pre><code style=\"white-space: pre-wrap; word-wrap: break-word; width: max-content !important;\" id=\"copyText\">${token}</code></pre>",
+							"    </div>",
+							"    </div>",
+							"</body>",
+							"</html>",
+							"<script>",
+							"    var clipboard = new ClipboardJS('.copyButton');",
+							"",
+							"    clipboard.on('success', function(e) {",
+							"        e.clearSelection();",
+							"        e.trigger.textContent = '✔ Copied!';",
+							"        window.setTimeout(function() {",
+							"            e.trigger.textContent = 'Copy to Clipboard';",
+							"        }, 2000);",
+							"    });",
+							"    clipboard.on('error', function(e) {",
+							"        e.clearSelection();",
+							"        e.trigger.textContent = '✗ Not Copied';",
+							"        window.setTimeout(function() {",
+							"            e.trigger.textContent = 'Copy to Clipboard';",
+							"        }, 2000);",
+							"    });",
+							"",
+							"    document.querySelector('.copyButton').click();",
+							"",
+							"</script>`",
+							"",
+							"pm.visualizer.set(template, pm.response.json())"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{client_secret}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{client_id}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded;charset=UTF-8"
+					},
+					{
+						"key": "x-app-key",
+						"value": "{{AppKey}}"
+					},
+					{
+						"key": "enterpriseId",
+						"value": "{{enterprise}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "urn:opc:hgbu:ws:__myscopes__",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://{{HostName}}/oauth/v1/tokens",
+					"protocol": "https",
+					"host": [
+						"{{HostName}}"
+					],
+					"path": [
+						"oauth",
+						"v1",
+						"tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "demo 1 - profiles",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "multipart/mixed; deferSpec=20220824, application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-app-key",
+						"value": "{{AppKey}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query DemoQuery1($input: ProfilesIndividualsQueryArgumentsType!) {\n     profilesIndividuals(input: $input) @stream{\n        profileAllInformationDetails{\n            guestProfileID\n            displayName\n        }\n        profileMembershipDetails {\n            enrollmentProperty\n            membershipClass\n            membershipID\n            membershipType\n            joinedDate\n            expirationDate\n        }\n     }\n}",
+						"variables": "{\n  \"input\": {\n    \"profilemembershipDetailsExpirationDate\":{\n        \"_lt\": \"2026-05-15\",\n        \"_gt\": \"2025-05-15\"\n    }\n  }\n}"
+					}
+				},
+				"url": {
+					"raw": "https://{{HostName}}/rna/v1/graphql/",
+					"protocol": "https",
+					"host": [
+						"{{HostName}}"
+					],
+					"path": [
+						"rna",
+						"v1",
+						"graphql",
+						""
+					]
+				},
+				"description": "Request used in demo to demonstrate the graphQL api"
+			},
+			"response": []
+		},
+		{
+			"name": "demo 2 - multi SA",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "multipart/mixed; deferSpec=20220824, application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-app-key",
+						"value": "{{AppKey}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query DemoQuery2($resvInput: BookingsReservationQueryArgumentsType!,\n$profileInput: ProfilesIndividualsQueryArgumentsType!) {\n     bookingsReservation(input: $resvInput) @stream(initialCount: 2){\n        reservationDetails{\n            guestFirstName\n            arrivalDate\n            departureDate\n        }\n     }\n\n    profilesIndividuals(input: $profileInput) @stream{\n        profileAllInformationDetails{\n            guestProfileID\n            displayName\n        }\n        profileMembershipDetails {\n            enrollmentProperty\n            membershipClass\n            membershipID\n            membershipType\n            joinedDate\n            expirationDate\n        }\n    }\n}",
+						"variables": "{\n  \"resvInput\": {\n    \"reservationDetailsResort\":{\n        \"_in\":[\n            {{Hotels}}\n        ]\n    },\n    \"reservationDetailsTruncBeginDate\":{\n        \"_gte\": \"2025-05-15\",\n        \"_lte\": \"2025-08-15\"\n    },\n    \"reservationDetailsTruncEndDate\":{\n        \"_gte\": \"2025-05-15\",\n        \"_lte\": \"2025-08-15\"\n    }\n  },\n  \"profileInput\": {\n    \"profilemembershipDetailsExpirationDate\":{\n        \"_lt\": \"2026-05-15\",\n        \"_gt\": \"2025-05-15\"\n    }\n  }\n\n}"
+					}
+				},
+				"url": {
+					"raw": "https://{{HostName}}/rna/v1/graphql/",
+					"protocol": "https",
+					"host": [
+						"{{HostName}}"
+					],
+					"path": [
+						"rna",
+						"v1",
+						"graphql",
+						""
+					]
+				},
+				"description": "Request used in demo to demonstrate the capability of requesting for multiple subject area in single request"
+			},
+			"response": []
+		},
+		{
+			"name": "ws1 - profiles",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "multipart/mixed; deferSpec=20220824, application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-app-key",
+						"value": "{{AppKey}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query Query($input: ProfilesIndividualsQueryArgumentsType!) {\n  profilesIndividuals(input: $input) @stream{\n    profileAllInformationDetails {\n      updateDate\n      city\n      country\n      lastStay\n      profileId\n      profileType\n      firstName\n      guestLastName\n    }\n  }\n}",
+						"variables": "{\n  \"input\": {\n    \"profileallDetailsUpdateDate\": {\n        \"_gte\": \"2025-03-01 00:00:00\"\n    }\n  }\n}"
+					}
+				},
+				"url": {
+					"raw": "https://{{HostName}}/rna/v1/graphql/",
+					"protocol": "https",
+					"host": [
+						"{{HostName}}"
+					],
+					"path": [
+						"rna",
+						"v1",
+						"graphql",
+						""
+					]
+				},
+				"description": "Request used in handson workshop to fetch all profiles which were updated in last 3 days"
+			},
+			"response": []
+		},
+		{
+			"name": "ws2 - reservations",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "multipart/mixed; deferSpec=20220824, application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-app-key",
+						"value": "{{AppKey}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query BookingsReservation($input: BookingsReservationQueryArgumentsType!){\n  bookingsReservation(input: $input) @stream{\n    reservationDetails {\n      reservationNameID\n      businessDateCreated\n      beginDatetime\n      endDatetime\n      lengthOfStay\n    }\n    propertyPropertyDetails  {\n        property\n    }\n    roomCategoryDetails {\n        roomType\n        roomClass\n        roomClassDescription\n        roomTypeDescription\n        pseudoRoomType\n    }\n  }\n}",
+						"variables": "{\n  \"input\": {\n    \"reservationDetailsResort\":{\n        \"_in\": [{{Hotels}}]\n    },\n    \"reservationDetailsTruncBeginDate\":{\n        \"_gte\": \"2025-03-01\"\n    },\n    \"reservationDetailsTruncEndDate\":{\n        \"_gte\": \"2025-03-01\"\n    }\n  }\n}"
+					}
+				},
+				"url": {
+					"raw": "https://{{HostName}}/rna/v1/graphql/",
+					"protocol": "https",
+					"host": [
+						"{{HostName}}"
+					],
+					"path": [
+						"rna",
+						"v1",
+						"graphql",
+						""
+					]
+				},
+				"description": "Request used in handson workshop to fetch all reservations which were updated in last 3 days"
+			},
+			"response": []
+		},
+		{
+			"name": "ws3 - transactions",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "multipart/mixed; deferSpec=20220824, application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-app-key",
+						"value": "{{AppKey}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query FinancialTransactionDetails($input: FinancialTransactionDetailsQueryArgumentsType!) {\n  financialTransactionDetails(input: $input) @stream{\n    financialTransactionDetails {\n      property\n      folioNo\n      folioType\n      folioid\n      businessDate\n    }\n    profileAllInformationDetails {\n      guestProfileID\n      displayName\n    }\n    folioTaxDetails {\n      billGenerationDate\n      businessDate\n      folioTime\n      billNumber\n      folioNo\n      folioStyle\n      folioTaxSeqNumber\n      folioType\n      folioType1\n    }\n  }\n}",
+						"variables": "{\n  \"input\": {\n    \"financialtransDetailsBusinessdate\": {\n        \"_gte\": \"2025-03-01\"\n  },\n    \"financialtransDetailsResort\": {\n        \"_in\": [{{Hotels}}]\n    },\n    \"financialtransDetailsTrxDate\": {\n        \"_gte\": \"2025-03-01\"\n    }\n  }\n}"
+					}
+				},
+				"url": {
+					"raw": "https://{{HostName}}/rna/v1/graphql/",
+					"protocol": "https",
+					"host": [
+						"{{HostName}}"
+					],
+					"path": [
+						"rna",
+						"v1",
+						"graphql",
+						""
+					]
+				},
+				"description": "Request used in handson workshop to fetch all transcation details corresponding to last 3 days"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"let expiry = new Date(pm.environment.get(\"oAuthTokenValidity\"));",
+					"let dt = new Date();",
+					"",
+					"rqUrl = pm.request.url.toString();",
+					"",
+					"if(rqUrl.includes(\"oauth\"))",
+					"{",
+					"    console.log(\"SKIP TOKEN CHECK\");",
+					"}",
+					"else if(dt <= expiry)",
+					"{",
+					"    console.log(\"Token OK\");",
+					"}",
+					"else",
+					"{",
+					"    console.log(\"Token Expired!\");",
+					"",
+					"    let rq = JSON.parse(pm.environment.get(\"oAuthTokenRQ\"));",
+					"    var url = rq.url;",
+					"",
+					"    while(url.indexOf('{{') >= 0) {",
+					"        var variableName = url.substring(url.indexOf('{{')+2, url.indexOf('}}'));",
+					"        var variableValue= postman.getEnvironmentVariable(variableName);",
+					"        url = url.replace('{{'+variableName+'}}', variableValue);",
+					"    }",
+					"    rq.url = url;",
+					"    ",
+					"    let body = {",
+					"        mode: 'urlencoded',",
+					"          urlencoded: [",
+					"            {key: \"grant_type\", value: rq[\"data\"][\"grant_type\"], disabled: false},",
+					"            {key: \"scope\", value: rq[\"data\"][\"scope\"], disabled: false}",
+					"        ]",
+					"    }",
+					"    rq[\"body\"] = body;",
+					"    rq[\"header\"] = rq[\"headers\"];",
+					"    // Replace variables in headers (assuming rq.header is a dictionary)",
+					"    Object.keys(rq.header).forEach(function(key) {",
+					"        var headerValue = rq.header[key];",
+					"        while (headerValue.indexOf('{{') >= 0) {",
+					"            var variableName = headerValue.substring(headerValue.indexOf('{{') + 2, headerValue.indexOf('}}'));",
+					"            var variableValue = pm.environment.get(variableName);",
+					"            headerValue = headerValue.replace('{{' + variableName + '}}', variableValue || '');",
+					"        }",
+					"        // Update the header value",
+					"        rq.header[key] = headerValue;",
+					"    });",
+					"    // Add Basic Auth header (Base64 of clientid:clientsecret)",
+					"    var clientId = pm.environment.get(\"client_id\") || \"\";",
+					"    var clientSecret = pm.environment.get(\"client_secret\") || \"\";",
+					"",
+					"    // Encode as Base64",
+					"    var basicAuthValue = btoa(clientId + \":\" + clientSecret);",
+					"    rq.header[\"Authorization\"] = \"Basic \" + basicAuthValue;",
+					"",
+					"    delete rq[\"id\"];",
+					"    delete rq[\"data\"];",
+					"    delete rq[\"headers\"];",
+					"",
+					"    console.log(rq);",
+					"",
+					"    pm.sendRequest(rq, function (err, response) {",
+					"        console.log(\"Performing Token Re-Generation\");",
+					"        // console.log(response);",
+					"        ",
+					"        let token = response.json().access_token;",
+					"        let expires = response.json().expires_in;",
+					"",
+					"        let dt = new Date();",
+					"        dt.setSeconds(dt.getSeconds() + expires)",
+					"",
+					"        pm.environment.set(\"oAuthTokenValidity\", dt.toString())",
+					"        pm.environment.set(\"token\", token);",
+					"    });",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"",
+					"rqUrl = pm.request.url.toString();",
+					"",
+					"if(!rqUrl.includes(\"oauth\"))",
+					"{",
+					"    // Retrieve the GraphQL query from the request body",
+					"    let graphqlQuery = pm.request.body.graphql.query;",
+					"",
+					"    // Remove everything before the first '{' to isolate the query structure",
+					"    graphqlQuery = graphqlQuery.substring(graphqlQuery.indexOf('{') + 1);",
+					"",
+					"    // Remove any `@stream` directives",
+					"    graphqlQuery = graphqlQuery.replace(/@stream/g, '');",
+					"",
+					"    // Initialize an empty mapping object",
+					"    let typeMap = {};",
+					"    let parent = null;",
+					"",
+					"    // Split the query by '{' to iterate over the rq_parts",
+					"    let rq_parts = graphqlQuery.split('{');",
+					"",
+					"    // Iterate over each part except the last one",
+					"    for (let i = 0; i < rq_parts.length - 1; i++) {",
+					"        let item = rq_parts[i].trim();",
+					"",
+					"        if (item.includes('(')) {",
+					"            // If the part contains '(', it's a parent field",
+					"            parent = item.split('(')[0].trim().split(' ').pop();",
+					"        } else {",
+					"            // Otherwise, it's a child field for the current parent",
+					"            let child = item.split(' ').pop();",
+					"",
+					"            if (parent) {",
+					"                typeMap[child] = parent;",
+					"            }",
+					"        }",
+					"    }",
+					"",
+					"    // Log the resulting type map",
+					"    // console.log(JSON.stringify(typeMap));",
+					"    // -------",
+					"    ",
+					"    let response = pm.response.text();",
+					"",
+					"    let boundary = response.split('\\n')[0];",
+					"    let parts = response.split(boundary);",
+					"",
+					"    // console.log(parts);",
+					"",
+					"    // Initialize an empty object to combine the JSON parts",
+					"    let combinedJson = {\"data\":{}};",
+					"    let incremental = [];",
+					"",
+					"    // Iterate over the parts and process each JSON part",
+					"    parts.forEach(part => {",
+					"        // Remove unnecessary line breaks and spaces",
+					"        part = part.trim();",
+					"        ",
+					"        // Check if the part contains JSON",
+					"        if (part.startsWith('{')) {",
+					"            let parsedJson = JSON.parse(part);",
+					"",
+					"            if (parsedJson.data) {",
+					"                combinedJson.data = parsedJson.data;",
+					"            }",
+					"            ",
+					"            if (parsedJson.incremental && Array.isArray(parsedJson.incremental)) {",
+					"                parsedJson.incremental.forEach(inc => {",
+					"                    if (inc.items && Array.isArray(inc.items)) {",
+					"                        inc.items.forEach(item => {",
+					"                            let child_type = Object.keys(item)[0];",
+					"                            let parent_type = typeMap[child_type];",
+					"                            // console.log(parent_type, '-->', child_type);",
+					"                            combinedJson.data[parent_type] = combinedJson.data[parent_type].concat(item);",
+					"                            // console.log(\"p\", combinedJson.data[parent_type]);                            ",
+					"                        })",
+					"                    }",
+					"                });",
+					"            }",
+					"        }",
+					"    });",
+					"",
+					"    // If needed, you can merge incremental items into the combinedJson or handle as required",
+					"    // For example, if you want to add incremental items to the `data` object:",
+					"    // if (Object.keys(combinedJson.data).length > 0) {",
+					"    //     const firstKey = Object.keys(combinedJson.data)[0];",
+					"    //     if (Array.isArray(combinedJson.data[firstKey])) {",
+					"    //         combinedJson.data[firstKey] = combinedJson.data[firstKey].concat(incremental);",
+					"    //     }",
+					"    // }",
+					"",
+					"    // Set the combined JSON as a new environment variable for further use",
+					"    // pm.environment.set(\"combinedJson\", JSON.stringify(combinedJson));",
+					"",
+					"    // Log the combined JSON to the console",
+					"    // console.log(combinedJson);",
+					"",
+					"",
+					"    // For testing purposes, you can also use",
+					"    // pm.test(\"Combined JSON\", function () {",
+					"    //     pm.expect(combinedJson).to.be.an('object');",
+					"    //     pm.expect(combinedJson.hasNext).to.be.an('array');",
+					"    //     pm.expect(combinedJson.data).to.be.an('array');",
+					"    //     pm.expect(combinedJson.incremental).to.be.an('array');",
+					"    // });",
+					"",
+					"",
+					"",
+					"    let template = `",
+					"    <html>",
+					"    <head>",
+					"        <link rel=\"stylesheet\" href=\"//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css\" />",
+					"        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js\"></script>",
+					"        <script src=\"https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js\"></script>",
+					"        <script src=\"https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js\"></script>",
+					"        <style>",
+					"            pre {",
+					"                white-space: pre-wrap;       /* Since CSS 2.1 */",
+					"                white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */",
+					"                white-space: -pre-wrap;      /* Opera 4-6 */",
+					"                white-space: -o-pre-wrap;    /* Opera 7 */",
+					"                word-wrap: break-word;       /* Internet Explorer 5.5+ */",
+					"            }",
+					"            .prettyprint ol.linenums > li { list-style-type: decimal; margin: 0px !important;}",
+					"            body {",
+					"                background: #ffffff !important;",
+					"            }",
+					"        </style>",
+					"    </head>",
+					"    <body>",
+					"        <div style=\"margin: 10px !important;\">",
+					"            <button class=\"copyButton\" type=\"button\" data-clipboard-action=\"copy\" data-clipboard-target=\"#copyText\" style=\"background:green;color:white;\">Copy to Clipboard</button>",
+					"            <div>",
+					"                <pre class=\"prettyprint linenums\"><span  class=\"prettyprint linenums\">{{combinedJson}}</span>",
+					"                </pre>",
+					"                <hr>",
+					"                <b>Original Payload</b>",
+					"                <code id=\"copyText\">{{combinedJson}}</code>",
+					"",
+					"            </div>",
+					"",
+					"        </div>",
+					"    </body>",
+					"    </html>",
+					"    <script>",
+					"        var clipboard = new ClipboardJS('.copyButton');",
+					"",
+					"        clipboard.on('success', function(e) {",
+					"            e.clearSelection();",
+					"            e.trigger.textContent = '✔ Copied!';",
+					"            window.setTimeout(function() {",
+					"                e.trigger.textContent = 'Copy to Clipboard';",
+					"            }, 2000);",
+					"        });",
+					"        clipboard.on('error', function(e) {",
+					"            e.clearSelection();",
+					"            e.trigger.textContent = '✗ Not Copied';",
+					"            window.setTimeout(function() {",
+					"                e.trigger.textContent = 'Copy to Clipboard';",
+					"            }, 2000);",
+					"        });",
+					"",
+					"        // Auto copy on load",
+					"        // document.querySelector('.copyButton').click();",
+					"    </script>`",
+					"",
+					"    if(combinedJson){",
+					"        let jsonString = JSON.stringify(combinedJson,null, 2);",
+					"        pm.visualizer.set(template, {'combinedJson': jsonString, 'combinedJson': jsonString})",
+					"    }",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "OCR4_ENDPOINT",
+			"value": "mucu1ua.hospitality-api.us-ashburn-1.ocs.oc-test.com/rna",
+			"type": "string"
+		}
+	]
+}
