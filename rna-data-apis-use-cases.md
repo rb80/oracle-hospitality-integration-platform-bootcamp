@@ -47,7 +47,7 @@ The goal of this lab is to become familiar with the Reporting & Analytics Data A
 
 ## 1 Setting up Postman
 
-1. Download the [R&A Data APIs Postman collection in this repository](ra-data-apis---bootcamp.postman_collection.json) and import this to Postman
+1. Download the [R&A Data APIs Postman collection in this repository](rna-data-apis-bootcamp.postman_collection.json) and import this to Postman
 2. Ensure you have imported the [Bootcamp Reseller Postman environment in this repository](bootcamp-reseller.postman_environment.json)
 3. Ensure the Bootcamp Reseller Postman environment is configured following this guide [Basic Setup](basic-setup.md).
 4. Ensure the application key listed in the `AppKey` variable in the Postman environment is the application Oracle set up with access to the R&A Data APIs.
