@@ -1,13 +1,16 @@
 {
   "input": {
     "financialtransDetailsTrxDate": {
-      "_in": ["{{transaction_date}}"]
+      "_in": ["{{transactionDate}}"]
     },
     "financialtransDetailsResort": {
       "_in": ["{{hotelId}}"]
     },
     "financialtransDetailsBusinessdate": {
-      "_gte": "{{business_date}}"
+      "_gte": "{{businessDate}}"
+    },
+    "financialtransDetailsResvNameId":{
+      "_eq": "{{resvNameId}}"
     }
   }
 }
