@@ -1,0 +1,8 @@
+{
+    "input": {
+        "profileallDetailsResortRegistered": {
+            "_eq": "{{hotelId}}"
+        }
+    },
+    "limit": {{limit}}
+}
