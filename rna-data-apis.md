@@ -2,11 +2,12 @@
 
 Report and Analytics Data APIs
 
-1. [What is R&A Data APIs](#1-what-is-ra-data-apis)
-2. [Pre Requisites](#2-pre-requisites)
-3. [Using R&A Data Apis](#3-using-ra-data-apis)
-4. [Subject Areas](#4-subject-areas)
-5. [FAQ](#5-faq)
+- [R\&A Data Apis](#ra-data-apis)
+  - [1. What is R\&A Data APIs](#1-what-is-ra-data-apis)
+  - [2. Pre-Requisites](#2-pre-requisites)
+  - [3. Using R\&A Data APIs](#3-using-ra-data-apis)
+  - [4. Subject Areas](#4-subject-areas)
+  - [5. FAQ](#5-faq)
 
 ## 1. What is R&A Data APIs
 
