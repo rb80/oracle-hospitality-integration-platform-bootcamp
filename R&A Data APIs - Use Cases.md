@@ -1,14 +1,30 @@
 # R&A Data APIs Use Cases
 
-- [0 Introduction](#0-introduction)
-- [1 Setting up Postman](#1-setting-up-postman)
-- [2 Setting up the Client](#2-setting-up-the-client)
-- [3 Get Token](#3-get-token)
-- [4 Fetch Profiles](#4-fetch-profiles)
-  - [4.1 Fetching Profiles Using Postman](4-1-fetching-profiles-using-postman)
-  - [4.2 Fetching Profiles Using the Client](4-1-fetching-profiles-using-client)
-- [5 Fetch Reservations](#5-fetch-reservations)
-- [6 Fetch Transaction details](#6-fetch-transaction-details)
+- [R\&A Data APIs Use Cases](#ra-data-apis-use-cases)
+  - [0 Introduction](#0-introduction)
+    - [Objective](#objective)
+  - [1 Setting up Postman](#1-setting-up-postman)
+    - [Familiarizing yourself with using Postman for GraphQL](#familiarizing-yourself-with-using-postman-for-graphql)
+    - [Responses in Postman](#responses-in-postman)
+  - [2 Setting up the Client](#2-setting-up-the-client)
+    - [Pre-Requisites](#pre-requisites)
+    - [Installing the Client](#installing-the-client)
+    - [Folder Structure for the Client](#folder-structure-for-the-client)
+    - [Configure the Client](#configure-the-client)
+    - [Queries](#queries)
+    - [Filters and filter variables](#filters-and-filter-variables)
+    - [Responses in the Client](#responses-in-the-client)
+    - [Running the client](#running-the-client)
+  - [3 Get Token](#3-get-token)
+  - [4 Fetch Profiles](#4-fetch-profiles)
+    - [4.1 Fetching Profiles Using Postman](#41-fetching-profiles-using-postman)
+    - [4.2 Fetching Profiles Using the Client (optional)](#42-fetching-profiles-using-the-client-optional)
+  - [5 Fetch Reservations](#5-fetch-reservations)
+    - [5.1 Fetching Reservations Using Postman](#51-fetching-reservations-using-postman)
+    - [5.2 Fetching Reservations Using the Client](#52-fetching-reservations-using-the-client)
+  - [6 Fetch Transaction Details](#6-fetch-transaction-details)
+    - [6.1 Fetching Transactions Using Postman](#61-fetching-transactions-using-postman)
+    - [6.2 Fetching Transactions Using the Client](#62-fetching-transactions-using-the-client)
 
 ## 0 Introduction
 
@@ -19,6 +35,15 @@ The R&A Data APIs use GraphQL, which is a powerful query language.  Unlike tradi
 You create queries, selecting fields and nested objects from a schema - the schemas are in the `rna_schemas` folder. These queries are then sent to the server, which returns a response in the exact shape requested, ensuring efficient data retrieval.
 
 One of the key strengths of GraphQL is its ability to support complex queries with filters and parameters. You can apply filters to narrow down results, enabling advanced search functionality and custom data retrieval based on specific criteria.
+
+### Objective
+
+The goal of this lab is to become familiar with the Reporting & Analytics Data APIs (R&A Data APIs) both in Postman and in a sample Node based client.  You will learn how to:
+
+- Use the schemas to build queries
+- Set up and use Postman to call the R&A Data APIs
+- Set up and use a Node based client to call the R&A Data APIs
+- Query profile data, reservation data, and financial transactions
 
 ## 1 Setting up Postman
 
@@ -204,54 +229,23 @@ The query uses the Profile-Individuals Subject Area API.
 
 ### 4.1 Fetching Profiles Using Postman
 
-Having first run the `Get OAuth Token` request click the request `lab - 4 - profiles` and click `Send`.
+Having first run the `Get OAuth Token` request click the request `lab - 4 - profiles`.  Then:
+
+1. Create a new query file with whichever fields you want from the [ProfilesIndividuals schema](rna_schemas/ProfilesIndividuals.graphql) and typeahead
+2. Create GraphQL variables that will return profiles updated in the last 3 days
+3. Click `Send`
 
 This query filters the Profile-Individuals Subject Area by the property you've been using as well as by their updated date.
 
-#### 4.1.1 Amending the Fetch Profiles Query Using Postman
+### 4.2 Fetching Profiles Using the Client (optional)
 
-Modify the "Query" section to change what data to return.  Postman offers typeahead to the schema.
+Using the client:
 
-#### 4.1.2 Amending the Fetch Profiles Filter Using Postman
+1. Create a new query file with whichever fields you want from the [ProfilesIndividuals schema](rna_schemas/ProfilesIndividuals.graphql)
+2. Create a filter file that will return profiles updated in the last 3 days
+3. Update the `.env` file and run the query
 
-Modify the "GraphQL Variables" section to return profiles changed in the last 3 days in the property you've been using.
-
-### 4.2 Fetching Profiles Using the Client
-
-Set the `.env` file properties to the following:
-
-|Variable Name|Value|
-|-------------|------|
-|`QUERY_NAME`|profileIndividuals|
-|`FILTER_NAME`|profileIndividuals|
-|`FILTER_VARS`|"hotelId:OHIPSB01,limit:100000"|
-
-Then send `npm start`.
-
-#### 4.2.1 Amending the Fetch Profiles Query Using the Client
-
-Queries are stored in the "queries" folder.
-
-Amend the `profileIndividuals.gql` query file by adding or removing fields.  We recommend building the query in Postman then copying it into the saved query.
-
-Then send `npm start`.
-
-#### 4.2.2 Amending the Fetch Profiles Filter Using the Client
-
-Filters are saved filters in the "filters" folder.
-
-Amend the `profileIndividuals.json` filter file to filter profiles changed in the last 3 days in the property you've been using.
-
-This will require:
-
-1. Changing the `profileIndividuals.json` filter file.  Use the "GraphQL Variables" section of the Postman request `lab - 4 - profiles`.
-2. Passing the property code in the `FILTER_VARS` variable in `.env`.
-3. Passing the start date and end date in the `FILTER_VARS` variable in `.env`.
-
-### Input parameters needed for Fetch Profiles
-
-- `profileallDetailsResortRegistered` (optional)
-- `profileallDetailsUpdateDate`
+*Tip* We recommend building the query in Postman then copying it into the saved query.
 
 ## 5 Fetch Reservations
 
@@ -261,27 +255,23 @@ For this, you'll use the Booking-Reservation Subject Area API.
 
 ### 5.1 Fetching Reservations Using Postman
 
-Having first run the `Get OAuth Token` request click the request `lab - 5 - reservations` and click `Send`.
+Having first run the `Get OAuth Token` request click the request `lab - 5 - reservations`.  Then:
+
+1. Create a new query file with whichever fields you want from the [BookingsReservation schema](rna_schemas/BookingsReservation.graphql) and typeahead
+2. Create GraphQL variables that will return reservations for hotel OHIPSB01 in the last 3 days
+3. Click `Send`
 
 This query filters the Booking-Reservation Subject Area by the property you've been using as well as by the reservations' updated date.
 
 ### 5.2 Fetching Reservations Using the Client
 
-Set the `.env` file properties to the following:
+Using the client:
 
-|Variable Name|Value|
-|-------------|------|
-|`QUERY_NAME`|reservations|
-|`FILTER_NAME`|reservations|
-|`FILTER_VARS`|"hotelId:OHIPSB01,dateFrom:2025-03-01,dateTo:2025-03-01"|
+1. Create a new query file with whichever fields you want from the [BookingsReservation schema](rna_schemas/BookingsReservation.graphql)
+2. Create a filter file that will return reservations for hotel OHIPSB01 in the last 3 days
+3. Update the `.env` file and run the query
 
-Then send `npm start`.
-
-### Input parameters needed for Fetch Reservations
-
-- `reservationDetailsResort`
-- `reservationDetailsTruncBeginDate`
-- `reservationDetailsTruncEndDate`
+*Tip* We recommend building the query in Postman then copying it into the saved query.
 
 ## 6 Fetch Transaction Details
 
@@ -291,35 +281,22 @@ For this, you'll use the Financial-TransactionDetails Subject Area API.
 
 ### 6.1 Fetching Transactions Using Postman
 
-Having first run the `Get OAuth Token` request click the request `lab - 6 - transactions` and click `Send`.
+Having first run the `Get OAuth Token` request click the request `lab - 6 - transactions`.  Then:
+
+1. Create a new query file with whichever fields you want from the [FinancialTransactionDetails schema](rna_schemas/FinancialTransactionDetails.graphql) and typeahead
+2. Create GraphQL variables that will return financial transactions for any of the hotels OHIPBSB01, OHIPSB01, or OHIPSB03 yesterday
+3. (Optional) Extend the GraphQL variables to return only financial transactions for a given reservation and business date
+4. Click `Send`
 
 This query filters the Financial-TransactionDetails Subject Area by their business and transaction dates.
 
 ### 6.2 Fetching Transactions Using the Client
 
-Set the `.env` file properties to the following:
+Using the client:
 
-|Variable Name|Value|
-|-------------|------|
-|`QUERY_NAME`|financialTransactionsSummary|
-|`FILTER_NAME`|financialTransactionsSummary|
-|`FILTER_VARS`|"dateFrom:2025-03-01,dateTo:2025-03-01"|
+1. Create a new query file with whichever fields you want from the [FinancialTransactionDetails schema](rna_schemas/FinancialTransactionDetails.graphql)
+2. Create a filter file that will return financial transactions for any of the hotels OHIPSB01, OHIPSB02, or OHIPSB03 yesterday
+3. (Optional) Extend the filter to return only financial transactions for a given reservation and business date
+4. Update the `.env` file and run the query
 
-Then send `npm start`.
-
-### 6.2.1 Fetching Transactions for given Date and Hotel Using the Client
-
-Either amend the query and filter or use the values below to obtain transaction details for a single property and a single transaction date.
-
-|Variable Name|Value|
-|-------------|------|
-|`QUERY_NAME`|financialTransactionDetails|
-|`FILTER_NAME`|financialTransactionDetails|
-|`FILTER_VARS`|"hotelId:OHIPSB01,date:2025-03-01"|
-
-### Input parameters needed for Fetch Transaction Details
-
-- `financialtransDetailsResvNameId`
-- `financialtransDetailsBusinessdate`
-- `financialtransDetailsResort`
-- `financialtransDetailsTrxDate`
+*Tip* We recommend building the query in Postman then copying it into the saved query.
