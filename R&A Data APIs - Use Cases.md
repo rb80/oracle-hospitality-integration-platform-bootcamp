@@ -4,16 +4,21 @@
 - [1 Setting up Postman](#1-setting-up-postman)
 - [2 Setting up the Client](#2-setting-up-the-client)
 - [3 Get Token](#3-get-token)
-- [4 Fetch Profiles changed in the last 3 days](#4-fetch-profiles)
-- [5 Fetch Reservations changed in the last 3 days](#5-fetch-reservations)
-- [6 Fetch Transaction details for these reservations](#6-fetch-transaction-details)
-- [7 Fetch Using Client](#7-fetch-using-client)
+- [4 Fetch Profiles](#4-fetch-profiles)
+  - [4.1 Fetching Profiles Using Postman](4-1-fetching-profiles-using-postman)
+  - [4.2 Fetching Profiles Using the Client](4-1-fetching-profiles-using-client)
+- [5 Fetch Reservations](#5-fetch-reservations)
+- [6 Fetch Transaction details](#6-fetch-transaction-details)
 
 ## 0 Introduction
 
 In this bootcamp, we will go through the usage of R&A Data APIs to fetch data using streaming technologies from your R&A platform.
 
-For the first four steps either Postman or a Node JS client.
+The R&A Data APIs use GraphQL, which is a powerful query language.  Unlike traditional REST APIs, GraphQL provides a flexible and structured way to fetch data, allowing clients to specify precisely what information they need.
+
+You create queries, selecting fields and nested objects from a schema - the schemas are in the `rna_schemas` folder. These queries are then sent to the server, which returns a response in the exact shape requested, ensuring efficient data retrieval.
+
+One of the key strengths of GraphQL is its ability to support complex queries with filters and parameters. You can apply filters to narrow down results, enabling advanced search functionality and custom data retrieval based on specific criteria.
 
 ## 1 Setting up Postman
 
@@ -21,6 +26,28 @@ For the first four steps either Postman or a Node JS client.
 2. Ensure you have imported the [Bootcamp Reseller Postman environment in this repository](bootcamp-reseller.postman_environment.json)
 3. Ensure the Bootcamp Reseller Postman environment is configured following this guide [Basic Setup](basic-setup.md).
 4. Ensure the application key listed in the `AppKey` variable in the Postman environment is the application Oracle set up with access to the R&A Data APIs.
+
+### Familiarizing yourself with using Postman for GraphQL
+
+When using GraphQL for Postman there are some differences and some similarities with using Postman for REST APIs.
+
+Just like with REST APIs you can use placeholders for variables that are in the Postman Environment selected, for example `{{hotelId}}`.
+
+Unlike REST APIs the `Body` tab has a very different layout:
+
+  ![rna_postman.png](images/rna_postman.png)
+
+The green section marked `1` is the GraphQL query.  The response will include only the data in the query.  Postman offers typeahead for the query.
+
+The blue section marked `2` is the filter.  This may be empty, but you can craft complex filters to limit the data returned.  There is also typeahead available for filters.  Furthermore, filters can incorporate variables from the Postman Environment, as in the below example which uses the Environment variable `{{Hotels}}`:
+
+  ![rna_example_parameterized_filter.png](images/rna_example_parameterized_filter.png)
+
+==NOTE:== Since Postman need to connect to the GraphQL server to check the schema, you must first have obtained a valid oAuth token before editing the queries or filters in Postman.
+
+### Responses in Postman
+
+You can visualize the multipart response in the `Raw` tab.  For ease of visualizing the results, a script pieces together the chunks into one JSON object; this can be seen in the `Visualization` tab.
 
 ## 2 Setting up the Client
 
@@ -108,9 +135,19 @@ Note that the values for the following change during the lab:
 - `FILTER_NAME`
 - `FILTER_VARS`
 
+### Queries
+
+Queries are stored in files in the "queries" folder.  When referencing queries in the `.env` file there is no need to include the `.gql` file extension.
+
+Reference the schemas in the `rna_schemas` folder to build queries.
+
+For example, the below excerpt from the [ProfilesIndividuals schema](rna_schemas/ProfilesIndividuals.graphql) shows just some of the fields available for inclusion in the query.
+
+![rna_schema_excerpt_query.png](images/rna_schema_excerpt_query.png)
+
 ### Filters and filter variables
 
-Filters are stored in files in the "filters" folder.
+Filters are stored in files in the "filters" folder.  When referencing filters in the `.env` file there is no need to include the `.json` file extension.
 
 Variables can be used in filters.  To create a place holder for a variable, insert the variable name in jinja template format. Example: `{{hotelId}}`.
 
@@ -118,28 +155,34 @@ For example, the variables `{{hotelId}}` and  `{{limit}}` are used in the below 
 
   ![rna_client_configure_filters.png](images/rna_client_configure_filters.png)
 
-The values of variables are passed in the `.env` file as an array.  For example, `hotelId:OHIPSB01,limit:100000` which means:
+The values of variables are passed in the `.env` file as an array.  For example, `FILTER_VARS=hotelId:OHIPSB01,limit:100000` which means:
 
 1. hotelId = OHIPSB01
 2. limit = 100000
 
-### Running the client
+Reference the schemas in the `rna_schemas` folder to build filters.  The schema clarifies which operations are valid on which data.  For example in the below excerpt from the [ProfilesIndividuals schema](rna_schemas/ProfilesIndividuals.graphql) the only operations available on a `DateRangeInput` are `start` and `end`, both of which are dates.
 
-1. After making the necessary configuration changes needed, run the script to fetch the data
+![rna_schema_excerpt_filter.png](images/rna_schema_excerpt_filter.png)
 
-```shell
-npm start
-```
+### Responses in the Client
 
-2. If the fileWriter plugin is selected the output of each response chunk is saved into individual json file in the data folder
+If the fileWriter plugin is selected (`PLUGIN_NAME=fileWriter` in the `.env`) the output of each response chunk is saved into individual json file in the data folder
 
    ![rna_client_file_output.png](images/rna_client_file_output.png)
 
-3. Requests Stats like no of records, no of chunks and Time Stats can be seen in the output of the script
+Requests statistics such as the number of records, the number of chunks and time statistics can be seen in the output of the script.
 
 Example:
 
 ![rna_client_example_output.png](images/rna_client_example_output.png)
+
+### Running the client
+
+After making the necessary configuration changes needed, run the script to fetch the data
+
+```shell
+npm start
+```
 
 ## 3 Get Token
 
@@ -161,7 +204,7 @@ The query uses the Profile-Individuals Subject Area API.
 
 ### 4.1 Fetching Profiles Using Postman
 
-Having first run the `Get OAuth Token` request click the request `demo 1 - profiles` and click `Send`.
+Having first run the `Get OAuth Token` request click the request `lab - 4 - profiles` and click `Send`.
 
 This query filters the Profile-Individuals Subject Area by the property you've been using as well as by their updated date.
 
@@ -201,7 +244,7 @@ Amend the `profileIndividuals.json` filter file to filter profiles changed in th
 
 This will require:
 
-1. Changing the `profileIndividuals.json` filter file.  Use the "GraphQL Variables" section of the Postman request "demo 2 - multi SA".
+1. Changing the `profileIndividuals.json` filter file.  Use the "GraphQL Variables" section of the Postman request `lab - 4 - profiles`.
 2. Passing the property code in the `FILTER_VARS` variable in `.env`.
 3. Passing the start date and end date in the `FILTER_VARS` variable in `.env`.
 
@@ -218,7 +261,7 @@ For this, you'll use the Booking-Reservation Subject Area API.
 
 ### 5.1 Fetching Reservations Using Postman
 
-Having first run the `Get OAuth Token` request click the request `ws2 - reservations` and click `Send`.
+Having first run the `Get OAuth Token` request click the request `lab - 5 - reservations` and click `Send`.
 
 This query filters the Booking-Reservation Subject Area by the property you've been using as well as by the reservations' updated date.
 
@@ -248,7 +291,7 @@ For this, you'll use the Financial-TransactionDetails Subject Area API.
 
 ### 6.1 Fetching Transactions Using Postman
 
-Having first run the `Get OAuth Token` request click the request `ws3 - transactions` and click `Send`.
+Having first run the `Get OAuth Token` request click the request `lab - 6 - transactions` and click `Send`.
 
 This query filters the Financial-TransactionDetails Subject Area by their business and transaction dates.
 
