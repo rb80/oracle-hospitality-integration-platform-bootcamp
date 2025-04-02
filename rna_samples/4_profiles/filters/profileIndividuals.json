@@ -1,0 +1,14 @@
+{
+    "input": {
+        "profileallDetailsResortRegistered": {
+            "_eq": "{{registeredHotelId}}"
+        },
+        "profileallDetailsUpdateDate": {
+            "_gte": "{{updateDate}}"
+        },
+        "reservationDetailsResort": {
+            "_eq": "{{hotelId}}"
+        }
+    },
+    "limit": {{limit}}
+}

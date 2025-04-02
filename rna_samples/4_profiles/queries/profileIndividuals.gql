@@ -1,0 +1,14 @@
+query ProfilesIndividuals($input: ProfilesIndividualsQueryArgumentsType!, $limit: Int) {
+    profilesIndividuals(input: $input, limit: $limit) @stream {
+    profileAllInformationDetails {
+      updateDate
+      city
+      country
+      lastStay
+      profileId
+      profileType
+      firstName
+      guestLastName
+    }
+  }
+}

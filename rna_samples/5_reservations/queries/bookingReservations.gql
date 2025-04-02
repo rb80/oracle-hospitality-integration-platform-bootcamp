@@ -1,0 +1,21 @@
+query BookingsReservation($input: BookingsReservationQueryArgumentsType!, $limit: Int) {
+  bookingsReservation(input: $input, limit: $limit) @stream {
+    reservationDetails {
+      reservationNameID
+      businessDateCreated
+      beginDatetime
+      endDatetime
+      lengthOfStay
+    }
+    propertyPropertyDetails  {
+        property
+    }
+    roomCategoryDetails {
+        roomType
+        roomClass
+        roomClassDescription
+        roomTypeDescription
+        pseudoRoomType
+    }
+  }
+}

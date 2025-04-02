@@ -1,0 +1,26 @@
+query FinancialTransactionDetails($input: FinancialTransactionDetailsQueryArgumentsType!) {
+  financialTransactionDetails(input: $input) @stream {
+    financialTransactionDetails {
+      property
+      folioNo
+      folioType
+      folioid
+      businessDate
+    }
+    profileAllInformationDetails {
+      guestProfileID
+      displayName
+    }
+    folioTaxDetails {
+      billGenerationDate
+      businessDate
+      folioTime
+      billNumber
+      folioNo
+      folioStyle
+      folioTaxSeqNumber
+      folioType
+      folioType1
+    }
+  }
+}
