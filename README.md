@@ -9,4 +9,4 @@ Materials for a bootcamp on the [Oracle Hospitality Integration Platform](https:
 5. [Asynchronous APIs](async.md)
 6. [Business Events](business-events.md)
 7. [R&A Data APIs](rna-data-apis.md)
-8. [R&A Data APIs - Use Cases](rna-data-apis-use-cases)
+8. [R&A Data APIs - Use Cases](rna-data-apis---use-cases)
