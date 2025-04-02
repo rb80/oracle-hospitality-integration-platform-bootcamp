@@ -2,15 +2,19 @@
 
 Getting started with Oracle Hospitality Integration Platform is easy.  Follow these steps.
 
-1. [Accessing the Developer Portal](#1-accessing-the-developer-portal)
-2. [Understanding the Developer Portal](#2-understanding-the-developer-portal)
-3. [Obtaining Credentials](#3-obtaining-credentials)
-4. [Authentication Flows](#4-authentication-flows-background)
-5. [Setting up Postman](#5-setting-up-postman)
-6. [Obtaining an oAuth Token](#6-obtaining-an-oauth-token)
-7. [Calling the getHotelDetails API](#7-calling-the-gethoteldetails-api)
-8. [Finding the OPERA version of the environment](#8-finding-the-opera-version-of-the-environment-optional)
-9. [Analytics](#9-view-analytics)
+- [Basic Setup](#basic-setup)
+  - [1. Accessing the Developer Portal](#1-accessing-the-developer-portal)
+  - [2. Understanding the Developer Portal](#2-understanding-the-developer-portal)
+    - [2a. Finding APIs and workflows (optional)](#2a-finding-apis-and-workflows-optional)
+    - [2b. Creating an application](#2b-creating-an-application)
+  - [3. Obtaining credentials](#3-obtaining-credentials)
+    - [3b. Adding environment](#3b-adding-environment)
+  - [4. Authentication Flows (background)](#4-authentication-flows-background)
+  - [5. Setting up Postman](#5-setting-up-postman)
+  - [6. Obtaining an oAuth token](#6-obtaining-an-oauth-token)
+  - [7. Calling the getHotelDetails API](#7-calling-the-gethoteldetails-api)
+  - [8. Finding the OPERA version of the environment (Optional)](#8-finding-the-opera-version-of-the-environment-optional)
+  - [9. View analytics](#9-view-analytics)
 
 ## 1. Accessing the Developer Portal
 
