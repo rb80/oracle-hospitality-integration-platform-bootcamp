@@ -3,6 +3,7 @@
 Getting started with Oracle Hospitality Integration Platform is easy.  Follow these steps.
 
 - [Basic Setup](#basic-setup)
+  - [0. Objective](#0-objective)
   - [1. Accessing the Developer Portal](#1-accessing-the-developer-portal)
   - [2. Understanding the Developer Portal](#2-understanding-the-developer-portal)
     - [2a. Finding APIs and workflows (optional)](#2a-finding-apis-and-workflows-optional)
@@ -15,6 +16,17 @@ Getting started with Oracle Hospitality Integration Platform is easy.  Follow th
   - [7. Calling the getHotelDetails API](#7-calling-the-gethoteldetails-api)
   - [8. Finding the OPERA version of the environment (Optional)](#8-finding-the-opera-version-of-the-environment-optional)
   - [9. View analytics](#9-view-analytics)
+
+## 0. Objective
+
+After completing this lab you will have:
+
+1. Become familiar with the OHIP developer portal
+2. Created an application in the OHIP developer portal
+3. Set up Postman
+4. Obtained an oAuth token
+5. Called two Oracle Hospitality APIs
+6. Viewed analytics of API usage
 
 ## 1. Accessing the Developer Portal
 

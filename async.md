@@ -2,15 +2,42 @@
 
 For long-running operations such as adding, updating, or retrieving large amounts of data, there is a series of Oracle Hospitality Property APIs called asynchronous ("Async") APIs.
 
-1. [What are Async APIs](#1-what-are-async-apis)
-2. [Workflow](#2-workflow)
-3. [Best Practices](#3-best-practices)
-4. [Types and Usage Recommendations](#4-types-and-usage-recommendations)
-5. [Creating an External System in OPERA Cloud](#5-creating-an-external-system-in-opera-cloud)
-6. [Implementation Guide](#6-implementation-guide)
-7. [References](#7-references)
-8. [Upcoming Async APIs](#8-upcoming-async-apis)
-9. [Async Lab](#9-async-lab)
+- [Async](#async)
+  - [0. Objective](#0-objective)
+  - [1. What are Async APIs](#1-what-are-async-apis)
+  - [2. Workflow](#2-workflow)
+  - [3. Best Practices](#3-best-practices)
+  - [4. Types and Usage Recommendations](#4-types-and-usage-recommendations)
+    - [:one: Operations that fetch data from OPERA Cloud](#one-operations-that-fetch-data-from-opera-cloud)
+      - [Module: Inventory (INVASYNC)](#module-inventory-invasync)
+      - [Module: Blocks (BLKASYNC) block allocation summary](#module-blocks-blkasync-block-allocation-summary)
+      - [Module: Reservations (RSVASYNC) reservation daily summary](#module-reservations-rsvasync-reservation-daily-summary)
+    - [:two: Operations that POST Data to OPERA Cloud](#two-operations-that-post-data-to-opera-cloud)
+      - [Module: Rate Plan (RTPASYNC)](#module-rate-plan-rtpasync)
+      - [Module: Availability (PARASYNC)](#module-availability-parasync)
+      - [Module: Inventory (INVASYNC) sell limits](#module-inventory-invasync-sell-limits)
+      - [Module: Blocks (BLKASYNC) shift blocks](#module-blocks-blkasync-shift-blocks)
+      - [Module: Reservation (RSVASYNC) create block reservations](#module-reservation-rsvasync-create-block-reservations)
+      - [Module: Profiles (CRMASYNC)](#module-profiles-crmasync)
+  - [5. Creating an External System in OPERA Cloud](#5-creating-an-external-system-in-opera-cloud)
+  - [6. Implementation Guide](#6-implementation-guide)
+  - [7. References](#7-references)
+  - [8. Upcoming Async APIs](#8-upcoming-async-apis)
+    - [Inventory Asynchronous (INVASYNC) new operation](#inventory-asynchronous-invasync-new-operation)
+    - [Blocks Asynchronous (BLKASYNC) updates](#blocks-asynchronous-blkasync-updates)
+    - [Blocks Asynchronous (BLKASYNC) new operation](#blocks-asynchronous-blkasync-new-operation)
+    - [Cashiering Asynchronous (CSHASYNC) new operation](#cashiering-asynchronous-cshasync-new-operation)
+  - [9. Async Lab](#9-async-lab)
+    - [Send the first request](#send-the-first-request)
+    - [Send the second request](#send-the-second-request)
+    - [Send the third request](#send-the-third-request)
+
+## 0. Objective
+
+After completing this lab you will have:
+
+1. Understood more about asynchronous APIs, their workflow and best practices for their use
+2. Called an asynchronous API from start to finish
 
 ## 1. What are Async APIs
 
@@ -180,8 +207,8 @@ A new asynchronous operation getFinancialPostingsNetVat will be introduced in th
   "criteria": {
     "hotelId": "{{HotelId}}",
     "timeSpan": {
-      "startDate": "2024-01-02",
-      "endDate": "2024-03-31"
+      "startDate": "2025-01-02",
+      "endDate": "2025-03-31"
     }
   }
 }
