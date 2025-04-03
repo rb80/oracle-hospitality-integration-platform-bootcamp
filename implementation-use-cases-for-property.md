@@ -1,5 +1,20 @@
 # Implementation Use Cases
 
+## Objective of Use Cases
+
+* Understand key implementation use cases for property-related data.
+
+* Explore different methods for managing and utilizing property attributes.
+
+* Learn how to integrate property data into various applications.
+
+* Gain hands-on experience with tools and techniques for property data handling.
+
+* Analyze real-world scenarios to improve decision-making with property data.
+
+* Develop skills to optimize property data usage for efficiency and accuracy.
+
+
 * [1 Get Token](#1-get-token)
 * [2 Create Guest Profile](#2-create-guest-profile)
 * [3 Create Company Profile Optional](#3-create-company-profile-optional)
